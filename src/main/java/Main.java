@@ -1,4 +1,5 @@
 import gui.GUIBuilder;
+import gui.window.MainWindow;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,12 +16,12 @@ public class Main {
 
     public static void main(String args[]) {
         Main main = new Main();
-        // comment
         main.setGuiBuilder(new GUIBuilder());
         main.initializeProgram();
     }
 
     public void initializeProgram() {
-        guiBuilder.buildUserInterface();
+        MainWindow mainWindow = guiBuilder.buildUserInterface();
+        mainWindow.setVisible(true);
     }
 }

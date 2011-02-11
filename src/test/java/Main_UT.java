@@ -1,9 +1,11 @@
 import gui.GUIBuilder;
+import gui.window.MainWindow;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
@@ -16,9 +18,13 @@ public class Main_UT {
     @Mock
     private GUIBuilder guiBuilder;
 
+    @Mock
+    private MainWindow mainWindow;
+
     @Before
     public void setUp() {
         initMocks(this);
+        when(guiBuilder.buildUserInterface()).thenReturn(mainWindow);
     }
 
     @Test
