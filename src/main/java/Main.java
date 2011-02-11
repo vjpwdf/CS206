@@ -1,5 +1,5 @@
 import gui.GUIBuilder;
-import gui.window.MainWindow;
+import gui.window.main.MainWindow;
 
 /**
  * Created by IntelliJ IDEA.

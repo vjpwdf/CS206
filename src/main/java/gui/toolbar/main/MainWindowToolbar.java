@@ -1,4 +1,4 @@
-package gui.window;
+package gui.toolbar.main;
 
 import javax.swing.*;
 

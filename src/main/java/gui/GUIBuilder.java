@@ -1,9 +1,6 @@
 package gui;
 
-import gui.window.MainWindow;
-import gui.window.MainWindowToolbar;
-
-import javax.swing.*;
+import gui.window.main.MainWindow;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,9 +11,7 @@ import javax.swing.*;
 public class GUIBuilder {
 
     public MainWindow buildUserInterface() {
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.setJMenuBar(new MainWindowToolbar());
-        return mainWindow;
+        return new MainWindow();
     }
 
 }

@@ -1,6 +1,6 @@
 package gui;
 
-import gui.window.MainWindow;
+import gui.window.main.MainWindow;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;

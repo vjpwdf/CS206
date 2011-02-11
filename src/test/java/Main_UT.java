@@ -1,5 +1,5 @@
 import gui.GUIBuilder;
-import gui.window.MainWindow;
+import gui.window.main.MainWindow;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
