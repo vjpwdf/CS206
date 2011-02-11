@@ -1,5 +1,7 @@
 package gui.action.main;
 
+import gui.window.addcoupon.AddCouponWindow;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class AddCouponButtonAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-
+        AddCouponWindow addCouponWindow = new AddCouponWindow();
+        addCouponWindow.setVisible(true);
     }
 }
