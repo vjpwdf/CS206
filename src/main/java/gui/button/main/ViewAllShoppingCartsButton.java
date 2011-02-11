@@ -3,6 +3,7 @@ package gui.button.main;
 import gui.action.main.ViewAllShoppingCartsButtonAction;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,8 +13,13 @@ import javax.swing.*;
  * To change this template use File | Settings | File Templates.
  */
 public class ViewAllShoppingCartsButton extends JButton {
+    private static final Integer WIDTH = 250;
+    private static final Integer HEIGHT = 35;
+
     public ViewAllShoppingCartsButton() {
         setText("View All Shopping Carts");
         addActionListener(new ViewAllShoppingCartsButtonAction());
+        setIcon(new ImageIcon("main/window/all-shopping-carts.png"));
+        setMaximumSize(new Dimension(WIDTH, HEIGHT));
     }
 }
