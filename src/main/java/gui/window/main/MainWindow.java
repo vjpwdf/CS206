@@ -1,6 +1,6 @@
 package gui.window.main;
 
-import gui.button.main.AddCouponButton;
+import gui.button.main.*;
 import gui.toolbar.main.MainWindowToolbar;
 
 import javax.swing.*;
@@ -17,6 +17,7 @@ public class MainWindow extends JFrame {
     private static final Integer HEIGHT = 250;
     
     public MainWindow() {
+        setTitle("Coupon Manager");
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setJMenuBar(new MainWindowToolbar());
@@ -24,6 +25,12 @@ public class MainWindow extends JFrame {
     }
 
     private void addMainWindowButtons() {
-        add(new AddCouponButton());
+        Box buttonBox = Box.createVerticalBox();
+        buttonBox.add(new AddCouponButton());
+        buttonBox.add(new RemoveCouponButton());
+        buttonBox.add(new BuildShoppingCartButton());
+        buttonBox.add(new ViewAllCouponsButton());
+        buttonBox.add(new ViewAllShoppingCartsButton());
+        add(buttonBox);
     }
 }

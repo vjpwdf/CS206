@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class AddCouponButton extends JButton {
     public AddCouponButton() {
-        this.setText("Add Coupon");
-        this.addActionListener(new AddCouponButtonAction());
+        setText("Add Coupon");
+        addActionListener(new AddCouponButtonAction());
     }
 }
