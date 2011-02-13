@@ -1,6 +1,6 @@
 package gui.toolbar.main;
 
-import gui.action.main.AddCouponButtonAction;
+import gui.action.main.*;
 import gui.action.toolbar.ExitToolbarButtonAction;
 
 import javax.swing.*;
@@ -23,21 +23,21 @@ public class MainWindowToolbar extends JMenuBar {
     private void addFileButton() {
         JMenu fileMenu = new JMenu("File");
 
-        addAddCouponMenuItem(fileMenu);
-        addExitMenuItem(fileMenu);
+        addMenuItem(fileMenu, "Add Item", new AddItemButtonAction());
+        addMenuItem(fileMenu, "Remove Item", new RemoveItemButtonAction());
+        addMenuItem(fileMenu, "Add Coupon", new AddCouponButtonAction());
+        addMenuItem(fileMenu, "Remove Coupon", new RemoveCouponButtonAction());
+        addMenuItem(fileMenu, "Build Shopping Cart", new BuildShoppingCartButtonAction());
+        addMenuItem(fileMenu, "View All Coupons", new ViewAllCouponsButtonAction());
+        addMenuItem(fileMenu, "View All Shopping Carts", new ViewAllShoppingCartsButtonAction());
+        addMenuItem(fileMenu, "Exit", new ExitToolbarButtonAction());
 
         add(fileMenu);
     }
 
-    private void addExitMenuItem(JMenu fileMenu) {
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.addActionListener(new ExitToolbarButtonAction());
-        fileMenu.add(exitMenuItem);
-    }
-
-    private void addAddCouponMenuItem(JMenu fileMenu) {
-        JMenuItem addCouponMenuItem = new JMenuItem("Add Coupon");
-        addCouponMenuItem.addActionListener(new AddCouponButtonAction());
-        fileMenu.add(addCouponMenuItem);
+    private void addMenuItem(JMenu fileMenu, String itemText, ActionListener actionListener) {
+        JMenuItem item = new JMenuItem(itemText);
+        item.addActionListener(actionListener);
+        fileMenu.add(item);
     }
 }

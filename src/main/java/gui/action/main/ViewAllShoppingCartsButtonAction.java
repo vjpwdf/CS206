@@ -1,5 +1,7 @@
 package gui.action.main;
 
+import gui.window.viewallshoppingcarts.ViewAllShoppingCartsWindow;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class ViewAllShoppingCartsButtonAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-        
+        ViewAllShoppingCartsWindow viewAllShoppingCartsWindow = new ViewAllShoppingCartsWindow();
+        viewAllShoppingCartsWindow.setVisible(true);
     }
 }

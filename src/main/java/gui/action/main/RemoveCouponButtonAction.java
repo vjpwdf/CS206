@@ -1,5 +1,7 @@
 package gui.action.main;
 
+import gui.window.removecoupon.RemoveCouponWindow;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class RemoveCouponButtonAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-        
+        RemoveCouponWindow removeCouponWindow = new RemoveCouponWindow();
+        removeCouponWindow.setVisible(true);
     }
 }

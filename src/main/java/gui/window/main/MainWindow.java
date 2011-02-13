@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class MainWindow extends JFrame {
     private static final Integer WIDTH = 250;
-    private static final Integer HEIGHT = 250;
+    private static final Integer HEIGHT = 330;
     
     public MainWindow() {
         setTitle("Coupon Manager");
@@ -26,6 +26,8 @@ public class MainWindow extends JFrame {
 
     private void addMainWindowButtons() {
         Box buttonBox = Box.createVerticalBox();
+        buttonBox.add(new AddItemButton());
+        buttonBox.add(new RemoveItemButton());
         buttonBox.add(new AddCouponButton());
         buttonBox.add(new RemoveCouponButton());
         buttonBox.add(new BuildShoppingCartButton());

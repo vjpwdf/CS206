@@ -1,5 +1,7 @@
 package gui.action.main;
 
+import gui.window.viewallcoupons.ViewAllCouponsWindow;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,6 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class ViewAllCouponsButtonAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-
+        ViewAllCouponsWindow viewAllCouponsWindow = new ViewAllCouponsWindow();
+        viewAllCouponsWindow.setVisible(true);
     }
 }

@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class AddCouponWindow extends JFrame {
     private static final Integer WIDTH = 500;
-    private static final Integer HEIGHT = 325;
+    private static final Integer HEIGHT = 330;
 
     public AddCouponWindow() throws HeadlessException {
         setTitle("Add A Coupon");
