@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hibernate">
+    <class name="Coupon" table="coupon">
+        <id name="couponId" column="coupon_id" type="integer">
+            <generator class="native"/>
+        </id>
+        <many-to-one name="item" column="item_upc" class="Item" lazy="false"/>
+        <property name="couponType" column="coupon_type" type="boolean"/>
+        <property name="couponValue" column="coupon_value" type="float"/>
+        <property name="expirationDate" column="expiration_date" type="timestamp"/>
+        <property name="couponImage" column="coupon_image" type="blob"/>
+    </class>
+</hibernate-mapping>
