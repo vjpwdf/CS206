@@ -4,9 +4,7 @@
 
 <hibernate-mapping package="hibernate">
     <class name="Item" table="item">
-        <id name="itemUpc" column="item_upc" type="string">
-            <generator class="native"/>
-        </id>
+        <id name="itemUpc" column="item_upc" type="string"/>
         <property name="itemName" column="item_name" type="string"/>
         <property name="itemDescription" column="item_description" type="string"/>
         <property name="itemManufacturer" column="item_manufacturer" type="string"/>

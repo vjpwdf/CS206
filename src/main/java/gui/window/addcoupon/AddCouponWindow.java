@@ -17,5 +17,6 @@ public class AddCouponWindow extends JFrame {
         setTitle("Add A Coupon");
         setSize(WIDTH, HEIGHT);
         add(new AddCouponWindowBackgroundPicture());
+        add(new JButton());
     }
 }

@@ -8,11 +8,11 @@ import java.sql.Blob;
  * Time: 12:59:50 PM
  */
 public class Item {
+    private String itemUpc;
     private Blob itemImage;
     private String itemManufacturer;
     private String itemDescription;
     private String itemName;
-    private String itemUpc;
 
     public String getItemUpc() {
         return itemUpc;
@@ -22,20 +22,12 @@ public class Item {
         this.itemUpc = itemUpc;
     }
 
-    public String getItemName() {
-        return itemName;
+    public Blob getItemImage() {
+        return itemImage;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public String getItemDescription() {
-        return itemDescription;
-    }
-
-    public void setItemDescription(String itemDescription) {
-        this.itemDescription = itemDescription;
+    public void setItemImage(Blob itemImage) {
+        this.itemImage = itemImage;
     }
 
     public String getItemManufacturer() {
@@ -46,11 +38,19 @@ public class Item {
         this.itemManufacturer = itemManufacturer;
     }
 
-    public Blob getItemImage() {
-        return itemImage;
+    public String getItemDescription() {
+        return itemDescription;
     }
 
-    public void setItemImage(Blob itemImage) {
-        this.itemImage = itemImage;
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }
