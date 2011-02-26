@@ -1,6 +1,7 @@
 package gui.input.image;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -17,12 +18,16 @@ public class ImagePreviewPanel extends JPanel
 
     private int width, height;
     private Image image;
-    private static final int DEFAULT_SIZE = 150;
+    private int scaleSize;
     private Color bg;
 
-    public ImagePreviewPanel() {
-        setPreferredSize(new Dimension(150, 150));
+    public ImagePreviewPanel(int panelWidth, int panelHeight) {
+        scaleSize = panelWidth;
+        setPreferredSize(new Dimension(panelWidth, panelHeight));
+        setMaximumSize(new Dimension(panelWidth, panelHeight));
+        setMinimumSize(new Dimension(panelWidth, panelHeight));
         bg = getBackground();
+        setBorder(new BevelBorder ( BevelBorder.RAISED ));
     }
 
     public void propertyChange(PropertyChangeEvent e) {
@@ -51,13 +56,13 @@ public class ImagePreviewPanel extends JPanel
         double ratio = 1.0;
 
         if (width >= height) {
-            ratio = (double) (DEFAULT_SIZE - 5) / width;
-            width = DEFAULT_SIZE - 5;
+            ratio = (double) (scaleSize - 5) / width;
+            width = scaleSize - 5;
             height = (int) (height * ratio);
         } else {
             if (getHeight() > 150) {
-                ratio = (double) (DEFAULT_SIZE - 5) / height;
-                height = DEFAULT_SIZE - 5;
+                ratio = (double) (scaleSize - 5) / height;
+                height = scaleSize - 5;
                 width = (int) (width * ratio);
             } else {
                 ratio = (double) getHeight() / height;
@@ -71,7 +76,7 @@ public class ImagePreviewPanel extends JPanel
 
     public void paintComponent(Graphics g) {
         g.setColor(bg);
-        g.fillRect(0, 0, DEFAULT_SIZE, getHeight());
+        g.fillRect(0, 0, scaleSize, getHeight());
         g.drawImage(image, getWidth() / 2 - width / 2 + 5,
                 getHeight() / 2 - height / 2, this);
     }

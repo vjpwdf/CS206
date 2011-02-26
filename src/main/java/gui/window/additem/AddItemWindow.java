@@ -27,7 +27,7 @@ public class AddItemWindow extends JFrame {
         inputs.add(priceInput);
         GeneralInputFileBrowser fileBrowser = new GeneralInputFileBrowser("Select Image");
         inputs.add(fileBrowser);
-        ImagePreviewPanel imagePreviewPanel = new ImagePreviewPanel();
+        ImagePreviewPanel imagePreviewPanel = new ImagePreviewPanel(120, 120);
         inputs.add(imagePreviewPanel);
         fileBrowser.getInput().addPropertyChangeListener(imagePreviewPanel);
         add(inputs);
