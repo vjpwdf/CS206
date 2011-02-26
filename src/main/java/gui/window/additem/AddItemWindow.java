@@ -1,10 +1,10 @@
 package gui.window.additem;
 
 import gui.input.GeneralInput;
+import gui.input.GeneralInputFileBrowser;
+import gui.input.image.ImagePreviewPanel;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -25,6 +25,11 @@ public class AddItemWindow extends JFrame {
         inputs.add(nameInput);
         GeneralInput priceInput = new GeneralInput("Price");
         inputs.add(priceInput);
+        GeneralInputFileBrowser fileBrowser = new GeneralInputFileBrowser("Select Image");
+        inputs.add(fileBrowser);
+        ImagePreviewPanel imagePreviewPanel = new ImagePreviewPanel();
+        inputs.add(imagePreviewPanel);
+        fileBrowser.getInput().addPropertyChangeListener(imagePreviewPanel);
         add(inputs);
     }
 }
