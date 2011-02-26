@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hibernate">
+    <class name="ShoppingCartItem" table="shopping_cart_item">
+        <id name="shoppingCartItemId" column="shopping_cart_item_id" type="integer">
+            <generator class="native"/>
+        </id>
+        <many-to-one name="shoppingCart" column="shopping_cart_id" class="ShoppingCart" lazy="false"/>
+        <many-to-one name="item" column="item_upc" class="Item" lazy="false"/>
+        <property name="itemQuantity" column="item_quantity" type="integer"/>
+    </class>
+</hibernate-mapping>

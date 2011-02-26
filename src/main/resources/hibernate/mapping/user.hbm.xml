@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping SYSTEM
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="hibernate">
+    <class name="User" table="user">
+        <id name="userId" column="user_id" type="integer">
+            <generator class="native"/>
+        </id>
+        <property name="userName" column="user_name" type="string"/>
+        <property name="userPassword" column="user_password" type="string"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="dbClient" class="hibernate.factory.DBClient">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306"/>
+        <property name="username" value="root"/>
+        <property name="password" value="0123456"/>
+
+        <!--Clean up dead transactions-->
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+        <property name="timeBetweenEvictionRunsMillis" value="1800000"/>
+        <property name="numTestsPerEvictionRun" value="3"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnReturn" value="true"/>
+        <property name="validationQuery" value="SELECT 1"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <property name="hibernateProperties">
+            <props>
+                <!-- c3p0 conneciton pool properties -->
+                <prop key="hibernate.c3p0.acquire_increment">1</prop>
+                <prop key="hibernate.c3p0.idle_test_period">100</prop>
+                <prop key="hibernate.c3p0.max_size">100</prop>
+                <prop key="hibernate.c3p0.max_statements">50</prop>
+                <prop key="hibernate.c3p0.min_size">10</prop>
+                <prop key="hibernate.c3p0.timeout">100</prop>
+                <prop key="hibernate.default_schema">coupon</prop>
+
+                <!-- end of c3p0 props -->
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.use_outer_join">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
+
+                <prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>hibernate/mapping/user.hbm.xml</value>
+                <value>hibernate/mapping/item.hbm.xml</value>
+                <value>hibernate/mapping/coupon.hbm.xml</value>
+                <value>hibernate/mapping/shoppingcart.hbm.xml</value>
+                <value>hibernate/mapping/shoppingcartitem.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+</beans>
