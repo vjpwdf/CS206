@@ -1,6 +1,10 @@
 package gui.window.additem;
 
+import gui.input.GeneralInput;
+
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -16,5 +20,11 @@ public class AddItemWindow extends JFrame {
     public AddItemWindow() throws HeadlessException {
         setTitle("Add An Item");
         setSize(WIDTH, HEIGHT);
+        Box inputs = Box.createVerticalBox();
+        GeneralInput nameInput = new GeneralInput("Item Name");
+        inputs.add(nameInput);
+        GeneralInput priceInput = new GeneralInput("Price");
+        inputs.add(priceInput);
+        add(inputs);
     }
 }

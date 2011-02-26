@@ -3,7 +3,6 @@ package gui.button.main;
 import gui.action.main.RemoveCouponButtonAction;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,14 +11,12 @@ import java.awt.*;
  * Time: 8:03:58 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RemoveCouponButton extends JButton {
-    private static final Integer WIDTH = 250;
-    private static final Integer HEIGHT = 35;
-    
+public class RemoveCouponButton extends MainMenuButton {
+
     public RemoveCouponButton() {
+        super();
         setText("Remove Coupon");
         addActionListener(new RemoveCouponButtonAction());
         setIcon(new ImageIcon("main/window/remove-button.png"));
-        setMaximumSize(new Dimension(WIDTH, HEIGHT));
     }
 }
