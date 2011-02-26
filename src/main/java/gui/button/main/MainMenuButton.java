@@ -15,6 +15,7 @@ public abstract class MainMenuButton extends JButton {
     private static final Integer HEIGHT = 40;
 
     public MainMenuButton(){
+        //asdf
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMaximumSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
