@@ -20,7 +20,7 @@ public class NumberFormValidator extends FormValidator {
     public void keyTyped(KeyEvent keyEvent) {
         JTextField source = (JTextField) keyEvent.getSource();
         String currentText = source.getText();
-        if(currentText.length()==0) {
+        if(keyEvent.getKeyCode() != KeyEvent.VK_BACK_SPACE) {
             currentText += keyEvent.getKeyChar();
         }
         valid = canConvertTextToFloat(currentText);
@@ -33,7 +33,6 @@ public class NumberFormValidator extends FormValidator {
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        System.out.println();
     }
 
     private boolean canConvertTextToFloat(String currentText) {
@@ -47,6 +46,5 @@ public class NumberFormValidator extends FormValidator {
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
-        System.out.println();
     }
 }

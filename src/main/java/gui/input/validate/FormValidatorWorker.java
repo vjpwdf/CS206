@@ -55,11 +55,9 @@ public class FormValidatorWorker implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        System.out.println();
     }
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
-        System.out.println();
     }
 }
