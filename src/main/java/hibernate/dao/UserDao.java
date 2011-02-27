@@ -1,5 +1,7 @@
 package hibernate.dao;
 
+import hibernate.User;
+
 /**
  * Created by IntelliJ IDEA.
  * User: will
@@ -7,5 +9,7 @@ package hibernate.dao;
  * Time: 7:05 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserDao {
+public interface UserDao {
+    boolean loginWithCredentials(String userName, String password);
+    User getUserByUserName(String userName);
 }

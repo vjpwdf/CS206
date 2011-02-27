@@ -25,12 +25,12 @@ public class AddItemWindow extends JFrame {
         setSize(WIDTH, HEIGHT);
         Box itemForm = Box.createVerticalBox();
 
-        GeneralInput nameInput = new GeneralInput("Item Name");
+        GeneralInput nameInput = new GeneralInput("Item Name", true);
         nameInput.addNewFormValidator(new MinLengthFormValidator(3));
         nameInput.addNewFormValidator(new MaxLengthFormValidator(30));
         itemForm.add(nameInput);
 
-        GeneralInput priceInput = new GeneralInput("Price");
+        GeneralInput priceInput = new GeneralInput("Price", true);
         priceInput.addNewFormValidator(new NumberFormValidator());
         itemForm.add(priceInput);
 

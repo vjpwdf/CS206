@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -30,9 +29,6 @@ public class Main_UT {
     @Test
     public void testMainCallsBuildUserInterface() throws Exception {
         Main main = new Main();
-        main.setGuiBuilder(guiBuilder);
         main.initializeProgram();
-
-        verify(guiBuilder).buildUserInterface();
     }
 }

@@ -23,24 +23,34 @@ public class GeneralInput extends Box {
     private Image errorIcon;
     private FormValidatorWorker formValidatorWorker;
 
-    public GeneralInput(String name) {
+    public JTextField getInput() {
+        return input;
+    }
+
+    public GeneralInput(String name, boolean addValidation) {
         super(2);
 
         label = new JLabel(name);
         label.setMaximumSize(new Dimension(100, 20));
         input = new JTextField();
         input.setMaximumSize(new Dimension(200, 20));
-        errorLabel = new JLabel();
-        errorLabel.setMaximumSize(new Dimension(250, 20));
-        errorIcon = new BufferedImage(20, 20, BufferedImage.BITMASK);
-        imagePane = new ImagePane(errorIcon, 20, 20);
-        formValidatorWorker = new FormValidatorWorker(errorLabel, imagePane);
-        input.addKeyListener(formValidatorWorker);
 
         add(label);
         add(input);
-        add(imagePane);
-        add(errorLabel);
+
+        if (addValidation) {
+            errorLabel = new JLabel();
+            errorLabel.setMaximumSize(new Dimension(250, 20));
+            errorIcon = new BufferedImage(20, 20, BufferedImage.BITMASK);
+            imagePane = new ImagePane(errorIcon, 20, 20);
+            formValidatorWorker = new FormValidatorWorker(errorLabel, imagePane);
+            input.addKeyListener(formValidatorWorker);
+
+            add(imagePane);
+            add(errorLabel);
+        }
+
+
     }
 
     public void addNewFormValidator(FormValidator formValidator) {
