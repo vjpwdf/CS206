@@ -20,16 +20,20 @@ public class AddItemWindow extends JFrame {
     public AddItemWindow() throws HeadlessException {
         setTitle("Add An Item");
         setSize(WIDTH, HEIGHT);
-        Box inputs = Box.createVerticalBox();
+        Box itemForm = Box.createVerticalBox();
+
         GeneralInput nameInput = new GeneralInput("Item Name");
-        inputs.add(nameInput);
+        itemForm.add(nameInput);
+
         GeneralInput priceInput = new GeneralInput("Price");
-        inputs.add(priceInput);
+        itemForm.add(priceInput);
+
         GeneralInputFileBrowser fileBrowser = new GeneralInputFileBrowser("Select Image");
-        inputs.add(fileBrowser);
+        itemForm.add(fileBrowser);
         ImagePreviewPanel imagePreviewPanel = new ImagePreviewPanel(120, 120);
-        inputs.add(imagePreviewPanel);
+        itemForm.add(imagePreviewPanel);
         fileBrowser.getInput().addPropertyChangeListener(imagePreviewPanel);
-        add(inputs);
+
+        add(itemForm);
     }
 }
