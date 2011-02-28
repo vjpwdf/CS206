@@ -1,5 +1,6 @@
 package hibernate.dao;
 
+import common.LoggedInUser;
 import hibernate.User;
 import hibernate.factory.DBClient;
 
@@ -14,6 +15,7 @@ public class UserDAOImpl implements UserDao{
     @Override
     public boolean loginWithCredentials(String userName, String password) {
         User user = getUserByUserName(userName);
+        LoggedInUser.loggedInUser = user;
         return user != null && user.getUserPassword().equals(password);
     }
 

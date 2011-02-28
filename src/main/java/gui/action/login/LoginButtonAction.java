@@ -36,7 +36,6 @@ public class LoginButtonAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         UserServiceAdaptor userServiceAdaptor = new UserServiceAdaptor();
         if (userServiceAdaptor.loginWithCredentials(userName.getInput().getText(), password.getInput().getText())) {
-//            Main.loggedInUser = userName.getInput().getText();
             loginWindow.setVisible(false);
             MainWindow mainWindow = guiBuilder.buildUserInterface();
             mainWindow.setVisible(true);

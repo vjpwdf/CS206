@@ -10,8 +10,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Time: 9:47:44 PM
  */
 public class Main {
-    public static String loggedInUser;
-
     public static void main(String args[]) {
         Main main = new Main();
         main.initializeProgram();
