@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  * Date: 12-Feb-2011
  * Time: 5:59:16 PM
  */
-public class AddItemButtonAction implements ActionListener {
+public class OpenAddItemWindowAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         AddItemWindow addItemWindow = new AddItemWindow();
         addItemWindow.setVisible(true);

@@ -7,6 +7,7 @@ import gui.input.validate.FormValidatorWorker;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.

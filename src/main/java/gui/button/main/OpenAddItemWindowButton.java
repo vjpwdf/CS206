@@ -1,6 +1,6 @@
 package gui.button.main;
 
-import gui.action.main.AddItemButtonAction;
+import gui.action.main.OpenAddItemWindowAction;
 
 import javax.swing.*;
 
@@ -10,11 +10,11 @@ import javax.swing.*;
  * Date: 12-Feb-2011
  * Time: 5:58:24 PM
  */
-public class AddItemButton extends MainMenuButton {
+public class OpenAddItemWindowButton extends MainMenuButton {
 
-    public AddItemButton() {
+    public OpenAddItemWindowButton() {
         setText("Add Item");
-        addActionListener(new AddItemButtonAction());
+        addActionListener(new OpenAddItemWindowAction());
         setIcon(new ImageIcon("main/window/item-icon.png"));
     }
 }
