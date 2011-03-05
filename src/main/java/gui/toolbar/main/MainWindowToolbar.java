@@ -4,7 +4,6 @@ import gui.action.main.*;
 import gui.action.toolbar.ExitToolbarButtonAction;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -23,7 +22,7 @@ public class MainWindowToolbar extends JMenuBar {
     private void addFileButton() {
         JMenu fileMenu = new JMenu("File");
 
-        addMenuItem(fileMenu, "Add Item", new AddItemButtonAction());
+        addMenuItem(fileMenu, "Add Item", new OpenAddItemWindowAction());
         addMenuItem(fileMenu, "Remove Item", new RemoveItemButtonAction());
         addMenuItem(fileMenu, "Add Coupon", new AddCouponButtonAction());
         addMenuItem(fileMenu, "Remove Coupon", new RemoveCouponButtonAction());

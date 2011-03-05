@@ -1,5 +1,6 @@
 package hibernate.factory;
 
+import hibernate.Item;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
@@ -34,5 +35,10 @@ public class DBClient {
     @Transactional
     public Object getObject(String query) {
         return databaseSession.getCurrentSession().createQuery(query).uniqueResult();
+    }
+
+    @Transactional
+    public void saveObject(Object object) {
+        databaseSession.getCurrentSession().save(object);
     }
 }

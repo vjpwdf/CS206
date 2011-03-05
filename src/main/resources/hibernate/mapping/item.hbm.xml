@@ -6,6 +6,7 @@
     <class name="Item" table="item">
         <id name="itemUpc" column="item_upc" type="string"/>
         <property name="itemName" column="item_name" type="string"/>
+        <property name="itemPrice" column="item_price" type="float"/>
         <property name="itemDescription" column="item_description" type="string"/>
         <property name="itemManufacturer" column="item_manufacturer" type="string"/>
         <property name="itemImage" column="item_image" type="blob"/>

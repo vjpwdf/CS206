@@ -7,5 +7,6 @@ package hibernate.dao;
  * Time: 7:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ItemDao {
+public interface ItemDao {
+    public void saveItem(hibernate.Item item);
 }

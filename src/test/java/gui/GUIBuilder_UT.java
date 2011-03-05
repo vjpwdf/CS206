@@ -14,7 +14,7 @@ import static junit.framework.Assert.assertNotNull;
  */
 public class GUIBuilder_UT {
     private static final Integer WIDTH = 250;
-    private static final Integer HEIGHT = 250;
+    private static final Integer HEIGHT = 330;
 
     @Test
     public void testBuildUserInterface_ReturnsNonNullMainWindow() throws Exception {

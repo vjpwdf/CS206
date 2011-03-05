@@ -13,6 +13,15 @@ public class Item {
     private String itemManufacturer;
     private String itemDescription;
     private String itemName;
+    private float itemPrice;
+
+    public float getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(float itemPrice) {
+        this.itemPrice = itemPrice;
+    }
 
     public String getItemUpc() {
         return itemUpc;
