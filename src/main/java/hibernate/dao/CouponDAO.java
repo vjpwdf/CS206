@@ -2,6 +2,8 @@ package hibernate.dao;
 
 import hibernate.Coupon;
 
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface CouponDAO {
-    public void addCoupon(Coupon coupon);
+    public void addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date, File file);
 
     public void removeCoupon(Integer couponId);
 

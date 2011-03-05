@@ -2,10 +2,13 @@ package hibernate.dao;
 
 import hibernate.Coupon;
 import hibernate.Item;
+import hibernate.factory.DBClient;
 import org.hibernate.classic.Session;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,23 +18,21 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class CouponDao_UT extends DaoTest{
+    private CouponDAO couponDao;
+
+    @Before
+    public void setUp() {
+        couponDao = new CouponDaoImpl();
+        testSessionFactoryIsNotNull();
+    }
 
     @Test
     public void testAddCoupon() {
-        Item item = new Item();
-        item.setItemDescription("Test description");
-        item.setItemManufacturer("Bob");
-        item.setItemName("Builder");
-        item.setItemUpc("0123456");
-        sessionFactory.getCurrentSession().save(item);
-
+        couponDao.addCoupon("test", false, .25f, new Date(), null);
         Coupon coupon = new Coupon();
-        coupon.setCouponId(1);
-        coupon.setCouponType(true);
-        coupon.setCouponValue(.25f);
-        coupon.setExpirationDate(new Date());
-        coupon.setItem(item);
-        sessionFactory.getCurrentSession().save(coupon);
-        System.out.println("Passed");
+        List<Coupon> coupons = (List<Coupon>)DBClient.INSTANCE.getListOfObjects("from Coupon");
+        System.out.println();
+        //assert(coupons.contains())
+        //couponDao.addCoupon();
     }
 }

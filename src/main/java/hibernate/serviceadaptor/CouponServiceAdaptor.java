@@ -1,5 +1,7 @@
 package hibernate.serviceadaptor;
 
+import hibernate.dao.CouponDaoImpl;
+
 import java.io.File;
 import java.util.Date;
 
@@ -11,9 +13,10 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class CouponServiceAdaptor {
+    private static CouponDaoImpl couponDao = new CouponDaoImpl();
 
-    public static void addCoupon(Integer itemId, boolean couponType, Float couponValue, Date date, File file) {
-
+    public static void addCoupon(String itemId, boolean couponType, Float couponValue, Date date, File file) {
+        couponDao.addCoupon(itemId, couponType, couponValue, date, file);
     }
     public static void removeCoupon() {
 

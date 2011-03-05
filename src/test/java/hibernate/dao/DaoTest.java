@@ -1,8 +1,10 @@
 package hibernate.dao;
 
+import hibernate.Item;
 import hibernate.factory.DBClient;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +23,28 @@ import static junit.framework.Assert.assertNotNull;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/resources/hibernate/config.xml"})
+@ContextConfiguration(locations = {"/hibernate/config.xml"})
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
 public abstract class DaoTest {
+
     @Autowired
-    public SessionFactory sessionFactory;
+    public void setDbClient(DBClient dbClient){
+        DBClient.INSTANCE = dbClient;
+    }
 
     @Test
     public void testSessionFactoryIsNotNull() {
-        assertNotNull(sessionFactory);
+        assertNotNull(DBClient.INSTANCE);
+        assertNotNull(DBClient.databaseSession);
+    }
+
+    public void addItem(String itemUpc, String itemName, String itemDescription, String itemManufacturer) {
+        Item item = new Item();
+        item.setItemUpc(itemUpc);
+        item.setItemName(itemName);
+        item.setItemDescription(itemDescription);
+        item.setItemManufacturer(itemManufacturer);
+        DBClient.databaseSession.getCurrentSession().save(item);
     }
 }
