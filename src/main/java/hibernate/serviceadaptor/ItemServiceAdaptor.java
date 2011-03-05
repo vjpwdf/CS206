@@ -20,13 +20,13 @@ public class ItemServiceAdaptor {
 
     private static final ItemDao itemDAO = new ItemDaoImpl();
 
-    public void saveItem(String name, String price, String upcVal, String descriptionVal, String manufacturerVal, BufferedImage image) {
+    public void saveItem(String name, String price, String upcVal, String descriptionVal, String manufacturerVal, byte[] image) {
         Item item = new Item();
         item.setItemName(name);
         item.setItemUpc(upcVal);
         item.setItemPrice(Float.valueOf(price));
         item.setItemDescription(descriptionVal);
-        item.setItemImage(convertBufferedImageToBlob(image));
+        item.setItemImage(Hibernate.createBlob(image));
         item.setItemManufacturer(manufacturerVal);
         itemDAO.saveItem(item);
     }

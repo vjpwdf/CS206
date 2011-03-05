@@ -1,4 +1,4 @@
-package gui.window.removeitem;
+package gui.window.edititem;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,13 +13,13 @@ import static junit.framework.Assert.assertEquals;
  * To change this template use File | Settings | File Templates.
  */
 public class RemoveItemWindow_UT {
-    private RemoveItemWindow removeItemWindow;
+    private EditItemWindow removeItemWindow;
     private Integer WIDTH = 500;
     private Integer HEIGHT = 330;
 
     @Before
     public void setUp() {
-        removeItemWindow = new RemoveItemWindow();
+        removeItemWindow = new EditItemWindow();
     }
 
     @Test

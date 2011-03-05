@@ -11,11 +11,11 @@ import javax.swing.*;
  * Time: 8:03:58 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RemoveCouponButton extends MainMenuButton {
+public class EditCouponButton extends MainMenuButton {
 
-    public RemoveCouponButton() {
+    public EditCouponButton() {
         super();
-        setText("Remove Coupon");
+        setText("Edit Coupons");
         addActionListener(new RemoveCouponButtonAction());
         setIcon(new ImageIcon("main/window/remove-button.png"));
     }

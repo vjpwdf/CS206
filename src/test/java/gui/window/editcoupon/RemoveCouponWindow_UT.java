@@ -1,4 +1,4 @@
-package gui.window.removecoupon;
+package gui.window.editcoupon;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,13 +13,13 @@ import static junit.framework.Assert.assertEquals;
  * To change this template use File | Settings | File Templates.
  */
 public class RemoveCouponWindow_UT {
-    private RemoveCouponWindow removeCouponWindow;
+    private EditCouponWindow removeCouponWindow;
     private Integer WIDTH = 500;
     private Integer HEIGHT = 330;
 
     @Before
     public void setUp() {
-        removeCouponWindow = new RemoveCouponWindow();
+        removeCouponWindow = new EditCouponWindow();
     }
 
     @Test

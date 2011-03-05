@@ -27,9 +27,9 @@ public class MainWindow extends JFrame {
     private void addMainWindowButtons() {
         Box buttonBox = Box.createVerticalBox();
         buttonBox.add(new OpenAddItemWindowButton());
-        buttonBox.add(new RemoveItemButton());
+        buttonBox.add(new EditItemButton());
         buttonBox.add(new AddCouponButton());
-        buttonBox.add(new RemoveCouponButton());
+        buttonBox.add(new EditCouponButton());
         buttonBox.add(new BuildShoppingCartButton());
         buttonBox.add(new ViewAllCouponsButton());
         buttonBox.add(new ViewAllShoppingCartsButton());
