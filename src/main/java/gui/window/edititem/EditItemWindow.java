@@ -1,32 +1,27 @@
-package gui.window.edititem;/* (swing1.1.1beta2) */
-//package jp.gr.java_conf.tame.swing.examples;
+package gui.window.edititem;
 
 
-import gui.action.main.EditItemButtonAction;
 import gui.action.main.RemoveItemButtonAction;
 import gui.action.main.UpdateItemButtonAction;
 import gui.window.editcoupon.TableEventListener;
 import hibernate.Item;
-import hibernate.factory.DBClient;
+import hibernate.serviceadaptor.ItemServiceAdaptor;
 
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.image.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.image.ImageObserver;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.List;
-import javax.swing.*;
-import javax.swing.event.TableColumnModelListener;
-import javax.swing.table.*;
 
 
 /**
  * @version 1.0 06/19/99
  */
 public class EditItemWindow extends JFrame {
-
     final private int ROW_HEIGHT = 100;
     final private int HEIGHT = 600;
     final private int WIDTH = 500;
@@ -35,8 +30,10 @@ public class EditItemWindow extends JFrame {
     private JButton edit;
 
     public EditItemWindow() {
-        super("AnimatedIconTable Example");
-        List<Item> items = (List<Item>) DBClient.INSTANCE.getListOfObjects("from Item");
+        super("Edit Item Window");
+        ItemServiceAdaptor itemServiceAdaptor = new ItemServiceAdaptor();
+
+        List<Item> items = itemServiceAdaptor.getAllItems();
 
         final Object[][] data = convertToObjectArray(items);
         final Object[] column = new Object[]{"Picture", "Name", "Manufacturer", "Price"};
@@ -57,13 +54,13 @@ public class EditItemWindow extends JFrame {
         edit = new JButton("Edit");
         edit.setMinimumSize(new Dimension(150, 50));
         edit.setMaximumSize(new Dimension(150, 50));
-        edit.addActionListener(new UpdateItemButtonAction());
+        edit.addActionListener(new UpdateItemButtonAction(table, items, this));
         edit.setEnabled(false);
 
         remove = new JButton("Remove");
         remove.setMinimumSize(new Dimension(150, 50));
         remove.setMaximumSize(new Dimension(150, 50));
-        remove.addActionListener(new RemoveItemButtonAction());
+        remove.addActionListener(new RemoveItemButtonAction(table, items, this));
         remove.setEnabled(false);
 
         buttonBox.add(edit);
@@ -94,7 +91,7 @@ public class EditItemWindow extends JFrame {
             DecimalFormat df = new DecimalFormat();
             df.setMinimumFractionDigits(2);
             df.setMaximumFractionDigits(2);
-            data[i][3] = "$"+df.format(item.getItemPrice());
+            data[i][3] = "$" + df.format(item.getItemPrice());
         }
         return data;
     }
@@ -102,9 +99,9 @@ public class EditItemWindow extends JFrame {
     private void setImageObserver(JTable table) {
         TableModel model = table.getModel();
         int rowCount = model.getRowCount();
-        for(int row = 0; row < rowCount; row++){
+        for (int row = 0; row < rowCount; row++) {
             ImageIcon icon = (ImageIcon) model.getValueAt(row, 0);
-            if(icon != null)
+            if (icon != null)
                 icon.setImageObserver(new CellImageObserver(table, row, 0));
         }
     }

@@ -1,10 +1,7 @@
 package hibernate.factory;
 
 import hibernate.Item;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -39,6 +36,11 @@ public class DBClient {
 
     @Transactional
     public void saveObject(Object object) {
-        databaseSession.getCurrentSession().save(object);
+        databaseSession.getCurrentSession().saveOrUpdate(object);
+    }
+
+    @Transactional
+    public void deleteObject(Item item) {
+        databaseSession.getCurrentSession().delete(item);
     }
 }

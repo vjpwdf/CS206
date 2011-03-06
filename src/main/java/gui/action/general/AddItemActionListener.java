@@ -2,13 +2,13 @@ package gui.action.general;
 
 import gui.input.GeneralInput;
 import gui.input.GeneralInputFileBrowser;
+import gui.window.additem.AddItemWindow;
+import hibernate.Item;
 import hibernate.serviceadaptor.ItemServiceAdaptor;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 /**
@@ -25,14 +25,18 @@ public class AddItemActionListener implements ActionListener {
     private GeneralInput description;
     private GeneralInput manufacturer;
     private GeneralInputFileBrowser fileBrowser;
+    private AddItemWindow addItemWindow;
+    private Item editingItem;
 
-    public AddItemActionListener(GeneralInput nameInput, GeneralInput priceInput, GeneralInput upc, GeneralInput description, GeneralInput manufacturer, GeneralInputFileBrowser fileBrowser) {
+    public AddItemActionListener(GeneralInput nameInput, GeneralInput priceInput, GeneralInput upc, GeneralInput description, GeneralInput manufacturer, GeneralInputFileBrowser fileBrowser, AddItemWindow addItemWindow, Item item) {
         this.nameInput = nameInput;
         this.priceInput = priceInput;
         this.upc = upc;
         this.description = description;
         this.manufacturer = manufacturer;
         this.fileBrowser = fileBrowser;
+        this.addItemWindow = addItemWindow;
+        this.editingItem = item;
     }
 
     @Override
@@ -48,13 +52,11 @@ public class AddItemActionListener implements ActionListener {
         } catch (FileNotFoundException e) {
 
         }
-//        BufferedImage image = null;
-//        try {
-//            image = ImageIO.read(new File(fileBrowser.getInput().getText()));
-//        } catch (IOException e) {}
         ItemServiceAdaptor itemServiceAdaptor = new ItemServiceAdaptor();
-        itemServiceAdaptor.saveItem(name, price, upcVal, descriptionVal, manufacturerVal, imageBytes);
+        itemServiceAdaptor.saveItem(name, price, upcVal, descriptionVal, manufacturerVal, imageBytes, editingItem);
 
+        JOptionPane.showMessageDialog(null, "Item has been successfully added/updated to/in the database.");
+        addItemWindow.setVisible(false);
     }
 
     private byte[] convertFileToByteArray(File file) throws FileNotFoundException {
@@ -64,8 +66,6 @@ public class AddItemActionListener implements ActionListener {
         try {
             for (int readNum; (readNum = fis.read(buf)) != -1;) {
                 bos.write(buf, 0, readNum); //no doubt here is 0
-                //Writes len bytes from the specified byte array starting at offset off to this byte array output stream.
-                System.out.println("read " + readNum + " bytes,");
             }
         } catch (IOException ex) {
         }

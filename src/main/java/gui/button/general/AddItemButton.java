@@ -3,6 +3,8 @@ package gui.button.general;
 import gui.action.general.AddItemActionListener;
 import gui.input.GeneralInput;
 import gui.input.GeneralInputFileBrowser;
+import gui.window.additem.AddItemWindow;
+import hibernate.Item;
 
 import javax.swing.*;
 
@@ -14,8 +16,8 @@ import javax.swing.*;
  * To change this template use File | Settings | File Templates.
  */
 public class AddItemButton extends JButton {
-    public AddItemButton(String title, GeneralInput nameInput, GeneralInput priceInput, GeneralInput upc, GeneralInput description, GeneralInput manufacturer, GeneralInputFileBrowser fileBrowser) {
+    public AddItemButton(String title, GeneralInput nameInput, GeneralInput priceInput, GeneralInput upc, GeneralInput description, GeneralInput manufacturer, GeneralInputFileBrowser fileBrowser, AddItemWindow addItemWindow, Item item) {
         super(title);
-        addActionListener(new AddItemActionListener(nameInput, priceInput, upc, description, manufacturer, fileBrowser));
+        addActionListener(new AddItemActionListener(nameInput, priceInput, upc, description, manufacturer, fileBrowser, addItemWindow, item));
     }
 }

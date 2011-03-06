@@ -7,9 +7,11 @@ import gui.input.image.ImagePreviewPanel;
 import gui.input.validate.MaxLengthFormValidator;
 import gui.input.validate.MinLengthFormValidator;
 import gui.input.validate.NumberFormValidator;
+import hibernate.Item;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,7 +23,7 @@ public class AddItemWindow extends JFrame {
     private static final Integer WIDTH = 600;
     private static final Integer HEIGHT = 330;
 
-    public AddItemWindow() throws HeadlessException {
+    public AddItemWindow(Item item) throws HeadlessException {
         setTitle("Add An Item");
         setSize(WIDTH, HEIGHT);
         Box itemForm = Box.createVerticalBox();
@@ -56,9 +58,31 @@ public class AddItemWindow extends JFrame {
         itemForm.add(imagePreviewPanel);
         fileBrowser.getInput().addPropertyChangeListener(imagePreviewPanel);
 
-        JButton addItem = new AddItemButton("Add Item", nameInput, priceInput, upc, description, manufacturer, fileBrowser);
+        JButton addItem = new AddItemButton("Add/Update Item", nameInput, priceInput, upc, description, manufacturer, fileBrowser, this, item);
         itemForm.add(addItem);
 
         add(itemForm);
+
+
+        if (item != null) {
+            manufacturer.getInput().setText(item.getItemManufacturer());
+            description.getInput().setText(item.getItemDescription());
+            upc.getInput().setText(item.getItemUpc());
+            priceInput.getInput().setText(Float.toString(item.getItemPrice()));
+            nameInput.getInput().setText(item.getItemName());
+
+            try {
+                byte[] bytes = item.getItemImage().getBytes(1, (int) item.getItemImage().length());
+                ImageIcon imageIcon = new ImageIcon(bytes);
+                imagePreviewPanel.setImage(imageIcon.getImage());
+                imagePreviewPanel.scaleImage();
+                imagePreviewPanel.repaint();
+            } catch (SQLException e) {
+            }
+        }
+    }
+
+    public AddItemWindow() throws HeadlessException {
+        this(null);
     }
 }

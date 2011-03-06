@@ -50,7 +50,7 @@ public class ImagePreviewPanel extends JPanel
         }
     }
 
-    private void scaleImage() {
+    public void scaleImage() {
         width = image.getWidth(this);
         height = image.getHeight(this);
         double ratio = 1.0;
@@ -81,4 +81,7 @@ public class ImagePreviewPanel extends JPanel
                 getHeight() / 2 - height / 2, this);
     }
 
+    public void setImage(Image image) {
+        this.image = image;
+    }
 }
