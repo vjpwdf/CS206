@@ -1,5 +1,9 @@
 package hibernate.dao;
 
+import hibernate.Item;
+
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: will
@@ -9,4 +13,7 @@ package hibernate.dao;
  */
 public interface ItemDao {
     public void saveItem(hibernate.Item item);
+    public void removeItem(String itemUpc);
+    public List<Item> getAllItems();
+    public Item getItemByUpc(String itemUpc);
 }

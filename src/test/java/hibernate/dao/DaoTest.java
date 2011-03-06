@@ -1,5 +1,6 @@
 package hibernate.dao;
 
+import hibernate.Coupon;
 import hibernate.Item;
 import hibernate.factory.DBClient;
 import org.hibernate.SessionFactory;
@@ -12,6 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 import static junit.framework.Assert.assertNotNull;
 
@@ -39,12 +42,26 @@ public abstract class DaoTest {
         assertNotNull(DBClient.databaseSession);
     }
 
-    public void addItem(String itemUpc, String itemName, String itemDescription, String itemManufacturer) {
+    public Item addItem(String itemUpc, String itemName, String itemDescription, String itemManufacturer, float itemPrice) {
         Item item = new Item();
         item.setItemUpc(itemUpc);
         item.setItemName(itemName);
         item.setItemDescription(itemDescription);
         item.setItemManufacturer(itemManufacturer);
+        item.setItemPrice(itemPrice);
         DBClient.databaseSession.getCurrentSession().save(item);
+        return item;
+    }
+
+    public Coupon addCoupon(int couponId, float couponValue, boolean couponType, Item couponItem) {
+        Coupon coupon = new Coupon();
+        coupon.setCouponId(couponId);
+        coupon.setCouponValue(couponValue);
+        coupon.setExpirationDate(new Date());
+        coupon.setCouponImage(null);
+        coupon.setCouponType(couponType);
+        coupon.setItem(couponItem);
+        DBClient.databaseSession.getCurrentSession().save(coupon);
+        return coupon;
     }
 }

@@ -16,7 +16,9 @@ import java.util.List;
 public interface CouponDAO {
     public void addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date, File file);
 
-    public void removeCoupon(Integer couponId);
+    public Coupon getCoupon(int couponId);
+
+    public void removeCoupon(int couponId);
 
     public List<Coupon> getAllCoupons();
 }

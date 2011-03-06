@@ -32,13 +32,20 @@ public class CouponDaoImpl implements CouponDAO {
     }
 
     @Transactional
-    public void removeCoupon(Integer couponId) {
+    public Coupon getCoupon(int couponId) {
+        Coupon coupon = (Coupon)DBClient.INSTANCE.getObject("from Coupon coupon where coupon.couponId = "  + Integer.toString(couponId));
+        return coupon;
+    }
 
+    @Transactional
+    public void removeCoupon(int couponId) {
+        Coupon coupon = (Coupon)DBClient.INSTANCE.getObject("from Coupon coupon where coupon.couponId = " + Integer.toString(couponId));
+        DBClient.databaseSession.getCurrentSession().delete(coupon);
     }
 
     @Transactional
     public List<Coupon> getAllCoupons() {
-        List<Coupon> coupons = new ArrayList<Coupon>();
+        List<Coupon> coupons = (ArrayList<Coupon>)DBClient.INSTANCE.getListOfObjects("from Coupon");
         return coupons;
     }
 }
