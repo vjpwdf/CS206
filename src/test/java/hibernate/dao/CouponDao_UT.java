@@ -31,7 +31,7 @@ public class CouponDao_UT extends DaoTest{
 
     @Test
     public void testAddCoupon() {
-        Item item = addItem("test", "test", "test", "test", 1.25f);
+        Item item = addItem("test", "test", "test", "test", 1.25f, null);
         couponDao.addCoupon("test", false, .25f, new Date(), null);
         Coupon coupon = new Coupon();
         coupon.setCouponType(false);
@@ -44,7 +44,7 @@ public class CouponDao_UT extends DaoTest{
 
     @Test
     public void testGetCoupon() {
-        Item item = addItem("test", "test", "test", "test", 1.25f);
+        Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Coupon coupon = addCoupon(10, 1.25f, false, item);
         Coupon couponFromDatabase = couponDao.getCoupon(coupon.getCouponId());
         assertNotNull(coupon);
@@ -53,7 +53,7 @@ public class CouponDao_UT extends DaoTest{
 
     @Test
     public void testGetAllCoupons() {
-        Item item = addItem("test", "test", "test", "test", 1.25f);
+        Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Coupon coupon = addCoupon(10, 1.25f, false, item);
         List<Coupon> couponList = couponDao.getAllCoupons();
         assertNotNull(couponList);
@@ -62,7 +62,7 @@ public class CouponDao_UT extends DaoTest{
 
     @Test
     public void removeCoupon() {
-        Item item = addItem("test", "test", "test", "test", 1.25f);
+        Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Coupon coupon = addCoupon(10, 1.25f, false, item);
         couponDao.removeCoupon(coupon.getCouponId());
         List<Coupon> coupons = (List<Coupon>)DBClient.INSTANCE.getListOfObjects("from Coupon");

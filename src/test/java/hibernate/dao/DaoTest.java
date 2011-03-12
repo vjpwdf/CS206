@@ -15,6 +15,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.Set;
 
 import static junit.framework.Assert.assertNotNull;
 
@@ -42,13 +43,14 @@ public abstract class DaoTest {
         assertNotNull(DBClient.databaseSession);
     }
 
-    public Item addItem(String itemUpc, String itemName, String itemDescription, String itemManufacturer, float itemPrice) {
+    public Item addItem(String itemUpc, String itemName, String itemDescription, String itemManufacturer, float itemPrice, Set<Coupon> itemCoupons) {
         Item item = new Item();
         item.setItemUpc(itemUpc);
         item.setItemName(itemName);
         item.setItemDescription(itemDescription);
         item.setItemManufacturer(itemManufacturer);
         item.setItemPrice(itemPrice);
+        item.setItemCoupons(itemCoupons);
         DBClient.databaseSession.getCurrentSession().save(item);
         return item;
     }

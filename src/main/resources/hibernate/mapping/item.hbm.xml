@@ -10,9 +10,9 @@
         <property name="itemDescription" column="item_description" type="string"/>
         <property name="itemManufacturer" column="item_manufacturer" type="string"/>
         <property name="itemImage" column="item_image" type="blob"/>
-        <!--<set name="itemCoupons" lazy="false">-->
-            <!--<one-to-many class="Coupon"></one-to-many>-->
-            <!--<key column="item_upc"></key>-->
-        <!--</set>-->
+        <set name="itemCoupons">
+            <key column="item_upc"></key>
+            <one-to-many class="Coupon"></one-to-many>
+        </set>
     </class>
 </hibernate-mapping>
