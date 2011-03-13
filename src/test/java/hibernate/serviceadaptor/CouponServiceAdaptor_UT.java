@@ -31,7 +31,7 @@ public class CouponServiceAdaptor_UT {
     @Test
     public void testAddCoupon() throws Exception {
         Date date = new Date();
-        CouponServiceAdaptor.addCoupon("1", true, 1.25f, date, null);
+        CouponServiceAdaptor.addCoupon("1", true, 1.25f, date);
         verify(couponDao).addCoupon("1", true, 1.25f, date);
     }
 

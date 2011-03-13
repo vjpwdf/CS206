@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ItemServiceAdaptor {
 
-    private static final ItemDao itemDAO = new ItemDaoImpl();
+    private static ItemDao itemDAO = new ItemDaoImpl();
 
     public static void saveItem(String name, String price, String upcVal, String descriptionVal, String manufacturerVal, byte[] image, Item item) {
         if (item == null) {
@@ -48,6 +48,11 @@ public class ItemServiceAdaptor {
     }
 
     public static void removeItem(Item item) {
-        DBClient.INSTANCE.deleteObject(item);
+        itemDAO.removeItem(item.getItemUpc());
+        //DBClient.INSTANCE.deleteObject(item);
+    }
+
+    public static void setItemDAO (ItemDaoImpl itemDao) {
+        ItemServiceAdaptor.itemDAO = itemDao;
     }
 }

@@ -27,7 +27,7 @@ public class CouponDaoImpl implements CouponDAO {
         coupon.setCouponValue(couponValue);
         coupon.setExpirationDate(date);
         coupon.setItem(item);
-        DBClient.databaseSession.getCurrentSession().save(coupon);
+        DBClient.INSTANCE.saveObject(coupon);
     }
 
     @Transactional
@@ -39,7 +39,7 @@ public class CouponDaoImpl implements CouponDAO {
     @Transactional
     public void removeCoupon(int couponId) {
         Coupon coupon = (Coupon)DBClient.INSTANCE.getObject("from Coupon coupon where coupon.couponId = " + Integer.toString(couponId));
-        DBClient.databaseSession.getCurrentSession().delete(coupon);
+        DBClient.INSTANCE.deleteObject(coupon);
     }
 
     @Transactional
