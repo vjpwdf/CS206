@@ -1,7 +1,6 @@
 package hibernate.dao;
 
-import hibernate.Coupon;
-import hibernate.Item;
+import hibernate.*;
 import hibernate.factory.DBClient;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
@@ -15,6 +14,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static junit.framework.Assert.assertNotNull;
@@ -65,5 +66,25 @@ public abstract class DaoTest {
         coupon.setItem(couponItem);
         DBClient.databaseSession.getCurrentSession().save(coupon);
         return coupon;
+    }
+
+    public User addUser(String userName, String password) {
+        User user = new User();
+        user.setUserName(userName);
+        user.setUserPassword(password);
+        DBClient.INSTANCE.saveObject(user);
+        return user;
+    }
+
+    public ShoppingCart addShoppingCart(List<ShoppingCartItem> shoppingCartItems, User user) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+            shoppingCartItem.setShoppingCart(shoppingCart);
+        }
+        shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItems));
+        shoppingCart.setUser(user);
+        shoppingCart.setCreationDate(new Date());
+        DBClient.databaseSession.getCurrentSession().save(shoppingCart);
+        return shoppingCart;
     }
 }

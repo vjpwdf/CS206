@@ -41,9 +41,8 @@ public class ItemDao_UT extends DaoTest{
     @Test
     public void testRemoveItem() {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
-        Coupon coupon = addCoupon(10, 2.5f, false, item);
         itemDao.removeItem(item.getItemUpc());
-        List<Item> items = DBClient.INSTANCE.getListOfObjects("from Item");
+        List<Item> items = new ArrayList<Item>(DBClient.INSTANCE.getListOfObjects("from Item"));
         assertTrue(!items.contains(item));
     }
 
@@ -67,6 +66,19 @@ public class ItemDao_UT extends DaoTest{
         Item itemFromDB = (Item) DBClient.INSTANCE.getObject("from Item item where item.itemUpc = " + "'test'");
         assertNotNull(itemFromDB.getItemCoupons());
         assertTrue(itemFromDB.getItemCoupons().contains(coupon));
-        System.out.println();
+    }
+
+    @Test
+    public void testSaveItem() {
+        Item item = new Item();
+        item.setItemDescription("test");
+        item.setItemManufacturer("test");
+        item.setItemName("test");
+        item.setItemPrice(1.25f);
+        item.setItemUpc("test");
+        itemDao.saveItem(item);
+        Item dbItem = (Item)DBClient.INSTANCE.getObject("from Item item where item.itemUpc = " + "'" + item.getItemUpc() + "'");
+        assertNotNull(dbItem);
+        assertTrue(dbItem.equals(item));
     }
 }

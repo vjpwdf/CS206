@@ -10,7 +10,7 @@
         <property name="itemDescription" column="item_description" type="string"/>
         <property name="itemManufacturer" column="item_manufacturer" type="string"/>
         <property name="itemImage" column="item_image" type="blob"/>
-        <set name="itemCoupons">
+        <set name="itemCoupons" cascade="save-update" lazy="false">
             <key column="item_upc"></key>
             <one-to-many class="Coupon"></one-to-many>
         </set>

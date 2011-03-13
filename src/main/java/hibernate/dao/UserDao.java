@@ -1,6 +1,7 @@
 package hibernate.dao;
 
 import hibernate.User;
+import hibernate.factory.DBClient;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,4 +13,5 @@ import hibernate.User;
 public interface UserDao {
     boolean loginWithCredentials(String userName, String password);
     User getUserByUserName(String userName);
+    public void addUser(String userName, String password);
 }
