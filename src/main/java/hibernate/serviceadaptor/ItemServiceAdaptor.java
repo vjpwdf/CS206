@@ -37,7 +37,7 @@ public class ItemServiceAdaptor {
         itemDAO.saveItem(item);
     }
 
-    private static Blob convertBufferedImageToBlob(BufferedImage image) {
+    public static Blob convertBufferedImageToBlob(BufferedImage image) {
         byte[] buffer = ((DataBufferByte) (image).getRaster().getDataBuffer()).getData();
         return Hibernate.createBlob(buffer);
     }
