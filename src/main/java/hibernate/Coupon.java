@@ -14,15 +14,6 @@ public class Coupon {
     private boolean couponType;
     private float couponValue;
     private Date expirationDate;
-    private Blob couponImage;
-
-    public Blob getCouponImage() {
-        return couponImage;
-    }
-
-    public void setCouponImage(Blob couponImage) {
-        this.couponImage = couponImage;
-    }
 
     public Date getExpirationDate() {
         return expirationDate;
@@ -69,7 +60,6 @@ public class Coupon {
 
         if (couponType != coupon.couponType) return false;
         if (Float.compare(coupon.couponValue, couponValue) != 0) return false;
-        if (couponImage != null ? !couponImage.equals(coupon.couponImage) : coupon.couponImage != null) return false;
         if (item != null ? !item.equals(coupon.item) : coupon.item != null) return false;
 
         return true;
@@ -81,7 +71,6 @@ public class Coupon {
         result = 31 * result + (couponType ? 1 : 0);
         result = 31 * result + (couponValue != +0.0f ? Float.floatToIntBits(couponValue) : 0);
         result = 31 * result + (expirationDate != null ? expirationDate.hashCode() : 0);
-        result = 31 * result + (couponImage != null ? couponImage.hashCode() : 0);
         return result;
     }
 

@@ -61,7 +61,6 @@ public abstract class DaoTest {
         coupon.setCouponId(couponId);
         coupon.setCouponValue(couponValue);
         coupon.setExpirationDate(new Date());
-        coupon.setCouponImage(null);
         coupon.setCouponType(couponType);
         coupon.setItem(couponItem);
         DBClient.databaseSession.getCurrentSession().save(coupon);

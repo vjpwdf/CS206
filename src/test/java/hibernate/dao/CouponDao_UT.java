@@ -34,7 +34,6 @@ public class CouponDao_UT extends DaoTest{
         couponDao.addCoupon("test", false, .25f, new Date());
         Coupon coupon = new Coupon();
         coupon.setCouponType(false);
-        coupon.setCouponImage(null);
         coupon.setCouponValue(.25f);
         coupon.setItem(item);
         List<Coupon> coupons = (List<Coupon>)DBClient.INSTANCE.getListOfObjects("from Coupon");

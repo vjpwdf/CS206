@@ -102,4 +102,9 @@ public class Item {
         result = 31 * result + (itemPrice != +0.0f ? Float.floatToIntBits(itemPrice) : 0);
         return result;
     }
+
+    @Override
+    public String toString(){
+        return itemName+" - "+itemManufacturer;
+    }
 }
