@@ -1,10 +1,13 @@
 package hibernate.serviceadaptor;
 
+import hibernate.Item;
 import hibernate.dao.ItemDao;
 import hibernate.dao.ItemDaoImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,7 +27,9 @@ public class ItemServiceAdaptor_UT {
 
     @Test
     public void testSaveItem() throws Exception {
-
+        Item item = new Item();
+        ItemServiceAdaptor.saveItem("test", "1.25", "test", "test", "test", null, item);
+        verify(itemDao).saveItem(item);
     }
 
     @Test

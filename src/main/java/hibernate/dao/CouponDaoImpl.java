@@ -5,7 +5,6 @@ import hibernate.Item;
 import hibernate.factory.DBClient;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.List;
 public class CouponDaoImpl implements CouponDAO {
 
     @Transactional
-    public void addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date, File file) {
+    public void addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date) {
         Item item = (Item)DBClient.INSTANCE.getObject("from Item item where item.itemUpc = " + "'" + itemUpc + "'");
         System.out.println();
         Coupon coupon = new Coupon();

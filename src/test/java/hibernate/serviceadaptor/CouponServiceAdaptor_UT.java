@@ -32,7 +32,7 @@ public class CouponServiceAdaptor_UT {
     public void testAddCoupon() throws Exception {
         Date date = new Date();
         CouponServiceAdaptor.addCoupon("1", true, 1.25f, date, null);
-        verify(couponDao).addCoupon("1", true, 1.25f, date, null);
+        verify(couponDao).addCoupon("1", true, 1.25f, date);
     }
 
     @Test

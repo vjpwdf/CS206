@@ -3,7 +3,6 @@ package hibernate.dao;
 import hibernate.Coupon;
 import hibernate.Item;
 import hibernate.factory.DBClient;
-import org.hibernate.classic.Session;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +31,7 @@ public class CouponDao_UT extends DaoTest{
     @Test
     public void testAddCoupon() {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
-        couponDao.addCoupon("test", false, .25f, new Date(), null);
+        couponDao.addCoupon("test", false, .25f, new Date());
         Coupon coupon = new Coupon();
         coupon.setCouponType(false);
         coupon.setCouponImage(null);

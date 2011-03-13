@@ -17,8 +17,8 @@ import java.util.List;
 public class CouponServiceAdaptor {
     private static CouponDaoImpl couponDao = new CouponDaoImpl();
 
-    public static void addCoupon(String itemId, boolean couponType, Float couponValue, Date date, File file) {
-        couponDao.addCoupon(itemId, couponType, couponValue, date, file);
+    public static void addCoupon(String itemId, boolean couponType, Float couponValue, Date date) {
+        couponDao.addCoupon(itemId, couponType, couponValue, date);
     }
     public static void removeCoupon(int couponId) {
         couponDao.removeCoupon(couponId);
