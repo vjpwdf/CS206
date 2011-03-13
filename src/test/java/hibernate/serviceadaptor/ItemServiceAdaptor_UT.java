@@ -10,7 +10,9 @@ import org.mockito.Mock;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Blob;
 
@@ -44,8 +46,21 @@ public class ItemServiceAdaptor_UT {
 
     @Test
     public void testSaveItemWithImage() throws Exception {
+        File file = new File("src/main/resources/images/check.png");
+
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum); //no doubt here is 0
+            }
+        } catch (IOException ex) {
+        }
+
         Item item = new Item();
-        BufferedImage bufferedImage = I
+        ItemServiceAdaptor.saveItem("test", "1.25", "test", "test", "test", bos.toByteArray(), item);
+        verify(itemDao).saveItem(item);
     }
 
     @Test
