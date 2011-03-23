@@ -30,7 +30,7 @@ public class UserDAOImpl_UT extends DaoTest {
 
     @Test
     public void testAddUser() {
-        userDao.addUser("Test", "0123456");
+        userDao.createUserAccount("Test", "0123456");
         User user = new User();
         user.setUserName("Test");
         user.setUserPassword("0123456");
