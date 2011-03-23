@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class ItemServiceAdaptor {
 
-    private static final ItemDao itemDAO = new ItemDaoImpl();
+    private static ItemDao itemDAO = new ItemDaoImpl();
 
-    public void saveItem(String name, String price, String upcVal, String descriptionVal, String manufacturerVal, byte[] image, Item item) {
+    public static void saveItem(String name, String price, String upcVal, String descriptionVal, String manufacturerVal, byte[] image, Item item) {
         if (item == null) {
             item = new Item();
         }
@@ -37,17 +37,22 @@ public class ItemServiceAdaptor {
         itemDAO.saveItem(item);
     }
 
-    private Blob convertBufferedImageToBlob(BufferedImage image) {
+    public static Blob convertBufferedImageToBlob(BufferedImage image) {
         byte[] buffer = ((DataBufferByte) (image).getRaster().getDataBuffer()).getData();
         return Hibernate.createBlob(buffer);
     }
 
     @SuppressWarnings("unchecked")
-    public List<Item> getAllItems() {
-        return (List<Item>) DBClient.INSTANCE.getListOfObjects("from Item");
+    public static List<Item> getAllItems() {
+        return itemDAO.getAllItems();
     }
 
-    public void removeItem(Item item) {
-        DBClient.INSTANCE.deleteObject(item);
+    public static void removeItem(Item item) {
+        itemDAO.removeItem(item.getItemUpc());
+        //DBClient.INSTANCE.deleteObject(item);
+    }
+
+    public static void setItemDAO (ItemDaoImpl itemDao) {
+        ItemServiceAdaptor.itemDAO = itemDao;
     }
 }

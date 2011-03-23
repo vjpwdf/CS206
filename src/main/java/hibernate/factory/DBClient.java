@@ -40,7 +40,7 @@ public class DBClient {
     }
 
     @Transactional
-    public void deleteObject(Item item) {
-        databaseSession.getCurrentSession().delete(item);
+    public void deleteObject(Object object) {
+        databaseSession.getCurrentSession().delete(object);
     }
 }

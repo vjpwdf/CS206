@@ -1,9 +1,11 @@
 package hibernate.serviceadaptor;
 
+import hibernate.Coupon;
 import hibernate.dao.CouponDaoImpl;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,13 +17,17 @@ import java.util.Date;
 public class CouponServiceAdaptor {
     private static CouponDaoImpl couponDao = new CouponDaoImpl();
 
-    public static void addCoupon(String itemId, boolean couponType, Float couponValue, Date date, File file) {
-        couponDao.addCoupon(itemId, couponType, couponValue, date, file);
+    public static void addCoupon(String itemId, boolean couponType, Float couponValue, Date date) {
+        couponDao.addCoupon(itemId, couponType, couponValue, date);
     }
-    public static void removeCoupon() {
-
+    public static void removeCoupon(int couponId) {
+        couponDao.removeCoupon(couponId);
     }
-    public static void getAllCoupons() {
+    public static List<Coupon> getAllCoupons() {
+        return couponDao.getAllCoupons();
+    }
 
+    public static void setCouponDao(CouponDaoImpl couponDao) {
+        CouponServiceAdaptor.couponDao = couponDao;
     }
 }

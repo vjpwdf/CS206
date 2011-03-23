@@ -11,6 +11,5 @@
         <property name="couponType" column="coupon_type" type="boolean"/>
         <property name="couponValue" column="coupon_value" type="float"/>
         <property name="expirationDate" column="expiration_date" type="timestamp"/>
-        <property name="couponImage" column="coupon_image" type="blob"/>
     </class>
 </hibernate-mapping>

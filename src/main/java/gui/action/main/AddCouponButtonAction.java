@@ -1,7 +1,6 @@
 package gui.action.main;
 
 import gui.window.addcoupon.AddCouponWindow;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

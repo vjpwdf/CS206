@@ -2,13 +2,14 @@ package gui.window.editcoupon;/* (swing1.1.1beta2) */
 //package jp.gr.java_conf.tame.swing.examples;
 
 
-import hibernate.Item;
-import hibernate.factory.DBClient;
+import gui.action.main.RemoveItemButtonAction;
+import gui.action.main.UpdateItemButtonAction;
+import gui.window.edititem.EditItemTableListener;
+import hibernate.Coupon;
+import hibernate.serviceadaptor.CouponServiceAdaptor;
 
 import java.awt.*;
-import java.awt.image.*;
-import java.sql.Blob;
-import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -18,57 +19,78 @@ import javax.swing.table.*;
  * @version 1.0 06/19/99
  */
 public class EditCouponWindow extends JFrame {
-
+    final private int ROW_HEIGHT = 30;
+    final private int HEIGHT = 600;
+    final private int WIDTH = 500;
+    JTable table;
+    private JButton remove;
+    private JButton edit;
 
     public EditCouponWindow() {
-        super("AnimatedIconTable Example");
-        List<Item> items = (List<Item>) DBClient.INSTANCE.getListOfObjects("from Item");
+        super("Edit Coupon Window");
 
+        List<Coupon> coupons = CouponServiceAdaptor.getAllCoupons();
 
-        final Object[][] data = convertToObjectArray(items);
-        final Object[] column = new Object[]{"Item Picture", "Item Name", "Item Description"};
+        final Object[][] data = convertToObjectArray(coupons);
+        final Object[] column = new Object[]{"Item", "Value", "Type", "Expiration Date"};
 
-        AbstractTableModel model = new ItemTableModel(column, data);
-        JTable table = new JTable(model);
-        table.setRowHeight(100);
-        setImageObserver(table);
+        AbstractTableModel model = new CouponTableModel(column, data);
+        table = new JTable(model);
+        table.setRowHeight(ROW_HEIGHT);
         JScrollPane pane = new JScrollPane(table);
-        getContentPane().add(pane);
+
+
+        Box vertBox = Box.createVerticalBox();
+        vertBox.add(pane);
+
+        Box buttonBox = Box.createHorizontalBox();
+
+        edit = new JButton("Edit");
+        edit.setMinimumSize(new Dimension(150, 50));
+        edit.setMaximumSize(new Dimension(150, 50));
+//        edit.addActionListener(new UpdateItemButtonAction(table, items, this));
+        edit.setEnabled(false);
+
+        remove = new JButton("Remove");
+        remove.setMinimumSize(new Dimension(150, 50));
+        remove.setMaximumSize(new Dimension(150, 50));
+//        remove.addActionListener(new RemoveItemButtonAction(table, items, this));
+        remove.setEnabled(false);
+
+        buttonBox.add(edit);
+        buttonBox.add(remove);
+
+//        table.getSelectionModel().addListSelectionListener(new EditItemTableListener(table, edit, remove));
+
+        vertBox.add(buttonBox);
+
+        getContentPane().add(vertBox);
+        setSize(WIDTH, HEIGHT);
     }
 
-    private Object[][] convertToObjectArray(List<Item> items) {
-        Object[][] data = new Object[items.size()][3];
-        for (int i = 0; i < items.size(); i++) {
-            Item item = items.get(i);
-            Blob image = item.getItemImage();
-            try {
-                byte[] bytes = image.getBytes(1, (int) image.length());
-                ImageIcon imageIcon = new ImageIcon(bytes);
-                data[i][0] = imageIcon;
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, e.toString());
-            }
-            data[i][1] = item.getItemName();
-            data[i][2] = item.getItemDescription();
+    private Object[][] convertToObjectArray(List<Coupon> coupons) {
+        Object[][] data = new Object[coupons.size()][4];
+        for (int i = 0; i < coupons.size(); i++) {
+            Coupon coupon = coupons.get(i);
+            data[i][0] = coupon.getItem().toString();
+
+            DecimalFormat df = new DecimalFormat();
+            df.setMinimumFractionDigits(2);
+            df.setMaximumFractionDigits(2);
+            data[i][1] = df.format(coupon.getCouponValue());
+
+            data[i][2] = coupon.isCouponType()?"Percent Off":"Amount Off";
+
+            data[i][3] = coupon.getExpirationDate().toString();
         }
         return data;
     }
 
-    private void setImageObserver(JTable table) {
-        TableModel model = table.getModel();
-        int rowCount = model.getRowCount();
-        for(int row = 0; row < rowCount; row++){
-            ImageIcon icon = (ImageIcon) model.getValueAt(row, 0);
-            if(icon != null)
-                icon.setImageObserver(new CellImageObserver(table, row, 0));
-        }
-    }
-
-    private static class ItemTableModel extends AbstractTableModel {
+    private static class CouponTableModel extends AbstractTableModel {
         private final Object[] column;
         private final Object[][] data;
 
-        public ItemTableModel(Object[] column, Object[][] data) {
+        public CouponTableModel(Object[] column, Object[][] data) {
             this.column = column;
             this.data = data;
         }
@@ -91,27 +113,6 @@ public class EditCouponWindow extends JFrame {
 
         public Class getColumnClass(int col) {
             return data[0][col].getClass();
-        }
-    }
-
-    class CellImageObserver implements ImageObserver {
-        JTable table;
-        int row;
-        int col;
-
-        CellImageObserver(JTable table, int row, int col) {
-            this.table = table;
-            this.row = row;
-            this.col = col;
-        }
-
-        public boolean imageUpdate(Image img, int flags,
-                                   int x, int y, int w, int h) {
-            if ((flags & (FRAMEBITS | ALLBITS)) != 0) {
-                Rectangle rect = table.getCellRect(row, col, false);
-                table.repaint(rect);
-            }
-            return (flags & (ALLBITS | ABORT)) == 0;
         }
     }
 }

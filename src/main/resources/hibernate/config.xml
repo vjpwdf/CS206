@@ -5,9 +5,6 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-
-
-
     <bean id="dbClient" class="hibernate.factory.DBClient">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

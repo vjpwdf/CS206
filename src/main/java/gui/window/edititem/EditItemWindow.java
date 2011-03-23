@@ -3,7 +3,6 @@ package gui.window.edititem;
 
 import gui.action.main.RemoveItemButtonAction;
 import gui.action.main.UpdateItemButtonAction;
-import gui.window.editcoupon.TableEventListener;
 import hibernate.Item;
 import hibernate.serviceadaptor.ItemServiceAdaptor;
 
@@ -40,7 +39,6 @@ public class EditItemWindow extends JFrame {
 
         AbstractTableModel model = new ItemTableModel(column, data);
         table = new JTable(model);
-        new TableEventListener(table, items);
         table.setRowHeight(ROW_HEIGHT);
         setImageObserver(table);
         JScrollPane pane = new JScrollPane(table);
