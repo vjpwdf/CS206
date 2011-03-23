@@ -1,21 +1,15 @@
 package gui.window.addcoupon;
 
-import gui.button.general.AddItemButton;
 import gui.button.general.SaveOrUpdateCouponButton;
 import gui.input.GeneralDropDownInput;
 import gui.input.GeneralInput;
-import gui.input.GeneralInputFileBrowser;
-import gui.input.image.ImagePreviewPanel;
 import gui.input.validate.DateFormValidator;
-import gui.input.validate.MaxLengthFormValidator;
-import gui.input.validate.MinLengthFormValidator;
 import gui.input.validate.NumberFormValidator;
 import hibernate.Item;
-import org.hibernate.event.SaveOrUpdateEvent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +27,7 @@ public class AddCouponWindow extends JFrame {
         Box itemForm = Box.createVerticalBox();
 
         GeneralInput value = new GeneralInput("Coupon Value", true);
-        value .addNewFormValidator(new NumberFormValidator());
+        value.addNewFormValidator(new NumberFormValidator());
         itemForm.add(value );
 
         GeneralInput expirationDate = new GeneralInput("Expiration Date", true);
@@ -46,9 +40,11 @@ public class AddCouponWindow extends JFrame {
         GeneralDropDownInput type = new GeneralDropDownInput("Coupon Type", new String[]{"Percent Off", "Amount Off"});
         itemForm.add(type);
 
-        SaveOrUpdateCouponButton button = new SaveOrUpdateCouponButton("Add", value, expirationDate, items, type);
-        itemForm.add(button);
+        JButton saveOrUpdateCouponButton = new SaveOrUpdateCouponButton("Add", value, expirationDate, items, type);
+        itemForm.add(saveOrUpdateCouponButton);
 
+        value.getFormValidatorWorker().monitorButtons(Arrays.asList(saveOrUpdateCouponButton));
+        expirationDate.getFormValidatorWorker().monitorButtons(Arrays.asList(saveOrUpdateCouponButton));
 
         add(itemForm);
 

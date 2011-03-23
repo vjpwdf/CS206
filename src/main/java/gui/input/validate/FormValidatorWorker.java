@@ -21,6 +21,7 @@ public class FormValidatorWorker implements KeyListener {
     private List<FormValidator> formValidators = new ArrayList<FormValidator>();
     private JLabel errorLabel;
     private ImagePane imagePane;
+    private List<JButton> buttons;
 
     public FormValidatorWorker(JLabel errorLabel, ImagePane imagePane) {
         this.errorLabel = errorLabel;
@@ -29,6 +30,10 @@ public class FormValidatorWorker implements KeyListener {
 
     public void addNewFormValidator(FormValidator formValidator) {
         formValidators.add(formValidator);
+    }
+
+    public void monitorButtons(List<JButton> buttons) {
+        this.buttons = buttons;
     }
 
     @Override
@@ -40,8 +45,10 @@ public class FormValidatorWorker implements KeyListener {
         try {
             errorLabel.setText("");
             imagePane.setImage(ImageIO.read(new File("images/check.png")));
+            enableButtons();
             for (FormValidator formValidator : formValidators) {
                 if (!formValidator.isValid()) {
+                    disableButtons();
                     errorLabel.setText(formValidator.toString());
                     imagePane.setImage(ImageIO.read(new File("images/x.png")));
                     break;
@@ -50,6 +57,24 @@ public class FormValidatorWorker implements KeyListener {
             imagePane.update(imagePane.getGraphics());
         } catch (Exception e) {
 
+        }
+    }
+
+    private void enableButtons() {
+        if(buttons == null) {
+            return;
+        }
+        for (JButton button : buttons) {
+            button.setEnabled(true);
+        }
+    }
+
+    private void disableButtons() {
+        if(buttons == null) {
+            return;
+        }
+        for (JButton button : buttons) {
+            button.setEnabled(false);
         }
     }
 

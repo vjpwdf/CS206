@@ -12,6 +12,7 @@ import hibernate.Item;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
@@ -62,6 +63,12 @@ public class AddItemWindow extends JFrame {
         itemForm.add(addItem);
 
         add(itemForm);
+
+        nameInput.getFormValidatorWorker().monitorButtons(Arrays.asList(addItem));
+        priceInput.getFormValidatorWorker().monitorButtons(Arrays.asList(addItem));
+        upc.getFormValidatorWorker().monitorButtons(Arrays.asList(addItem));
+        description.getFormValidatorWorker().monitorButtons(Arrays.asList(addItem));
+        manufacturer.getFormValidatorWorker().monitorButtons(Arrays.asList(addItem));
 
 
         if (item != null) {

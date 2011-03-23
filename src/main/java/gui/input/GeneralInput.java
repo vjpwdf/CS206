@@ -7,7 +7,6 @@ import gui.input.validate.FormValidatorWorker;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
@@ -58,5 +57,9 @@ public class GeneralInput extends Box {
         formValidator.setFormValidatorWorker(formValidatorWorker);
         formValidatorWorker.addNewFormValidator(formValidator);
         input.addKeyListener(formValidator);
+    }
+
+    public FormValidatorWorker getFormValidatorWorker() {
+        return formValidatorWorker;
     }
 }

@@ -7,6 +7,7 @@ import gui.input.validate.MinLengthFormValidator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,6 +34,8 @@ public class CreateUserWindow extends JFrame {
         password.addNewFormValidator(new MinLengthFormValidator(3));
         password.addNewFormValidator(new MaxLengthFormValidator(30));
         JButton createUserButton = new AddNewUserButton(this, userName, password);
+        userName.getFormValidatorWorker().monitorButtons(Arrays.asList(createUserButton));
+        password.getFormValidatorWorker().monitorButtons(Arrays.asList(createUserButton));
 
         loginForm.add(userName);
         loginForm.add(password);
