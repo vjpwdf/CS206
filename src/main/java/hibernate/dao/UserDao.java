@@ -12,4 +12,5 @@ import hibernate.User;
 public interface UserDao {
     boolean loginWithCredentials(String userName, String password);
     User getUserByUserName(String userName);
+    void createUserAccount(String userName, String password);
 }

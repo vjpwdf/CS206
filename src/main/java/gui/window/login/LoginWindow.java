@@ -1,5 +1,6 @@
 package gui.window.login;
 
+import gui.button.login.CreateUserButton;
 import gui.button.login.LoginButton;
 import gui.input.GeneralInput;
 
@@ -26,11 +27,13 @@ public class LoginWindow extends JFrame {
 
         GeneralInput userName = new GeneralInput("Username: ", false);
         GeneralInput password = new GeneralInput("Password: ", false);
-        LoginButton loginButton = new LoginButton(this, userName, password);
+        JButton loginButton = new LoginButton(this, userName, password);
+        JButton createUserButton = new CreateUserButton();
 
         loginForm.add(userName);
         loginForm.add(password);
         loginForm.add(loginButton);
+        loginForm.add(createUserButton);
 
         add(loginForm);
     }

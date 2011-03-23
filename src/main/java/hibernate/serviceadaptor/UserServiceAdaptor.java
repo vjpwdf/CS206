@@ -16,4 +16,12 @@ public class UserServiceAdaptor {
     public boolean loginWithCredentials(String username, String password) {
         return userDao.loginWithCredentials(username, password);
     }
+
+    public boolean userNameAlreadyExists(String userName) {
+        return userDao.getUserByUserName(userName) != null;
+    }
+
+    public void createUserAccount(String userName, String password) {
+        userDao.createUserAccount(userName, password);
+    }
 }

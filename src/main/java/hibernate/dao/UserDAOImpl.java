@@ -23,4 +23,12 @@ public class UserDAOImpl implements UserDao{
     public User getUserByUserName(String userName) {
         return (User)DBClient.INSTANCE.getObject("from User where userName='" + userName + "'");
     }
+
+    @Override
+    public void createUserAccount(String userName, String password) {
+        User newUser = new User();
+        newUser.setUserName(userName);
+        newUser.setUserPassword(password);
+        DBClient.INSTANCE.saveObject(newUser);
+    }
 }
