@@ -30,9 +30,8 @@ public class EditItemWindow extends JFrame {
 
     public EditItemWindow() {
         super("Edit Item Window");
-        ItemServiceAdaptor itemServiceAdaptor = new ItemServiceAdaptor();
 
-        List<Item> items = itemServiceAdaptor.getAllItems();
+        List<Item> items = ItemServiceAdaptor.getAllItems();
 
         final Object[][] data = convertToObjectArray(items);
         final Object[] column = new Object[]{"Picture", "Name", "Manufacturer", "Price"};
@@ -77,12 +76,15 @@ public class EditItemWindow extends JFrame {
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             Blob image = item.getItemImage();
-            try {
-                byte[] bytes = image.getBytes(1, (int) image.length());
-                ImageIcon imageIcon = new ImageIcon(bytes);
-                data[i][0] = imageIcon;
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, e.toString());
+            data[i][0] = "No Image";
+            if (image != null) {
+                try {
+                    byte[] bytes = image.getBytes(1, (int) image.length());
+                    ImageIcon imageIcon = new ImageIcon(bytes);
+                    data[i][0] = imageIcon;
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, e.toString());
+                }
             }
             data[i][1] = item.getItemName();
             data[i][2] = item.getItemManufacturer();
@@ -98,9 +100,11 @@ public class EditItemWindow extends JFrame {
         TableModel model = table.getModel();
         int rowCount = model.getRowCount();
         for (int row = 0; row < rowCount; row++) {
-            ImageIcon icon = (ImageIcon) model.getValueAt(row, 0);
-            if (icon != null)
-                icon.setImageObserver(new CellImageObserver(table, row, 0));
+            if (model.getValueAt(row, 0).getClass() == ImageIcon.class) {
+                ImageIcon icon = (ImageIcon) model.getValueAt(row, 0);
+                if (icon != null)
+                    icon.setImageObserver(new CellImageObserver(table, row, 0));
+            }
         }
     }
 
