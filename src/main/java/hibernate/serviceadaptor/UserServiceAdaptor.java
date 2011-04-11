@@ -13,15 +13,19 @@ import hibernate.dao.UserDao;
 public class UserServiceAdaptor {
     private static UserDao userDao = new UserDAOImpl();
 
-    public boolean loginWithCredentials(String username, String password) {
+    public static boolean loginWithCredentials(String username, String password) {
         return userDao.loginWithCredentials(username, password);
     }
 
-    public boolean userNameAlreadyExists(String userName) {
+    public static boolean userNameAlreadyExists(String userName) {
         return userDao.getUserByUserName(userName) != null;
     }
 
-    public void createUserAccount(String userName, String password) {
+    public static void createUserAccount(String userName, String password) {
         userDao.createUserAccount(userName, password);
+    }
+
+    public static void setUserDao(UserDAOImpl userDao) {
+        UserServiceAdaptor.userDao = userDao;
     }
 }

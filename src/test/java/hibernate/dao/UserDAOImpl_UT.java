@@ -45,7 +45,7 @@ public class UserDAOImpl_UT extends DaoTest {
         User user = addUser("Test", "0123456");
         User dbUser = (User) DBClient.INSTANCE.getObject("from User user where user.userName = " + "'" + user.getUserName() + "'");
         assertNotNull(dbUser);
-        assertTrue(dbUser.equals(dbUser));
+        assertTrue(dbUser.equals(user));
     }
 
     @Test

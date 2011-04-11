@@ -3,6 +3,7 @@ package hibernate.serviceadaptor;
 import hibernate.Item;
 import hibernate.dao.ItemDao;
 import hibernate.dao.ItemDaoImpl;
+import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.sql.Blob;
 
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -35,6 +38,8 @@ public class ItemServiceAdaptor_UT {
     public void setUp() {
         initMocks(this);
         ItemServiceAdaptor.setItemDAO(itemDao);
+        ItemServiceAdaptor itemServiceAdaptor = new ItemServiceAdaptor();
+        assertNotNull(itemServiceAdaptor);
     }
 
     @Test
@@ -42,6 +47,13 @@ public class ItemServiceAdaptor_UT {
         Item item = new Item();
         ItemServiceAdaptor.saveItem("test", "1.25", "test", "test", "test", null, item);
         verify(itemDao).saveItem(item);
+    }
+
+    @Test
+    public void testSaveItemWithItemNull() throws Exception {
+        Item item = null;
+        ItemServiceAdaptor.saveItem("test", "1.25", "test", "test", "test", null, item);
+        verify(itemDao).saveItem(any(Item.class));
     }
 
     @Test
@@ -74,12 +86,5 @@ public class ItemServiceAdaptor_UT {
         Item item = new Item();
         ItemServiceAdaptor.removeItem(item);
         verify(itemDao).removeItem(item.getItemUpc());
-    }
-
-    @Test
-    public void testConvertBufferedImageToBlob() throws IOException {
-        BufferedImage bufferedImage = ImageIO.read(new File("src/main/resources/images/check.png"));
-        Blob blob = ItemServiceAdaptor.convertBufferedImageToBlob(bufferedImage);
-        assertNotNull(blob);
     }
 }

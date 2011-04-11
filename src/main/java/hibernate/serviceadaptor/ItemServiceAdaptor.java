@@ -37,11 +37,6 @@ public class ItemServiceAdaptor {
         itemDAO.saveItem(item);
     }
 
-    public static Blob convertBufferedImageToBlob(BufferedImage image) {
-        byte[] buffer = ((DataBufferByte) (image).getRaster().getDataBuffer()).getData();
-        return Hibernate.createBlob(buffer);
-    }
-
     @SuppressWarnings("unchecked")
     public static List<Item> getAllItems() {
         return itemDAO.getAllItems();
@@ -49,7 +44,6 @@ public class ItemServiceAdaptor {
 
     public static void removeItem(Item item) {
         itemDAO.removeItem(item.getItemUpc());
-        //DBClient.INSTANCE.deleteObject(item);
     }
 
     public static void setItemDAO (ItemDaoImpl itemDao) {
