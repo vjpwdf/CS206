@@ -23,9 +23,9 @@ public class MainWindowToolbar extends JMenuBar {
         JMenu fileMenu = new JMenu("File");
 
         addMenuItem(fileMenu, "Add Item", new OpenAddItemWindowAction());
-        addMenuItem(fileMenu, "Remove Item", new EditItemButtonAction());
+        addMenuItem(fileMenu, "Eit Item", new EditItemButtonAction());
         addMenuItem(fileMenu, "Add Coupon", new AddCouponButtonAction());
-        addMenuItem(fileMenu, "Remove Coupon", new RemoveCouponButtonAction());
+        addMenuItem(fileMenu, "Edit Coupons", new RemoveCouponButtonAction());
         addMenuItem(fileMenu, "Build Shopping Cart", new BuildShoppingCartButtonAction());
         addMenuItem(fileMenu, "View All Coupons", new ViewAllCouponsButtonAction());
         addMenuItem(fileMenu, "View All Shopping Carts", new ViewAllShoppingCartsButtonAction());

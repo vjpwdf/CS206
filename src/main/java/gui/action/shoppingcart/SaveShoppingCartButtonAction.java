@@ -1,11 +1,9 @@
 package gui.action.shoppingcart;
 
 import common.LoggedInUser;
-import gui.button.shoppingcart.SaveShoppingCartButton;
 import gui.window.buildshoppingcart.BuildShoppingCartWindow;
 import hibernate.Item;
 import hibernate.serviceadaptor.ShoppingCartServiceAdaptor;
-import org.apache.commons.collections.map.HashedMap;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -49,7 +47,7 @@ public class SaveShoppingCartButtonAction implements ActionListener{
 
     private Item getItemByItemName(String itemName) {
         for (Item item : items) {
-            if(item.toString().equals(itemName)) {
+            if(item.getItemName().equals(itemName)) {
                 return item;
             }
         }

@@ -16,4 +16,5 @@ public interface ShoppingCartDao {
     public void addShoppingCartFromListOfShoppingCartItems(List<ShoppingCartItem> shoppingCartItems, String userName);
     public List<ShoppingCart> getAllShoppingCarts();
     public void addEmptyShoppingCart(String userName);
+    public void removeShoppingCart(ShoppingCart shoppingCart);
 }

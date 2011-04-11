@@ -40,4 +40,8 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         shoppingCart.setUser(user);
         DBClient.INSTANCE.saveObject(shoppingCart);
     }
+
+    public void removeShoppingCart(ShoppingCart shoppingCart) {
+        DBClient.INSTANCE.deleteObject(shoppingCart);
+    }
 }

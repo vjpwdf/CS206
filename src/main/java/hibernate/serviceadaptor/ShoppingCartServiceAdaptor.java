@@ -1,6 +1,7 @@
 package hibernate.serviceadaptor;
 
 import hibernate.Item;
+import hibernate.ShoppingCart;
 import hibernate.ShoppingCartItem;
 import hibernate.User;
 import hibernate.dao.ShoppingCartDaoImpl;
@@ -32,5 +33,13 @@ public class ShoppingCartServiceAdaptor {
 
     public static void setShoppingCartDao(ShoppingCartDaoImpl shoppingCartDao) {
         ShoppingCartServiceAdaptor.shoppingCartDao = shoppingCartDao;
+    }
+
+    public static List<ShoppingCart> getAllShoppingCarts() {
+        return shoppingCartDao.getAllShoppingCarts();
+    }
+
+    public static void removeShoppingCart(ShoppingCart shoppingCart) {
+        shoppingCartDao.removeShoppingCart(shoppingCart);
     }
 }
