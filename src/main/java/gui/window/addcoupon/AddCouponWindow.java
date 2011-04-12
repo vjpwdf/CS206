@@ -5,6 +5,7 @@ import gui.input.GeneralDropDownInput;
 import gui.input.GeneralInput;
 import gui.input.validate.DateFormValidator;
 import gui.input.validate.NumberFormValidator;
+import hibernate.Coupon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +25,7 @@ public class AddCouponWindow extends JFrame {
      * Add coupon window
      * @throws HeadlessException thrown if error
      */
-    public AddCouponWindow() throws HeadlessException {
+    public AddCouponWindow(Coupon coupon) throws HeadlessException {
         setTitle("Add A Coupon");
         setSize(WIDTH, HEIGHT);
         Box itemForm = Box.createVerticalBox();
@@ -51,5 +52,13 @@ public class AddCouponWindow extends JFrame {
 
         add(itemForm);
 
+        if(coupon != null){
+            value.getInput().setText("Hello!!");
+        }
     }
+
+    public AddCouponWindow() throws HeadlessException {
+        this(null);
+    }
+
 }

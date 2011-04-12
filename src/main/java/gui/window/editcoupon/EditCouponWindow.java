@@ -1,6 +1,9 @@
 package gui.window.editcoupon;
 
 
+import gui.action.general.EditCouponTableListener;
+import gui.action.general.UpdateCouponButtonAction;
+import gui.action.main.RemoveCouponButtonAction;
 import hibernate.Coupon;
 import hibernate.serviceadaptor.CouponServiceAdaptor;
 
@@ -38,19 +41,19 @@ public class EditCouponWindow extends JFrame {
         JButton edit = new JButton("Edit");
         edit.setMinimumSize(new Dimension(150, 50));
         edit.setMaximumSize(new Dimension(150, 50));
-//        edit.addActionListener(new UpdateItemButtonAction(table, items, this));
+        edit.addActionListener(new UpdateCouponButtonAction(table, coupons, this));
         edit.setEnabled(false);
 
         JButton remove = new JButton("Remove");
         remove.setMinimumSize(new Dimension(150, 50));
         remove.setMaximumSize(new Dimension(150, 50));
-//        remove.addActionListener(new RemoveItemButtonAction(table, items, this));
+        remove.addActionListener(new RemoveCouponButtonAction());
         remove.setEnabled(false);
 
         buttonBox.add(edit);
         buttonBox.add(remove);
 
-//        table.getSelectionModel().addListSelectionListener(new EditItemTableListener(table, edit, remove));
+        table.getSelectionModel().addListSelectionListener(new EditCouponTableListener(table, edit, remove));
 
         vertBox.add(buttonBox);
 
