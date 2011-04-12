@@ -1,5 +1,6 @@
 package gui.window.editcoupon;
 
+import gui.window.WindowTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,10 +13,10 @@ import static junit.framework.Assert.assertEquals;
  * Time: 7:03 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RemoveCouponWindow_UT {
+public class RemoveCouponWindow_UT extends WindowTest{
     private EditCouponWindow removeCouponWindow;
     private Integer WIDTH = 500;
-    private Integer HEIGHT = 330;
+    private Integer HEIGHT = 600;
 
     @Before
     public void setUp() {
@@ -24,7 +25,7 @@ public class RemoveCouponWindow_UT {
 
     @Test
     public void testProperAttributesAreSet() {
-        assertEquals("Remove A Coupon", removeCouponWindow.getTitle());
+        assertEquals("Edit A Coupon", removeCouponWindow.getTitle());
         assertEquals((double) WIDTH, removeCouponWindow.getSize().getWidth());
         assertEquals((double) HEIGHT, removeCouponWindow.getSize().getHeight());
     }

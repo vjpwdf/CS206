@@ -1,5 +1,6 @@
 package gui.window.viewallcoupons;
 
+import gui.window.WindowTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,10 +13,10 @@ import static junit.framework.Assert.assertEquals;
  * Time: 7:05 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ViewAllCouponsWindow_UT {
+public class ViewAllCouponsWindow_UT extends WindowTest{
     private ViewAllCouponsWindow viewAllCouponsWindow;
     private Integer WIDTH = 500;
-    private Integer HEIGHT = 330;
+    private Integer HEIGHT = 600;
 
     @Before
     public void setUp() {

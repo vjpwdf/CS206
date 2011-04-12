@@ -23,7 +23,7 @@ public class EditCouponWindow extends JFrame {
     private JButton edit;
 
     public EditCouponWindow() {
-        super("Edit Coupon Window");
+        super("Edit A Coupon");
 
         List<Coupon> coupons = CouponServiceAdaptor.getAllCoupons();
 

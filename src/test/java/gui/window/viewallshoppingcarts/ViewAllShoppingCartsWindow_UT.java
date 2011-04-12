@@ -1,5 +1,6 @@
 package gui.window.viewallshoppingcarts;
 
+import gui.window.WindowTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,9 +13,9 @@ import static junit.framework.Assert.assertEquals;
  * Time: 7:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ViewAllShoppingCartsWindow_UT {
+public class ViewAllShoppingCartsWindow_UT extends WindowTest{
     private ViewAllShoppingCartsWindow viewAllCouponsWindow;
-    private Integer WIDTH = 500;
+    private Integer WIDTH = 550;
     private Integer HEIGHT = 330;
 
     @Before
