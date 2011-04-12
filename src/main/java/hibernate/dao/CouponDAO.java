@@ -14,7 +14,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface CouponDAO {
-    public void addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date);
+    public Coupon addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date);
 
     public Coupon getCoupon(int couponId);
 

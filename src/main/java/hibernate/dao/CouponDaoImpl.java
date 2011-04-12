@@ -19,7 +19,7 @@ import java.util.List;
 public class CouponDaoImpl implements CouponDAO {
 
     @Transactional
-    public void addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date) {
+    public Coupon addCoupon(String itemUpc, boolean couponType, Float couponValue, Date date) {
         Item item = (Item)DBClient.INSTANCE.getObject("from Item item where item.itemUpc = " + "'" + itemUpc + "'");
         System.out.println();
         Coupon coupon = new Coupon();
@@ -28,6 +28,7 @@ public class CouponDaoImpl implements CouponDAO {
         coupon.setExpirationDate(date);
         coupon.setItem(item);
         DBClient.INSTANCE.saveObject(coupon);
+        return coupon;
     }
 
     @Transactional
@@ -44,7 +45,7 @@ public class CouponDaoImpl implements CouponDAO {
 
     @Transactional
     public List<Coupon> getAllCoupons() {
-        List<Coupon> coupons = (ArrayList<Coupon>)DBClient.INSTANCE.getListOfObjects("from Coupon");
+        List<Coupon> coupons = (List<Coupon>)DBClient.INSTANCE.getListOfObjects("from Coupon");
         return coupons;
     }
 }
