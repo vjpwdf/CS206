@@ -1,7 +1,15 @@
 package gui.window.addcoupon;
 
+import gui.window.WindowTest;
+import hibernate.factory.DBClient;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.*;
 
@@ -14,9 +22,10 @@ import static junit.framework.Assert.assertEquals;
  * Time: 6:44 PM
  * To change this template use File | Settings | File Templates.
  */
-public class AddCouponWindow_UT {
+
+public class AddCouponWindow_UT extends WindowTest{
     private AddCouponWindow addCouponWindow;
-    private Integer WIDTH = 500;
+    private Integer WIDTH = 600;
     private Integer HEIGHT = 330;
 
     @Before

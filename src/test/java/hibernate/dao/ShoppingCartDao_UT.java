@@ -98,7 +98,7 @@ public class ShoppingCartDao_UT extends DaoTest {
         shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItemList));
         shoppingCart.setUser(user);
 
-        shoppingCartDao.addShoppingCartFromListOfShoppingCartItems(shoppingCartItemList, user.getUserName());
+        ShoppingCart shoppingCart1 = shoppingCartDao.addShoppingCartFromListOfShoppingCartItems(shoppingCartItemList, user.getUserName());
         List<ShoppingCart> shoppingCartFromDb = (List<ShoppingCart>) DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
         assertNotNull(shoppingCartFromDb);
         assertTrue(shoppingCartFromDb.contains(shoppingCart));
@@ -106,7 +106,7 @@ public class ShoppingCartDao_UT extends DaoTest {
         shoppingCartItemList.add(shoppingCartItem2);
         shoppingCartItemList.remove(shoppingCartItem);
         shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItemList));
-        shoppingCartDao.updateShoppingCart(shoppingCartFromDb.get(0), shoppingCartItemList);
+        shoppingCartDao.updateShoppingCart(shoppingCart1, shoppingCartItemList);
         List<ShoppingCartItem> shoppingCartItems = (List<ShoppingCartItem>) DBClient.INSTANCE.getListOfObjects("from ShoppingCartItem");
         shoppingCartFromDb = (List<ShoppingCart>) DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
         assertTrue(shoppingCartFromDb.contains(shoppingCart));

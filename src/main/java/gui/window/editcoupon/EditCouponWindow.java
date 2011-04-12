@@ -17,7 +17,7 @@ public class EditCouponWindow extends JFrame {
     JTable table;
 
     public EditCouponWindow() {
-        super("Edit Coupon Window");
+        super("Edit A Coupon");
 
         List<Coupon> coupons = CouponServiceAdaptor.getAllCoupons();
 

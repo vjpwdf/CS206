@@ -29,7 +29,7 @@ public class EditItemWindow extends JFrame {
     private JButton edit;
 
     public EditItemWindow() {
-        super("Edit Item Window");
+        super("Edit A Item");
 
         List<Item> items = ItemServiceAdaptor.getAllItems();
 

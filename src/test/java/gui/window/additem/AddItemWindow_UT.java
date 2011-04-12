@@ -1,5 +1,6 @@
 package gui.window.additem;
 
+import gui.window.WindowTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ import static junit.framework.Assert.assertEquals;
  * Time: 6:48 PM
  * To change this template use File | Settings | File Templates.
  */
-public class AddItemWindow_UT {
+public class AddItemWindow_UT extends WindowTest{
     private AddItemWindow addItemWindow;
-    private Integer WIDTH = 500;
+    private Integer WIDTH = 600;
     private Integer HEIGHT = 330;
 
     @Before
@@ -30,6 +31,6 @@ public class AddItemWindow_UT {
         assertEquals((double)WIDTH, addItemWindow.getSize().getWidth());
         assertEquals((double)HEIGHT, addItemWindow.getSize().getHeight());
         assertEquals(1, (((JRootPane)addItemWindow.getComponent(0))).getContentPane().getComponentCount());
-        assertEquals(4, ((Box)(((JRootPane)addItemWindow.getComponent(0))).getContentPane().getComponent(0)).getComponentCount());
+        assertEquals(8, ((Box)(((JRootPane)addItemWindow.getComponent(0))).getContentPane().getComponent(0)).getComponentCount());
     }
 }

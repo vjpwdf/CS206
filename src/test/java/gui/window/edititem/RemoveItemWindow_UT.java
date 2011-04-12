@@ -1,5 +1,6 @@
 package gui.window.edititem;
 
+import gui.window.WindowTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,10 +13,10 @@ import static junit.framework.Assert.assertEquals;
  * Time: 7:04 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RemoveItemWindow_UT {
+public class RemoveItemWindow_UT extends WindowTest{
     private EditItemWindow removeItemWindow;
     private Integer WIDTH = 500;
-    private Integer HEIGHT = 330;
+    private Integer HEIGHT = 600;
 
     @Before
     public void setUp() {
@@ -24,7 +25,7 @@ public class RemoveItemWindow_UT {
 
     @Test
     public void testProperAttributesAreSet() {
-        assertEquals("Remove An Item", removeItemWindow.getTitle());
+        assertEquals("Edit A Item", removeItemWindow.getTitle());
         assertEquals((double) WIDTH, removeItemWindow.getSize().getWidth());
         assertEquals((double) HEIGHT, removeItemWindow.getSize().getHeight());
     }
