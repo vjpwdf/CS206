@@ -42,4 +42,15 @@ public class ShoppingCartServiceAdaptor {
     public static void removeShoppingCart(ShoppingCart shoppingCart) {
         shoppingCartDao.removeShoppingCart(shoppingCart);
     }
+
+    public static void updateShoppingCart(ShoppingCart shoppingCart, Map<Item, Integer> itemList) {
+        List<ShoppingCartItem> shoppingCartItems = new ArrayList<ShoppingCartItem>();
+        for (Item item : itemList.keySet()) {
+            ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+            shoppingCartItem.setItem(item);
+            shoppingCartItem.setItemQuantity(itemList.get(item));
+            shoppingCartItems.add(shoppingCartItem);
+        }
+        shoppingCartDao.updateShoppingCart(shoppingCart, shoppingCartItems);
+    }
 }

@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
@@ -23,7 +24,7 @@ import static junit.framework.Assert.assertTrue;
  * Time: 7:31 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ShoppingCartDao_UT extends DaoTest{
+public class ShoppingCartDao_UT extends DaoTest {
     private ShoppingCartDao shoppingCartDao;
 
     @Before
@@ -47,7 +48,7 @@ public class ShoppingCartDao_UT extends DaoTest{
         shoppingCart.setUser(user);
 
         shoppingCartDao.addShoppingCartFromListOfShoppingCartItems(shoppingCartItemList, user.getUserName());
-        List<ShoppingCart> shoppingCartFromDb = (List<ShoppingCart>)DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
+        List<ShoppingCart> shoppingCartFromDb = (List<ShoppingCart>) DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
         assertNotNull(shoppingCartFromDb);
         assertTrue(shoppingCartFromDb.contains(shoppingCart));
     }
@@ -80,5 +81,65 @@ public class ShoppingCartDao_UT extends DaoTest{
         assertNotNull(shoppingCarts);
         assertTrue(shoppingCarts.size() > 0);
         assertTrue(shoppingCarts.contains(shoppingCart));
+    }
+
+    @Test
+    public void testUpdateShoppingCart() {
+        User user = addUser("John-the-man", "0123456");
+        Item item = addItem("test", "test", "test", "test", 1.25f, null);
+        Item item2 = addItem("test2", "test2", "test2", "test2", 2.25f, null);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        ShoppingCartItem shoppingCartItem2 = new ShoppingCartItem();
+        shoppingCartItem.setItem(item);
+        shoppingCartItem.setItemQuantity(5);
+        shoppingCartItem2.setItem(item2);
+        shoppingCartItem2.setItemQuantity(10);
+        List<ShoppingCartItem> shoppingCartItemList = new ArrayList<ShoppingCartItem>();
+        shoppingCartItemList.add(shoppingCartItem);
+
+        shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItemList));
+        shoppingCart.setUser(user);
+
+        shoppingCartDao.addShoppingCartFromListOfShoppingCartItems(shoppingCartItemList, user.getUserName());
+        List<ShoppingCart> shoppingCartFromDb = (List<ShoppingCart>) DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
+        assertNotNull(shoppingCartFromDb);
+        assertTrue(shoppingCartFromDb.contains(shoppingCart));
+
+        shoppingCartItemList.add(shoppingCartItem2);
+        shoppingCartItemList.remove(shoppingCartItem);
+        shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItemList));
+        shoppingCartDao.updateShoppingCart(shoppingCartFromDb.get(0), shoppingCartItemList);
+        List<ShoppingCartItem> shoppingCartItems = (List<ShoppingCartItem>) DBClient.INSTANCE.getListOfObjects("from ShoppingCartItem");
+        shoppingCartFromDb = (List<ShoppingCart>) DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
+        assertTrue(shoppingCartFromDb.contains(shoppingCart));
+        assertFalse(shoppingCartItems.contains(shoppingCartItem));
+    }
+
+    @Test
+    public void testRemoveShoppingCart() {
+        User user = addUser("John-the-man", "0123456");
+        Item item = addItem("test", "test", "test", "test", 1.25f, null);
+        Item item2 = addItem("test2", "test2", "test2", "test2", 2.25f, null);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
+        ShoppingCartItem shoppingCartItem2 = new ShoppingCartItem();
+        shoppingCartItem.setItem(item);
+        shoppingCartItem.setItemQuantity(5);
+        shoppingCartItem2.setItem(item2);
+        shoppingCartItem2.setItemQuantity(10);
+        List<ShoppingCartItem> shoppingCartItemList = new ArrayList<ShoppingCartItem>();
+        shoppingCartItemList.add(shoppingCartItem);
+
+        shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItemList));
+        shoppingCart.setUser(user);
+
+        shoppingCartDao.addShoppingCartFromListOfShoppingCartItems(shoppingCartItemList, user.getUserName());
+        List<ShoppingCart> shoppingCartFromDb = (List<ShoppingCart>) DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
+        assertNotNull(shoppingCartFromDb);
+        assertTrue(shoppingCartFromDb.contains(shoppingCart));
+        shoppingCartDao.removeShoppingCart(shoppingCartFromDb.get(0));
+        shoppingCartFromDb = (List<ShoppingCart>)DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
+        assertFalse(shoppingCartFromDb.contains(shoppingCart));
     }
 }

@@ -44,4 +44,19 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     public void removeShoppingCart(ShoppingCart shoppingCart) {
         DBClient.INSTANCE.deleteObject(shoppingCart);
     }
+
+    public void updateShoppingCart(ShoppingCart shoppingCart, List<ShoppingCartItem> shoppingCartItems) {
+        removePreviousShoppingCartItems(shoppingCart);
+        shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItems));
+        for (ShoppingCartItem shoppingCartItem : shoppingCartItems) {
+            shoppingCartItem.setShoppingCart(shoppingCart);
+        }
+        DBClient.INSTANCE.saveObject(shoppingCart);
+    }
+
+    private void removePreviousShoppingCartItems(ShoppingCart shoppingCart) {
+        for (ShoppingCartItem shoppingCartItem : shoppingCart.getShoppingCartItems()) {
+            DBClient.INSTANCE.deleteObject(shoppingCartItem);
+        }
+    }
 }
