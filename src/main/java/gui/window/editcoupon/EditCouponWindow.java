@@ -1,18 +1,14 @@
-package gui.window.editcoupon;/* (swing1.1.1beta2) */
-//package jp.gr.java_conf.tame.swing.examples;
+package gui.window.editcoupon;
 
 
-import gui.action.main.RemoveItemButtonAction;
-import gui.action.main.UpdateItemButtonAction;
-import gui.window.edititem.EditItemTableListener;
 import hibernate.Coupon;
 import hibernate.serviceadaptor.CouponServiceAdaptor;
 
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.List;
-import javax.swing.*;
-import javax.swing.table.*;
 
 
 /**
