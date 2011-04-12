@@ -16,18 +16,15 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.List;
 
-
-/**
- * @version 1.0 06/19/99
- */
 public class EditItemWindow extends JFrame {
     final private int ROW_HEIGHT = 100;
     final private int HEIGHT = 600;
     final private int WIDTH = 500;
     JTable table;
-    private JButton remove;
-    private JButton edit;
 
+    /**
+     * Builds the edit item window
+     */
     public EditItemWindow() {
         super("Edit A Item");
 
@@ -48,13 +45,13 @@ public class EditItemWindow extends JFrame {
 
         Box buttonBox = Box.createHorizontalBox();
 
-        edit = new JButton("Edit");
+        JButton edit = new JButton("Edit");
         edit.setMinimumSize(new Dimension(150, 50));
         edit.setMaximumSize(new Dimension(150, 50));
         edit.addActionListener(new UpdateItemButtonAction(table, items, this));
         edit.setEnabled(false);
 
-        remove = new JButton("Remove");
+        JButton remove = new JButton("Remove");
         remove.setMinimumSize(new Dimension(150, 50));
         remove.setMaximumSize(new Dimension(150, 50));
         remove.addActionListener(new RemoveItemButtonAction(table, items, this));
@@ -71,6 +68,11 @@ public class EditItemWindow extends JFrame {
         setSize(WIDTH, HEIGHT);
     }
 
+    /**
+     * Converts a list of objects to a 2d object array
+     * @param items a list of items to a 2d object array
+     * @return a list of objects to a 2d object array
+     */
     private Object[][] convertToObjectArray(List<Item> items) {
         Object[][] data = new Object[items.size()][4];
         for (int i = 0; i < items.size(); i++) {
@@ -96,6 +98,10 @@ public class EditItemWindow extends JFrame {
         return data;
     }
 
+    /**
+     * Sets the image observer for the JTable for first column
+     * @param table table to set the image observer of
+     */
     private void setImageObserver(JTable table) {
         TableModel model = table.getModel();
         int rowCount = model.getRowCount();
@@ -108,6 +114,9 @@ public class EditItemWindow extends JFrame {
         }
     }
 
+    /**
+     * Item table model for the item table
+     */
     private static class ItemTableModel extends AbstractTableModel {
         private final Object[] column;
         private final Object[][] data;
