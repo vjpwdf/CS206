@@ -5,8 +5,9 @@ import gui.button.shoppingcart.RemoveItemFromCartButton;
 import gui.button.shoppingcart.SaveShoppingCartButton;
 import gui.input.GeneralInput;
 import gui.input.validate.NumberFormValidator;
-import gui.window.edititem.EditItemTableListener;
 import hibernate.Item;
+import hibernate.ShoppingCart;
+import hibernate.ShoppingCartItem;
 import hibernate.serviceadaptor.ItemServiceAdaptor;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ import java.awt.image.ImageObserver;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,8 +33,14 @@ public class BuildShoppingCartWindow extends JFrame {
     private static final Integer HEIGHT = 600;
     private static final int ROW_HEIGHT = 100;
     private List<Item> items;
+    private ShoppingCart selectedShoppingCart;
+    private JTable shoppingCartTable;
 
     public BuildShoppingCartWindow() throws HeadlessException {
+        buildShoppingCartWindow();
+    }
+
+    private void buildShoppingCartWindow() {
         setTitle("Build A Shopping Cart");
         setSize(WIDTH, HEIGHT);
 
@@ -52,7 +59,7 @@ public class BuildShoppingCartWindow extends JFrame {
 
         shoppingCartVerticalBox.add(pane);
         DefaultTableModel shoppingCartTableModel = new DefaultTableModel(new String[][]{}, new String[]{"Item Name", "Quantity"});
-        JTable shoppingCartTable = new JTable(shoppingCartTableModel);
+        shoppingCartTable = new JTable(shoppingCartTableModel);
 
         GeneralInput quantityInput = new GeneralInput("Quantity", true);
         quantityInput.getInput().setText("1");
@@ -80,8 +87,16 @@ public class BuildShoppingCartWindow extends JFrame {
         itemTable.getSelectionModel().addListSelectionListener(new BuildShoppingCartItemListener(addItemToCartButton));
         shoppingCartTable.getSelectionModel().addListSelectionListener(new ShoppingCartListener(removeItemFromCartButton));
 
-        JButton saveShoppingCartButton = new SaveShoppingCartButton(items, shoppingCartTable, this);
+        JButton saveShoppingCartButton = new SaveShoppingCartButton(items, shoppingCartTable, this, selectedShoppingCart);
         shoppingCartVerticalBox.add(saveShoppingCartButton);
+    }
+
+    public BuildShoppingCartWindow(ShoppingCart selectedShoppingCart) {
+        this.selectedShoppingCart = selectedShoppingCart;
+        buildShoppingCartWindow();
+        for (ShoppingCartItem shoppingCartItem : selectedShoppingCart.getShoppingCartItems()) {
+            ((DefaultTableModel)shoppingCartTable.getModel()).addRow(new String[]{shoppingCartItem.getItem().getItemName(), String.valueOf(shoppingCartItem.getItemQuantity())});
+        }
     }
 
     private Object[][] convertToObjectArray(List<Item> items) {

@@ -3,6 +3,7 @@ package gui.action.shoppingcart;
 import common.LoggedInUser;
 import gui.window.buildshoppingcart.BuildShoppingCartWindow;
 import hibernate.Item;
+import hibernate.ShoppingCart;
 import hibernate.serviceadaptor.ShoppingCartServiceAdaptor;
 
 import javax.swing.*;
@@ -20,34 +21,40 @@ import java.util.Map;
  * Time: 2:30 PM
  * To change this template use File | Settings | File Templates.
  */
-public class SaveShoppingCartButtonAction implements ActionListener{
+public class SaveShoppingCartButtonAction implements ActionListener {
     private List<Item> items;
     private JTable shoppingCartTable;
     private BuildShoppingCartWindow buildShoppingCartWindow;
+    private ShoppingCart selectedShoppingCart;
 
-    public SaveShoppingCartButtonAction(List<Item> items, JTable shoppingCartTable, BuildShoppingCartWindow buildShoppingCartWindow) {
+    public SaveShoppingCartButtonAction(List<Item> items, JTable shoppingCartTable, BuildShoppingCartWindow buildShoppingCartWindow, ShoppingCart selectedShoppingCart) {
         this.items = items;
         this.shoppingCartTable = shoppingCartTable;
         this.buildShoppingCartWindow = buildShoppingCartWindow;
+        this.selectedShoppingCart = selectedShoppingCart;
     }
 
     public void actionPerformed(ActionEvent e) {
         Map<Item, Integer> shoppingCart = new HashMap<Item, Integer>();
         DefaultTableModel shoppingCartTableModel = (DefaultTableModel) shoppingCartTable.getModel();
-        for (int i = 0; i< shoppingCartTableModel.getRowCount(); i++) {
-            String itemName = (String)shoppingCartTableModel.getValueAt(i, 0);
+        for (int i = 0; i < shoppingCartTableModel.getRowCount(); i++) {
+            String itemName = (String) shoppingCartTableModel.getValueAt(i, 0);
             Item item = getItemByItemName(itemName);
             Integer quantity = Integer.valueOf((String) shoppingCartTableModel.getValueAt(i, 1));
             shoppingCart.put(item, quantity);
         }
-        ShoppingCartServiceAdaptor.addShoppingCartFromListOfShoppingCartItems(shoppingCart, LoggedInUser.loggedInUser);
+        if (selectedShoppingCart == null) {
+            ShoppingCartServiceAdaptor.addShoppingCartFromListOfShoppingCartItems(shoppingCart, LoggedInUser.loggedInUser);
+        } else {
+            ShoppingCartServiceAdaptor.updateShoppingCart(selectedShoppingCart, shoppingCart);
+        }
         JOptionPane.showMessageDialog(null, "Shopping cart has been successfully added/updated");
         buildShoppingCartWindow.setVisible(false);
     }
 
     private Item getItemByItemName(String itemName) {
         for (Item item : items) {
-            if(item.getItemName().equals(itemName)) {
+            if (item.getItemName().equals(itemName)) {
                 return item;
             }
         }

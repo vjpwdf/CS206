@@ -3,10 +3,10 @@ package gui.button.shoppingcart;
 import gui.action.shoppingcart.SaveShoppingCartButtonAction;
 import gui.window.buildshoppingcart.BuildShoppingCartWindow;
 import hibernate.Item;
+import hibernate.ShoppingCart;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -17,11 +17,11 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class SaveShoppingCartButton extends JButton {
-    public SaveShoppingCartButton(List<Item> items, JTable shoppingCartTable, BuildShoppingCartWindow buildShoppingCartWindow) {
+    public SaveShoppingCartButton(List<Item> items, JTable shoppingCartTable, BuildShoppingCartWindow buildShoppingCartWindow, ShoppingCart selectedShoppingCart) {
         setText("Save/Update Cart");
         setMinimumSize(new Dimension(150, 50));
         setMaximumSize(new Dimension(150, 50));
-        addActionListener(new SaveShoppingCartButtonAction(items, shoppingCartTable, buildShoppingCartWindow));
+        addActionListener(new SaveShoppingCartButtonAction(items, shoppingCartTable, buildShoppingCartWindow, selectedShoppingCart));
         setIcon(new ImageIcon("main/window/build-shopping-cart.png"));
     }
 }

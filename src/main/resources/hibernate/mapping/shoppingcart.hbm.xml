@@ -10,8 +10,8 @@
         <many-to-one name="user" column="user_id" class="User" lazy="false"/>
         <property name="creationDate" column="creation_date" type="timestamp"/>
         <set name="shoppingCartItems" cascade="save-update" lazy="false">
-            <key column="shopping_cart_id"></key>
-            <one-to-many class="ShoppingCartItem"></one-to-many>
+            <key column="shopping_cart_id"/>
+            <one-to-many class="ShoppingCartItem"/>
         </set>
     </class>
 </hibernate-mapping>

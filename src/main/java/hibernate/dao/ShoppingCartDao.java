@@ -13,7 +13,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface ShoppingCartDao {
-    public void addShoppingCartFromListOfShoppingCartItems(List<ShoppingCartItem> shoppingCartItems, String userName);
+    public ShoppingCart addShoppingCartFromListOfShoppingCartItems(List<ShoppingCartItem> shoppingCartItems, String userName);
     public List<ShoppingCart> getAllShoppingCarts();
     public void addEmptyShoppingCart(String userName);
     public void removeShoppingCart(ShoppingCart shoppingCart);

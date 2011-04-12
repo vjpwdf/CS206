@@ -38,7 +38,7 @@ public class ViewAllShoppingCartsWindow extends JFrame {
         allShoppingCartsBox.add(shoppingCartTablePane);
 
         Box allShoppingCartsButtonBox = Box.createHorizontalBox();
-        JButton editShoppingCartButton = new EditShoppingCartButton();
+        JButton editShoppingCartButton = new EditShoppingCartButton(shoppingCartList, shoppingCarts, this);
         JButton removeShoppingCartButton = new RemoveShoppingCartButton(shoppingCartList, shoppingCarts, this);
         JButton computeSavingsButton = new ComputeSavingsButton(shoppingCartList, shoppingCarts);
         editShoppingCartButton.setEnabled(false);

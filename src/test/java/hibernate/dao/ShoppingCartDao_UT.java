@@ -9,13 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -134,11 +131,11 @@ public class ShoppingCartDao_UT extends DaoTest {
         shoppingCart.setShoppingCartItems(new HashSet<ShoppingCartItem>(shoppingCartItemList));
         shoppingCart.setUser(user);
 
-        shoppingCartDao.addShoppingCartFromListOfShoppingCartItems(shoppingCartItemList, user.getUserName());
+        ShoppingCart shoppingCart1 = shoppingCartDao.addShoppingCartFromListOfShoppingCartItems(shoppingCartItemList, user.getUserName());
         List<ShoppingCart> shoppingCartFromDb = (List<ShoppingCart>) DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
         assertNotNull(shoppingCartFromDb);
         assertTrue(shoppingCartFromDb.contains(shoppingCart));
-        shoppingCartDao.removeShoppingCart(shoppingCartFromDb.get(0));
+        shoppingCartDao.removeShoppingCart(shoppingCart1);
         shoppingCartFromDb = (List<ShoppingCart>)DBClient.INSTANCE.getListOfObjects("from ShoppingCart");
         assertFalse(shoppingCartFromDb.contains(shoppingCart));
     }

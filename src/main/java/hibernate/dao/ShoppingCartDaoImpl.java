@@ -17,7 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
-    public void addShoppingCartFromListOfShoppingCartItems(List<ShoppingCartItem> shoppingCartItems, String userName) {
+    public ShoppingCart addShoppingCartFromListOfShoppingCartItems(List<ShoppingCartItem> shoppingCartItems, String userName) {
         ShoppingCart shoppingCart = new ShoppingCart();
         User user = (User) DBClient.INSTANCE.getObject("from User user where user.userName = " + "'" + userName + "'");
         shoppingCart.setCreationDate(new Date());
@@ -27,6 +27,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             shoppingCartItem.setShoppingCart(shoppingCart);
         }
         DBClient.INSTANCE.saveObject(shoppingCart);
+        return shoppingCart;
     }
 
     public List<ShoppingCart> getAllShoppingCarts() {
@@ -42,6 +43,9 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     public void removeShoppingCart(ShoppingCart shoppingCart) {
+        for (ShoppingCartItem shoppingCartItem : shoppingCart.getShoppingCartItems()) {
+            DBClient.INSTANCE.deleteObject(shoppingCartItem);
+        }
         DBClient.INSTANCE.deleteObject(shoppingCart);
     }
 
