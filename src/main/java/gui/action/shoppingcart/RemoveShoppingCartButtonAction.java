@@ -14,19 +14,28 @@ import java.util.List;
  * User: vincent
  * Date: 11/04/11
  * Time: 2:24 PM
- * To change this template use File | Settings | File Templates.
  */
 public class RemoveShoppingCartButtonAction implements ActionListener {
     private JTable shoppingCarts;
     private List<ShoppingCart> shoppingCartList;
     private ViewAllShoppingCartsWindow viewAllShoppingCartsWindow;
 
+    /**
+     * Remove shopping cart button action
+     * @param shoppingCartList shopping cart list
+     * @param shoppingCarts shopping cart table
+     * @param viewAllShoppingCartsWindow window to close upon completion
+     */
     public RemoveShoppingCartButtonAction(List<ShoppingCart> shoppingCartList, JTable shoppingCarts, ViewAllShoppingCartsWindow viewAllShoppingCartsWindow) {
         this.shoppingCartList = shoppingCartList;
         this.shoppingCarts = shoppingCarts;
         this.viewAllShoppingCartsWindow = viewAllShoppingCartsWindow;
     }
 
+    /**
+     * Action to remove a shopping cart
+     * @param actionEvent ignored
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         int selectedRow = shoppingCarts.getSelectedRow();

@@ -12,9 +12,13 @@ import java.util.List;
  * User: vincent
  * Date: 11/04/11
  * Time: 2:14 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ComputeSavingsButton extends JButton {
+    /**
+     * Compute savings button of shopping cart
+     * @param shoppingCartList shopping cart list
+     * @param shoppingCarts list of shopping carts
+     */
     public ComputeSavingsButton(List<ShoppingCart> shoppingCartList, JTable shoppingCarts) {
         setText("Compute Savings");
         setMinimumSize(new Dimension(200, 50));

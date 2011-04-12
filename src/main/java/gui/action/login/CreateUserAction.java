@@ -10,9 +10,12 @@ import java.awt.event.ActionListener;
  * User: vincent
  * Date: 22/03/11
  * Time: 10:01 PM
- * To change this template use File | Settings | File Templates.
  */
 public class CreateUserAction implements ActionListener {
+    /**
+     * Opens create user window
+     * @param actionEvent ignored
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         CreateUserWindow createUserWindow = new CreateUserWindow();

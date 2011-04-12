@@ -10,12 +10,14 @@ import javax.swing.*;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 6:58:32 PM
- * To change this template use File | Settings | File Templates.
  */
 public class MainWindow extends JFrame {
     private static final Integer WIDTH = 250;
     private static final Integer HEIGHT = 330;
-    
+
+    /**
+     * Main window constructor
+     */
     public MainWindow() {
         setTitle("Coupon Manager");
         setSize(WIDTH, HEIGHT);
@@ -24,6 +26,9 @@ public class MainWindow extends JFrame {
         addMainWindowButtons();
     }
 
+    /**
+     * Adds all the buttons to the main window
+     */
     private void addMainWindowButtons() {
         Box buttonBox = Box.createVerticalBox();
         buttonBox.add(new OpenAddItemWindowButton());

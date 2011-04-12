@@ -12,25 +12,24 @@ import java.awt.*;
  * User: vincent
  * Date: 26/02/11
  * Time: 5:19 PM
- * To change this template use File | Settings | File Templates.
  */
 public class GeneralInputFileBrowser extends Box {
-
-    private JLabel label;
     private JTextField input;
-    private JButton browseButton;
 
-
+    /**
+     * General input file browser
+     * @param name name of file browser
+     */
     public GeneralInputFileBrowser(String name) {
         super(0);
 
-        label = new JLabel(name);
+        JLabel label = new JLabel(name);
         label.setMaximumSize(new Dimension(100, 20));
 
         input = new JTextField();
         input.setMaximumSize(new Dimension(200, 20));
 
-        browseButton = new JButton("Browse");
+        JButton browseButton = new JButton("Browse");
         browseButton.addActionListener(new GenericBrowseButtonActionListener(input, new ImageFileFilter()));
 
         add(label);
@@ -38,15 +37,11 @@ public class GeneralInputFileBrowser extends Box {
         add(browseButton);
     }
 
-    public JLabel getLabel() {
-        return label;
-    }
-
+    /**
+     * Gets the input for selected file
+     * @return the input for the selected file
+     */
     public JTextField getInput() {
         return input;
-    }
-
-    public JButton getBrowseButton() {
-        return browseButton;
     }
 }

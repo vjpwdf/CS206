@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
  * User: vincent
  * Date: 27/02/11
  * Time: 3:18 PM
- * To change this template use File | Settings | File Templates.
  */
 public class LoginButtonAction implements ActionListener {
     GUIBuilder guiBuilder = new GUIBuilder();
@@ -23,19 +22,33 @@ public class LoginButtonAction implements ActionListener {
     private GeneralInput password;
     private GeneralInput userName;
 
+    /**
+     * Action for login button
+     * @param loginWindow window to display
+     * @param userName user name
+     * @param password password
+     */
     public LoginButtonAction(LoginWindow loginWindow, GeneralInput userName, GeneralInput password) {
         this.loginWindow = loginWindow;
         this.userName = userName;
         this.password = password;
     }
 
+    /**
+     * Used for UT's to set gui builder
+     * @param guiBuilder gui builder
+     */
+    @SuppressWarnings("unused")
     public void setGuiBuilder(GUIBuilder guiBuilder) {
         this.guiBuilder = guiBuilder;
     }
 
+    /**
+     * Action to see if can log in
+     * @param e ignored
+     */
     public void actionPerformed(ActionEvent e) {
-        UserServiceAdaptor userServiceAdaptor = new UserServiceAdaptor();
-        if (userServiceAdaptor.loginWithCredentials(userName.getInput().getText(), password.getInput().getText())) {
+        if (UserServiceAdaptor.loginWithCredentials(userName.getInput().getText(), password.getInput().getText())) {
             loginWindow.setVisible(false);
             MainWindow mainWindow = guiBuilder.buildUserInterface();
             mainWindow.setVisible(true);

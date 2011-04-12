@@ -6,7 +6,6 @@ import hibernate.Item;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -14,9 +13,15 @@ import java.util.List;
  * User: vincent
  * Date: 4/9/11
  * Time: 7:06 PM
- * To change this template use File | Settings | File Templates.
  */
 public class AddItemToCartButton extends JButton {
+    /**
+     * Add item to shopping cart
+     * @param itemTable item table with list of items
+     * @param shoppingCartTable shopping cart table to add to
+     * @param items list of items in table
+     * @param quantityInput quantity of items to add to shopping cart
+     */
     public AddItemToCartButton(JTable itemTable, JTable shoppingCartTable, List<Item> items, GeneralInput quantityInput) {
         setText("Add To Cart");
         setMinimumSize(new Dimension(150, 50));

@@ -10,16 +10,22 @@ import java.util.List;
  * User: vincent
  * Date: 11/04/11
  * Time: 2:20 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ShoppingCartTableListener implements ListSelectionListener {
-
     private List<JButton> buttons;
 
+    /**
+     * Shopping cart list selection listener to enable buttons once clicked
+     * @param buttons buttons to enable once selected
+     */
     public ShoppingCartTableListener(List<JButton> buttons) {
         this.buttons = buttons;
     }
 
+    /**
+     * Enables buttons upon initial selection
+     * @param event makes sure the event isn't value is adjusting
+     */
     @Override
     public void valueChanged(ListSelectionEvent event) {
         if(!event.getValueIsAdjusting()){

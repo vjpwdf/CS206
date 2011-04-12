@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
  * Time: 6:05:48 PM
  */
 public class EditItemButtonAction implements ActionListener {
+    /**
+     * Opens edit item window
+     * @param e ignored
+     */
     public void actionPerformed(ActionEvent e) {
         EditItemWindow removeItemWindow = new EditItemWindow();
         removeItemWindow.setVisible(true);

@@ -10,11 +10,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Time: 9:47:44 PM
  */
 public class Main {
+    /**
+     * Main runner of the program
+     * @param args ignored
+     */
     public static void main(String args[]) {
         Main main = new Main();
         main.initializeProgram();
     }
 
+    /**
+     * Initialized the program
+     */
     public void initializeProgram() {
         LoginWindow loginWindow = new LoginWindow();
         loginWindow.setVisible(true);
@@ -22,6 +29,9 @@ public class Main {
         initIOCContainer();
     }
 
+    /**
+     * Initializes spring ioc container and sets hibernate session
+     */
     private void initIOCContainer() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(new String[]{"/hibernate/config.xml"});
         DBClient.INSTANCE = (DBClient) applicationContext.getBean("dbClient");

@@ -12,6 +12,9 @@ import javax.swing.*;
  */
 public class EditItemButton extends MainMenuButton {
 
+    /**
+     * Edit item button constructor
+     */
     public EditItemButton() {
         setText("Edit Item");
         addActionListener(new EditItemButtonAction());

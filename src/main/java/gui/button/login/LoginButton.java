@@ -12,12 +12,17 @@ import java.awt.*;
  * User: vincent
  * Date: 27/02/11
  * Time: 3:13 PM
- * To change this template use File | Settings | File Templates.
  */
 public class LoginButton extends JButton {
     private static final Integer WIDTH = 190;
     private static final Integer HEIGHT = 35;
 
+    /**
+     * Login button constructor
+     * @param loginWindow login window to close
+     * @param userName user name
+     * @param password password
+     */
     public LoginButton(LoginWindow loginWindow, GeneralInput userName, GeneralInput password) {
         setText("Login");
         addActionListener(new LoginButtonAction(loginWindow, userName, password));

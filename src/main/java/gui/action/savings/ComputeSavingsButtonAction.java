@@ -13,17 +13,25 @@ import java.util.List;
  * User: vincent
  * Date: 11/04/11
  * Time: 2:32 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ComputeSavingsButtonAction implements ActionListener {
     private JTable shoppingCarts;
     private List<ShoppingCart> shoppingCartList;
 
+    /**
+     * Compute savings button action
+     * @param shoppingCartList shopping cart list
+     * @param shoppingCarts shopping cart list table
+     */
     public ComputeSavingsButtonAction(List<ShoppingCart> shoppingCartList, JTable shoppingCarts) {
         this.shoppingCartList = shoppingCartList;
         this.shoppingCarts = shoppingCarts;
     }
 
+    /**
+     * Computes the savings of a selected shopping cart opening a new window
+     * @param actionEvent ignored
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         int selectedRow = shoppingCarts.getSelectedRow();

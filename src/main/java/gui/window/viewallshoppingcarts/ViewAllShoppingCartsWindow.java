@@ -22,6 +22,10 @@ public class ViewAllShoppingCartsWindow extends JFrame {
     private static final Integer WIDTH = 550;
     private static final Integer HEIGHT = 330;
 
+    /**
+     * Builds the view all shopping carts window
+     * @throws HeadlessException thrown if could not build the shopping cart window
+     */
     public ViewAllShoppingCartsWindow() throws HeadlessException {
         setTitle("View All Shopping Carts");
         setSize(WIDTH, HEIGHT);
@@ -55,6 +59,11 @@ public class ViewAllShoppingCartsWindow extends JFrame {
 
     }
 
+    /**
+     * Gets a list of dates from the shopping cart list
+     * @param shoppingCartList shopping cart list to get dates from
+     * @return a list of dates from the shopping cart list
+     */
     private Object[][] getDatesFromShoppingCartList(List<ShoppingCart> shoppingCartList) {
         Object[][] shoppingCartDates = new String[shoppingCartList.size()][1];
         for (int i = 0; i < shoppingCartList.size(); i++) {

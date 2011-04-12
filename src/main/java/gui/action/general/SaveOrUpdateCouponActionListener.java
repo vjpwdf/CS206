@@ -2,8 +2,6 @@ package gui.action.general;
 
 import gui.input.GeneralDropDownInput;
 import gui.input.GeneralInput;
-import gui.input.GeneralInputFileBrowser;
-import gui.window.additem.AddItemWindow;
 import hibernate.Item;
 import hibernate.serviceadaptor.CouponServiceAdaptor;
 
@@ -16,7 +14,6 @@ import java.util.Date;
  * User: timhuff
  * Date: 3/13/11
  * Time: 2:49 PM
- * To change this template use File | Settings | File Templates.
  */
 public class SaveOrUpdateCouponActionListener implements ActionListener {
 
@@ -25,6 +22,13 @@ public class SaveOrUpdateCouponActionListener implements ActionListener {
     GeneralDropDownInput items;
     GeneralDropDownInput type;
 
+    /**
+     * Save or update action listener for save or update button
+     * @param value value for coupon
+     * @param expirationDate expiration of coupon
+     * @param items item drop down
+     * @param type coupon type
+     */
     public SaveOrUpdateCouponActionListener(GeneralInput value, GeneralInput expirationDate, GeneralDropDownInput items, GeneralDropDownInput type) {
         this.value = value;
         this.expirationDate = expirationDate;
@@ -32,6 +36,10 @@ public class SaveOrUpdateCouponActionListener implements ActionListener {
         this.type = type;
     }
 
+    /**
+     * Action for to save/update coupon
+     * @param actionEvent ignored
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         CouponServiceAdaptor.addCoupon(((Item)items.getSelectedObject()).getItemUpc(), type.getSelectedObject().equals("Percent Off"), Float.valueOf(value.getInput().getText()), new Date(expirationDate.getInput().getText()));

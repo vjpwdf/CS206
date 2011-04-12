@@ -12,13 +12,18 @@ import java.awt.*;
  * User: vincent
  * Date: 22/03/11
  * Time: 10:10 PM
- * To change this template use File | Settings | File Templates.
  */
 public class AddNewUserButton extends JButton {
     private static final Integer WIDTH = 190;
     private static final Integer HEIGHT = 35;
 
 
+    /**
+     * Add new user button
+     * @param createUserWindow window to close upon completion
+     * @param userName user name
+     * @param password password
+     */
     public AddNewUserButton(CreateUserWindow createUserWindow, GeneralInput userName, GeneralInput password) {
         setText("Create Account");
         addActionListener(new AddNewUserAction(createUserWindow, userName, password));

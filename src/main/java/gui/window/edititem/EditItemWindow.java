@@ -63,7 +63,7 @@ public class EditItemWindow extends JFrame {
         buttonBox.add(edit);
         buttonBox.add(remove);
 
-        table.getSelectionModel().addListSelectionListener(new EditItemTableListener(table, edit, remove));
+        table.getSelectionModel().addListSelectionListener(new EditItemTableListener(edit, remove));
 
         vertBox.add(buttonBox);
 

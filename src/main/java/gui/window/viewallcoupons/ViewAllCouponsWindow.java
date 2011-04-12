@@ -19,6 +19,9 @@ public class ViewAllCouponsWindow extends JFrame {
     final private int WIDTH = 500;
     JTable table;
 
+    /**
+     * View all coupons window
+     */
     public ViewAllCouponsWindow() {
         super("View All Coupons");
 
@@ -40,6 +43,11 @@ public class ViewAllCouponsWindow extends JFrame {
         setSize(WIDTH, HEIGHT);
     }
 
+    /**
+     * Converts the list of coupons to object array
+     * @param coupons coupons to be converted
+     * @return the list of coupons to converted object array
+     */
     private Object[][] convertToObjectArray(java.util.List<Coupon> coupons) {
         Object[][] data = new Object[coupons.size()][4];
         for (int i = 0; i < coupons.size(); i++) {
@@ -58,6 +66,9 @@ public class ViewAllCouponsWindow extends JFrame {
         return data;
     }
 
+    /**
+     * Coupon table model for coupon table
+     */
     private static class CouponTableModel extends AbstractTableModel {
         private final Object[] column;
         private final Object[][] data;

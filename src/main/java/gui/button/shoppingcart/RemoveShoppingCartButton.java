@@ -13,9 +13,14 @@ import java.util.List;
  * User: vincent
  * Date: 11/04/11
  * Time: 2:13 PM
- * To change this template use File | Settings | File Templates.
  */
 public class RemoveShoppingCartButton extends JButton {
+    /**
+     * Remove shopping cart button
+     * @param shoppingCartList shopping cart list
+     * @param shoppingCarts shopping carts table
+     * @param viewAllShoppingCartsWindow window to close upon success
+     */
     public RemoveShoppingCartButton(List<ShoppingCart> shoppingCartList, JTable shoppingCarts, ViewAllShoppingCartsWindow viewAllShoppingCartsWindow) {
         setText("Remove Cart");
         setMinimumSize(new Dimension(175, 50));

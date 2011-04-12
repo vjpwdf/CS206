@@ -24,6 +24,11 @@ public class AddItemWindow extends JFrame {
     private static final Integer WIDTH = 600;
     private static final Integer HEIGHT = 330;
 
+    /**
+     * Add item window
+     * @param item item to overload to be able to save instead of add
+     * @throws HeadlessException thrown if error upon creation
+     */
     public AddItemWindow(Item item) throws HeadlessException {
         setTitle("Add An Item");
         setSize(WIDTH, HEIGHT);
@@ -85,10 +90,15 @@ public class AddItemWindow extends JFrame {
                 imagePreviewPanel.scaleImage();
                 imagePreviewPanel.repaint();
             } catch (SQLException e) {
+                //Do nothing
             }
         }
     }
 
+    /**
+     * Default add item window constructor - for adding item not updating
+     * @throws HeadlessException thrown if error upon creation
+     */
     public AddItemWindow() throws HeadlessException {
         this(null);
     }

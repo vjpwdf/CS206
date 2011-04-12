@@ -9,15 +9,22 @@ import javax.swing.event.ListSelectionListener;
  * User: vincent
  * Date: 4/10/11
  * Time: 1:53 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ShoppingCartListener implements ListSelectionListener {
     private JButton removeButton;
 
+    /**
+     * Shopping cart table list selection listener constructor
+     * @param removeButton remove button to enable upon initial selection
+     */
     public ShoppingCartListener(JButton removeButton) {
         this.removeButton = removeButton;
     }
 
+    /**
+     * Enables remove button
+     * @param event makes sure event is not value is adjusting
+     */
     @Override
     public void valueChanged(ListSelectionEvent event) {
         if(!event.getValueIsAdjusting()){

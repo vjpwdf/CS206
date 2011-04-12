@@ -8,12 +8,14 @@ import java.awt.*;
  * User: timhuff
  * Date: 2/26/11
  * Time: 3:37 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class MainMenuButton extends JButton {
     private static final Integer WIDTH = 250;
     private static final Integer HEIGHT = 40;
 
+    /**
+     * Main menu button
+     */
     public MainMenuButton(){
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMaximumSize(new Dimension(WIDTH, HEIGHT));

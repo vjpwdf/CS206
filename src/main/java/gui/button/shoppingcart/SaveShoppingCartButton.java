@@ -14,9 +14,15 @@ import java.util.List;
  * User: vincent
  * Date: 4/10/11
  * Time: 2:26 PM
- * To change this template use File | Settings | File Templates.
  */
 public class SaveShoppingCartButton extends JButton {
+    /**
+     * Save shopping cart button
+     * @param items list of items
+     * @param shoppingCartTable shopping cart table
+     * @param buildShoppingCartWindow shopping cart window to close upon success
+     * @param selectedShoppingCart selected shopping cart to update if necessary
+     */
     public SaveShoppingCartButton(List<Item> items, JTable shoppingCartTable, BuildShoppingCartWindow buildShoppingCartWindow, ShoppingCart selectedShoppingCart) {
         setText("Save/Update Cart");
         setMinimumSize(new Dimension(150, 50));

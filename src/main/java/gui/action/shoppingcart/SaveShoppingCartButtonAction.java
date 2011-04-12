@@ -19,7 +19,6 @@ import java.util.Map;
  * User: vincent
  * Date: 4/10/11
  * Time: 2:30 PM
- * To change this template use File | Settings | File Templates.
  */
 public class SaveShoppingCartButtonAction implements ActionListener {
     private List<Item> items;
@@ -27,6 +26,13 @@ public class SaveShoppingCartButtonAction implements ActionListener {
     private BuildShoppingCartWindow buildShoppingCartWindow;
     private ShoppingCart selectedShoppingCart;
 
+    /**
+     * Save shopping cart button action
+     * @param items item list
+     * @param shoppingCartTable shopping cart table
+     * @param buildShoppingCartWindow window to close upon completion
+     * @param selectedShoppingCart shopping cart selected
+     */
     public SaveShoppingCartButtonAction(List<Item> items, JTable shoppingCartTable, BuildShoppingCartWindow buildShoppingCartWindow, ShoppingCart selectedShoppingCart) {
         this.items = items;
         this.shoppingCartTable = shoppingCartTable;
@@ -34,6 +40,10 @@ public class SaveShoppingCartButtonAction implements ActionListener {
         this.selectedShoppingCart = selectedShoppingCart;
     }
 
+    /**
+     * Saves selected shopping cart
+     * @param e ignored
+     */
     public void actionPerformed(ActionEvent e) {
         Map<Item, Integer> shoppingCart = new HashMap<Item, Integer>();
         DefaultTableModel shoppingCartTableModel = (DefaultTableModel) shoppingCartTable.getModel();
@@ -52,6 +62,11 @@ public class SaveShoppingCartButtonAction implements ActionListener {
         buildShoppingCartWindow.setVisible(false);
     }
 
+    /**
+     * Gets item by comparing name
+     * @param itemName item name to find in list of items
+     * @return equal item
+     */
     private Item getItemByItemName(String itemName) {
         for (Item item : items) {
             if (item.getItemName().equals(itemName)) {

@@ -9,10 +9,12 @@ import javax.swing.*;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 8:03:58 PM
- * To change this template use File | Settings | File Templates.
  */
 public class EditCouponButton extends MainMenuButton {
 
+    /**
+     * Edit coupon button constructor
+     */
     public EditCouponButton() {
         super();
         setText("Edit Coupons");

@@ -14,12 +14,15 @@ import java.util.Arrays;
  * User: vincent
  * Date: 22/03/11
  * Time: 10:05 PM
- * To change this template use File | Settings | File Templates.
  */
 public class CreateUserWindow extends JFrame {
     private static final Integer WIDTH = 500;
     private static final Integer HEIGHT = 150;
 
+    /**
+     * Create user window
+     * @throws HeadlessException thrown if could not create window
+     */
     public CreateUserWindow() throws HeadlessException {
         setTitle("Create A User Account");
         setSize(WIDTH, HEIGHT);

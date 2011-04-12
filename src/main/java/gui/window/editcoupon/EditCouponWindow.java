@@ -10,17 +10,11 @@ import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.List;
 
-
-/**
- * @version 1.0 06/19/99
- */
 public class EditCouponWindow extends JFrame {
     final private int ROW_HEIGHT = 30;
     final private int HEIGHT = 600;
     final private int WIDTH = 500;
     JTable table;
-    private JButton remove;
-    private JButton edit;
 
     public EditCouponWindow() {
         super("Edit Coupon Window");
@@ -41,13 +35,13 @@ public class EditCouponWindow extends JFrame {
 
         Box buttonBox = Box.createHorizontalBox();
 
-        edit = new JButton("Edit");
+        JButton edit = new JButton("Edit");
         edit.setMinimumSize(new Dimension(150, 50));
         edit.setMaximumSize(new Dimension(150, 50));
 //        edit.addActionListener(new UpdateItemButtonAction(table, items, this));
         edit.setEnabled(false);
 
-        remove = new JButton("Remove");
+        JButton remove = new JButton("Remove");
         remove.setMinimumSize(new Dimension(150, 50));
         remove.setMaximumSize(new Dimension(150, 50));
 //        remove.addActionListener(new RemoveItemButtonAction(table, items, this));

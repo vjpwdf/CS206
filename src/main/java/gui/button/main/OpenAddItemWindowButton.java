@@ -12,6 +12,9 @@ import javax.swing.*;
  */
 public class OpenAddItemWindowButton extends MainMenuButton {
 
+    /**
+     * Open add item window button
+     */
     public OpenAddItemWindowButton() {
         setText("Add Item");
         addActionListener(new OpenAddItemWindowAction());

@@ -10,9 +10,12 @@ import java.awt.*;
  * User: vincent
  * Date: 4/9/11
  * Time: 7:17 PM
- * To change this template use File | Settings | File Templates.
  */
 public class RemoveItemFromCartButton extends JButton {
+    /**
+     * Remove item from shopping cart
+     * @param shoppingCartTable shopping cart table to remove item from
+     */
     public RemoveItemFromCartButton(JTable shoppingCartTable) {
         setText("Remove From Cart");
         setMinimumSize(new Dimension(150, 50));

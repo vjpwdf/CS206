@@ -9,10 +9,12 @@ import javax.swing.*;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 8:07:47 PM
- * To change this template use File | Settings | File Templates.
  */
 public class BuildShoppingCartButton extends MainMenuButton {
 
+    /**
+     * Build shopping cart button action
+     */
     public BuildShoppingCartButton() {
         setText("Build Shopping Cart");
         addActionListener(new BuildShoppingCartButtonAction());

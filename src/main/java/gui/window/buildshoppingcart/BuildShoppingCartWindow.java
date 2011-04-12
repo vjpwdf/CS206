@@ -32,21 +32,27 @@ public class BuildShoppingCartWindow extends JFrame {
     private static final Integer WIDTH = 500;
     private static final Integer HEIGHT = 600;
     private static final int ROW_HEIGHT = 100;
-    private List<Item> items;
     private ShoppingCart selectedShoppingCart;
     private JTable shoppingCartTable;
 
+    /**
+     * Build shopping cart window constructor
+     * @throws HeadlessException thrown if could not build window
+     */
     public BuildShoppingCartWindow() throws HeadlessException {
         buildShoppingCartWindow();
     }
 
+    /**
+     * Builds the gui components for the shopping cart window
+     */
     private void buildShoppingCartWindow() {
         setTitle("Build A Shopping Cart");
         setSize(WIDTH, HEIGHT);
 
         Box shoppingCartVerticalBox = Box.createVerticalBox();
 
-        items = ItemServiceAdaptor.getAllItems();
+        List<Item> items = ItemServiceAdaptor.getAllItems();
 
         final Object[][] data = convertToObjectArray(items);
         final Object[] column = new Object[]{"Picture", "Name", "Manufacturer", "Price"};
@@ -91,6 +97,10 @@ public class BuildShoppingCartWindow extends JFrame {
         shoppingCartVerticalBox.add(saveShoppingCartButton);
     }
 
+    /**
+     * Build shopping cart window constructor for editing an existing shopping cart
+     * @param selectedShoppingCart shopping cart to edit
+     */
     public BuildShoppingCartWindow(ShoppingCart selectedShoppingCart) {
         this.selectedShoppingCart = selectedShoppingCart;
         buildShoppingCartWindow();
@@ -99,6 +109,11 @@ public class BuildShoppingCartWindow extends JFrame {
         }
     }
 
+    /**
+     * Converts a list of items to object array
+     * @param items items to convert
+     * @return a list of items in an object array
+     */
     private Object[][] convertToObjectArray(List<Item> items) {
         Object[][] data = new Object[items.size()][4];
         for (int i = 0; i < items.size(); i++) {
@@ -124,6 +139,10 @@ public class BuildShoppingCartWindow extends JFrame {
         return data;
     }
 
+    /**
+     * Sets the image observer to first column in the table
+     * @param table table to set the image observer to
+     */
     private void setImageObserver(JTable table) {
         TableModel model = table.getModel();
         int rowCount = model.getRowCount();
@@ -136,6 +155,9 @@ public class BuildShoppingCartWindow extends JFrame {
         }
     }
 
+    /**
+     * Item table model for item table
+     */
     private static class ItemTableModel extends AbstractTableModel {
         private final Object[] column;
         private final Object[][] data;
@@ -166,6 +188,9 @@ public class BuildShoppingCartWindow extends JFrame {
         }
     }
 
+    /**
+     * Cell image observer to fill graphics appropriately
+     */
     class CellImageObserver implements ImageObserver {
         JTable table;
         int row;

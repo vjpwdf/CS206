@@ -9,10 +9,12 @@ import javax.swing.*;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 8:23:13 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ViewAllCouponsButton extends MainMenuButton {
 
+    /**
+     * View all coupons button
+     */
     public ViewAllCouponsButton() {
         setText("View All Coupons");
         addActionListener(new ViewAllCouponsButtonAction());

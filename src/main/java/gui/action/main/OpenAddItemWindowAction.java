@@ -12,6 +12,10 @@ import java.awt.event.ActionListener;
  * Time: 5:59:16 PM
  */
 public class OpenAddItemWindowAction implements ActionListener {
+    /**
+     * Opens add item window
+     * @param e ignored
+     */
     public void actionPerformed(ActionEvent e) {
         AddItemWindow addItemWindow = new AddItemWindow();
         addItemWindow.setVisible(true);

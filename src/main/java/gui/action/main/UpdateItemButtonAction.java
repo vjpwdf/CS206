@@ -14,19 +14,28 @@ import java.util.List;
  * User: timhuff
  * Date: 3/5/11
  * Time: 1:58 PM
- * To change this template use File | Settings | File Templates.
  */
 public class UpdateItemButtonAction implements ActionListener {
     private EditItemWindow editItemWindow;
     private List<Item> items;
     private JTable table;
 
+    /**
+     * Update Item button constructor
+     * @param table item table
+     * @param items items in table
+     * @param editItemWindow window to close once update is complete
+     */
     public UpdateItemButtonAction(JTable table, List<Item> items, EditItemWindow editItemWindow) {
         this.table = table;
         this.items = items;
         this.editItemWindow = editItemWindow;
     }
 
+    /**
+     * Updates selected item
+     * @param actionEvent ignored
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         int selectedRow = table.getSelectedRow();

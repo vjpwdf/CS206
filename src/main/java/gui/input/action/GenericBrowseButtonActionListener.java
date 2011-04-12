@@ -11,17 +11,25 @@ import java.io.File;
  * User: vincent
  * Date: 26/02/11
  * Time: 5:22 PM
- * To change this template use File | Settings | File Templates.
  */
 public class GenericBrowseButtonActionListener implements ActionListener {
     private JTextField input;
     private FileFilter fileFilter;
 
+    /**
+     * Generic browse button action
+     * @param input text field
+     * @param fileFilter file filter
+     */
     public GenericBrowseButtonActionListener(JTextField input, FileFilter fileFilter) {
         this.input = input;
         this.fileFilter = fileFilter;
     }
 
+    /**
+     * Opens a file chooser to select image and load it
+     * @param actionEvent ignore
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         JFileChooser fileChooser = new JFileChooser();

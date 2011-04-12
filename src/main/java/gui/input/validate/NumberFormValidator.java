@@ -11,11 +11,19 @@ import java.awt.event.KeyEvent;
  * To change this template use File | Settings | File Templates.
  */
 public class NumberFormValidator extends FormValidator {
+    /**
+     * Error message
+     * @return error message
+     */
     @Override
     public String toString() {
         return "Value is not a valid number";
     }
 
+    /**
+     * Checks the input to make sure it is a number
+     * @param keyEvent event to get key code of number typed
+     */
     @Override
     public void keyTyped(KeyEvent keyEvent) {
         JTextField source = (JTextField) keyEvent.getSource();
@@ -31,10 +39,19 @@ public class NumberFormValidator extends FormValidator {
         formValidatorWorker.performValidation();
     }
 
+    /**
+     * Ignored
+     * @param keyEvent ignored
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
     }
 
+    /**
+     * Checks to see if text input can be converted to a float
+     * @param currentText text input to see if can be converted to a float
+     * @return true if text input can be converted to a float
+     */
     private boolean canConvertTextToFloat(String currentText) {
         try {
             Float.valueOf(currentText);
@@ -44,6 +61,10 @@ public class NumberFormValidator extends FormValidator {
         }
     }
 
+    /**
+     * Ignored
+     * @param keyEvent ignored
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
     }

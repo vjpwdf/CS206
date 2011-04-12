@@ -15,12 +15,15 @@ import java.util.Arrays;
  * User: vincent
  * Date: 27/02/11
  * Time: 3:09 PM
- * To change this template use File | Settings | File Templates.
  */
 public class LoginWindow extends JFrame {
     private static final Integer WIDTH = 500;
     private static final Integer HEIGHT = 150;
 
+    /**
+     * Shows the login window
+     * @throws HeadlessException thrown if could not build window correctly
+     */
     public LoginWindow() throws HeadlessException {
         setTitle("Please Log In");
         setSize(WIDTH, HEIGHT);

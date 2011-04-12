@@ -11,16 +11,18 @@ import java.beans.PropertyChangeListener;
  * User: vincent
  * Date: 26/02/11
  * Time: 5:36 PM
- * To change this template use File | Settings | File Templates.
  */
-public class ImagePreviewPanel extends JPanel
-        implements PropertyChangeListener {
-
+public class ImagePreviewPanel extends JPanel implements PropertyChangeListener {
     private int width, height;
     private Image image;
     private int scaleSize;
     private Color bg;
 
+    /**
+     * Image preview panel constructor
+     * @param panelWidth width of panel
+     * @param panelHeight height of panel
+     */
     public ImagePreviewPanel(int panelWidth, int panelHeight) {
         scaleSize = panelWidth;
         setPreferredSize(new Dimension(panelWidth, panelHeight));
@@ -30,6 +32,10 @@ public class ImagePreviewPanel extends JPanel
         setBorder(new BevelBorder ( BevelBorder.RAISED ));
     }
 
+    /**
+     * When selected file is selected, draw image in preview panel
+     * @param e makes sure event is selected file changed property
+     */
     public void propertyChange(PropertyChangeEvent e) {
         String propertyName = e.getPropertyName();
 
@@ -53,7 +59,7 @@ public class ImagePreviewPanel extends JPanel
     public void scaleImage() {
         width = image.getWidth(this);
         height = image.getHeight(this);
-        double ratio = 1.0;
+        double ratio;
 
         if (width >= height) {
             ratio = (double) (scaleSize - 5) / width;

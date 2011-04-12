@@ -9,10 +9,12 @@ import javax.swing.*;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 8:23:26 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ViewAllShoppingCartsButton extends MainMenuButton {
 
+    /**
+     * View all shopping carts button
+     */
     public ViewAllShoppingCartsButton() {
         setText("View All Shopping Carts");
         addActionListener(new ViewAllShoppingCartsButtonAction());

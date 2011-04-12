@@ -11,14 +11,19 @@ import java.awt.event.ActionListener;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 7:07:17 PM
- * To change this template use File | Settings | File Templates.
  */
 public class MainWindowToolbar extends JMenuBar {
 
+    /**
+     * Main window tool bar constructor
+     */
     public MainWindowToolbar() {
         addFileButton();
     }
 
+    /**
+     * Adds the file button with list of options available on the main screen
+     */
     private void addFileButton() {
         JMenu fileMenu = new JMenu("File");
 
@@ -34,6 +39,12 @@ public class MainWindowToolbar extends JMenuBar {
         add(fileMenu);
     }
 
+    /**
+     * Adds a menu item to the file drop down
+     * @param fileMenu file menu to add option
+     * @param itemText text of item to add
+     * @param actionListener action listener of item added to drop down
+     */
     private void addMenuItem(JMenu fileMenu, String itemText, ActionListener actionListener) {
         JMenuItem item = new JMenuItem(itemText);
         item.addActionListener(actionListener);

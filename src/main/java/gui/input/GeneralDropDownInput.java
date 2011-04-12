@@ -13,20 +13,29 @@ import java.util.List;
  * User: timhuff
  * Date: 3/13/11
  * Time: 2:11 PM
- * To change this template use File | Settings | File Templates.
  */
 public class GeneralDropDownInput extends Box {
 
-    private JLabel label;
     private JComboBox dropdown;
     private List list;
 
+    /**
+     * General drop down input list
+     * @param label drop down list label
+     * @param options list options
+     */
     public GeneralDropDownInput(String label, String[] options) {
         super(0);
         list = Arrays.asList(options);
         setFields(label, options);
     }
 
+    /**
+     * General drop down input list
+     * @param label label drop down list label
+     * @param query query to perform to populate list
+     */
+    @SuppressWarnings("unchecked")
     public GeneralDropDownInput(String label, String query){
         super(0);
         list = DBClient.INSTANCE.getListOfObjects(query);
@@ -38,15 +47,24 @@ public class GeneralDropDownInput extends Box {
         setFields(label, (String[]) objectNames.toArray(names));
     }
 
+    /**
+     * Sets the fields for the drop down
+     * @param label label to set
+     * @param options list of options to set on drop down
+     */
     private void setFields(String label, String[] options) {
-        this.label = new JLabel(label);
+        JLabel label1 = new JLabel(label);
         this.dropdown = new JComboBox(options);
-        add(this.label);
+        add(label1);
         add(dropdown);
-        this.label.setMaximumSize(new Dimension(100, 25));
+        label1.setMaximumSize(new Dimension(100, 25));
         dropdown.setMaximumSize(new Dimension(200, 25));
     }
 
+    /**
+     * gets the selected object from the list of data
+     * @return the selected object
+     */
     public Object getSelectedObject(){
         return list.get(dropdown.getSelectedIndex());
     }

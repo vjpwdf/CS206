@@ -16,7 +16,6 @@ import java.io.*;
  * User: timhuff
  * Date: 2/27/11
  * Time: 7:24 PM
- * To change this template use File | Settings | File Templates.
  */
 public class AddItemActionListener implements ActionListener {
     private GeneralInput nameInput;
@@ -28,6 +27,17 @@ public class AddItemActionListener implements ActionListener {
     private AddItemWindow addItemWindow;
     private Item editingItem;
 
+    /**
+     * Action listener for add item button
+     * @param nameInput name
+     * @param priceInput price
+     * @param upc upc
+     * @param description description
+     * @param manufacturer manufacturer
+     * @param fileBrowser file browser for image
+     * @param addItemWindow add item window to close upon success
+     * @param item item to be modified
+     */
     public AddItemActionListener(GeneralInput nameInput, GeneralInput priceInput, GeneralInput upc, GeneralInput description, GeneralInput manufacturer, GeneralInputFileBrowser fileBrowser, AddItemWindow addItemWindow, Item item) {
         this.nameInput = nameInput;
         this.priceInput = priceInput;
@@ -39,6 +49,10 @@ public class AddItemActionListener implements ActionListener {
         this.editingItem = item;
     }
 
+    /**
+     * Add action event
+     * @param actionEvent action event
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String name = nameInput.getInput().getText();
@@ -46,14 +60,14 @@ public class AddItemActionListener implements ActionListener {
         String upcVal = upc.getInput().getText();
         String descriptionVal = description.getInput().getText();
         String manufacturerVal = manufacturer.getInput().getText();
-        byte[] imageBytes = null;
+        byte[] imageBytes;
         try {
             imageBytes = convertFileToByteArray(new File(fileBrowser.getInput().getText()));
         } catch (FileNotFoundException e) {
-
+            JOptionPane.showMessageDialog(null, "Error", "Could Not Locate Image File", JOptionPane.OK_OPTION);
+            return;
         }
-        ItemServiceAdaptor itemServiceAdaptor = new ItemServiceAdaptor();
-        itemServiceAdaptor.saveItem(name, price, upcVal, descriptionVal, manufacturerVal, imageBytes, editingItem);
+        ItemServiceAdaptor.saveItem(name, price, upcVal, descriptionVal, manufacturerVal, imageBytes, editingItem);
 
         JOptionPane.showMessageDialog(null, "Item has been successfully added/updated to/in the database.");
         addItemWindow.setVisible(false);
@@ -65,9 +79,10 @@ public class AddItemActionListener implements ActionListener {
         byte[] buf = new byte[1024];
         try {
             for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                bos.write(buf, 0, readNum); //no doubt here is 0
+                bos.write(buf, 0, readNum);
             }
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error", "Could Not Locate Image File", JOptionPane.OK_OPTION);
         }
 
         return bos.toByteArray();

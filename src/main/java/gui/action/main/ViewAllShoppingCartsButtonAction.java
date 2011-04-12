@@ -10,9 +10,12 @@ import java.awt.event.ActionListener;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 8:25:38 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ViewAllShoppingCartsButtonAction implements ActionListener {
+    /**
+     * Opens view all shopping carts window
+     * @param e ignored
+     */
     public void actionPerformed(ActionEvent e) {
         ViewAllShoppingCartsWindow viewAllShoppingCartsWindow = new ViewAllShoppingCartsWindow();
         viewAllShoppingCartsWindow.setVisible(true);

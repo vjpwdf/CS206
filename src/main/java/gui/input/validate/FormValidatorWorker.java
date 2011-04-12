@@ -15,7 +15,6 @@ import java.util.List;
  * User: vincent
  * Date: 27/02/11
  * Time: 10:36 AM
- * To change this template use File | Settings | File Templates.
  */
 public class FormValidatorWorker implements KeyListener {
     private List<FormValidator> formValidators = new ArrayList<FormValidator>();
@@ -23,24 +22,44 @@ public class FormValidatorWorker implements KeyListener {
     private ImagePane imagePane;
     private List<JButton> buttons;
 
+    /**
+     * form validator worker constructor
+     * @param errorLabel error label to change
+     * @param imagePane image pane for check mark or x mark
+     */
     public FormValidatorWorker(JLabel errorLabel, ImagePane imagePane) {
         this.errorLabel = errorLabel;
         this.imagePane = imagePane;
     }
 
+    /**
+     * Add new form validator to worker
+     * @param formValidator form validator to be added
+     */
     public void addNewFormValidator(FormValidator formValidator) {
         formValidators.add(formValidator);
     }
 
+    /**
+     * Buttons to monitor for success and failure
+     * @param buttons buttons to monitor
+     */
     public void monitorButtons(List<JButton> buttons) {
         this.buttons = buttons;
     }
 
+    /**
+     * Performs validation when key is typed
+     * @param keyEvent ignored
+     */
     @Override
     public void keyTyped(KeyEvent keyEvent) {
         performValidation();
     }
 
+    /**
+     * Checks to see if any of the form validators are in an invalid state
+     */
     public void performValidation() {
         try {
             errorLabel.setText("");
@@ -60,6 +79,9 @@ public class FormValidatorWorker implements KeyListener {
         }
     }
 
+    /**
+     * Enables all buttons
+     */
     private void enableButtons() {
         if(buttons == null) {
             return;
@@ -69,6 +91,9 @@ public class FormValidatorWorker implements KeyListener {
         }
     }
 
+    /**
+     * Disables all buttons
+     */
     private void disableButtons() {
         if(buttons == null) {
             return;
@@ -78,10 +103,18 @@ public class FormValidatorWorker implements KeyListener {
         }
     }
 
+    /**
+     * Ignored
+     * @param keyEvent ignored
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
     }
 
+    /**
+     * Ignored
+     * @param keyEvent ignored
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
     }

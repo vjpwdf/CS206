@@ -5,16 +5,18 @@ import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
  * User: timhuff
  * Date: 3/13/11
  * Time: 3:13 PM
- * To change this template use File | Settings | File Templates.
  */
 public class DateFormValidator extends FormValidator {
+    /**
+     * Validates date input type
+     * @param keyEvent trigged when key is typed
+     */
     @Override
     public void keyTyped(KeyEvent keyEvent) {
         JTextField source = (JTextField) keyEvent.getSource();
@@ -30,6 +32,11 @@ public class DateFormValidator extends FormValidator {
         formValidatorWorker.performValidation();
     }
 
+    /**
+     * Checks to see if it can convert the input to a date type
+     * @param currentText text to convert
+     * @return true if it could be successfully converted
+     */
     private boolean canConvertTextToDate(String currentText) {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -41,16 +48,27 @@ public class DateFormValidator extends FormValidator {
         return true;
     }
 
+    /**
+     * Ignored
+     * @param keyEvent ignored
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    /**
+     * Ignored
+     * @param keyEvent ignored
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
 
     }
 
+    /**
+     * Error message
+     * @return error message
+     */
     @Override
     public String toString() {
         return "Valid Format: dd/mm/yyyy";

@@ -9,10 +9,12 @@ import javax.swing.*;
  * User: vincent
  * Date: Feb 10, 2011
  * Time: 7:54:56 PM
- * To change this template use File | Settings | File Templates.
  */
 public class AddCouponButton extends MainMenuButton {
 
+    /**
+     * Add coupon to db button constructor
+     */
     public AddCouponButton() {
         setText("Add Coupon");
         addActionListener(new AddCouponButtonAction());

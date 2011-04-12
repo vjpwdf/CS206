@@ -13,12 +13,16 @@ import java.util.Set;
  * User: vincent
  * Date: 11/04/11
  * Time: 2:31 PM
- * To change this template use File | Settings | File Templates.
  */
 public class ComputeSavingsWindow extends JFrame {
     private static final Integer WIDTH = 525;
     private static final Integer HEIGHT = 600;
 
+    /**
+     * Computes saving window
+     * @param selectedShoppingCart shopping cart to compute savings up
+     * @throws HeadlessException thrown if window could not be created
+     */
     public ComputeSavingsWindow(ShoppingCart selectedShoppingCart) throws HeadlessException {
         setTitle("Savings For Shopping Cart");
         setSize(WIDTH, HEIGHT);
@@ -28,6 +32,11 @@ public class ComputeSavingsWindow extends JFrame {
         add(tabbedPane);
     }
 
+    /**
+     * Creates the coupon applied pane
+     * @param selectedShoppingCart shopping cart to get coupons applied pane
+     * @return the coupon applied pane
+     */
     private JPanel createCouponsAppliedPane(ShoppingCart selectedShoppingCart) {
         JPanel createCouponsAppliedPane = new JPanel();
         String couponsAppliedText = "Item Name\t\tQuantity\t\tTotal\n\n";
@@ -55,6 +64,11 @@ public class ComputeSavingsWindow extends JFrame {
         return createCouponsAppliedPane;
     }
 
+    /**
+     * Creates the no coupon applied pane
+     * @param selectedShoppingCart shopping cart to get no coupons applied pane
+     * @return the no coupon applied pane
+     */
     private JPanel createNoCouponsAppliedPane(ShoppingCart selectedShoppingCart) {
         JPanel createNoCouponsAppliedPane = new JPanel();
         String noCouponsAppliedText = "Item Name\t\tQuantity\t\tTotal\n\n";

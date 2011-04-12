@@ -10,6 +10,10 @@ import gui.window.main.MainWindow;
  */
 public class GUIBuilder {
 
+    /**
+     * Builds the main windows user interface
+     * @return main window
+     */
     public MainWindow buildUserInterface() {
         return new MainWindow();
     }

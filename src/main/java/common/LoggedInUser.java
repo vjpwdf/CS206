@@ -7,7 +7,9 @@ import hibernate.User;
  * User: vincent
  * Date: 27/02/11
  * Time: 9:12 PM
- * To change this template use File | Settings | File Templates.
+ */
+/**
+ * Class to store the current user logged into the system
  */
 public class LoggedInUser {
     public static User loggedInUser;
