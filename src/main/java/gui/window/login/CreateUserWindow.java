@@ -18,6 +18,9 @@ import java.util.Arrays;
 public class CreateUserWindow extends JFrame {
     private static final Integer WIDTH = 500;
     private static final Integer HEIGHT = 150;
+    private GeneralInput userName;
+    private GeneralInput password;
+    private JButton createUserButton;
 
     /**
      * Create user window
@@ -30,13 +33,13 @@ public class CreateUserWindow extends JFrame {
 
         Box loginForm = Box.createVerticalBox();
 
-        GeneralInput userName = new GeneralInput("Username: ", true);
+        userName = new GeneralInput("Username: ", true);
         userName.addNewFormValidator(new MinLengthFormValidator(3));
         userName.addNewFormValidator(new MaxLengthFormValidator(30));
-        GeneralInput password = new GeneralInput("Password: ", true);
+        password = new GeneralInput("Password: ", true);
         password.addNewFormValidator(new MinLengthFormValidator(3));
         password.addNewFormValidator(new MaxLengthFormValidator(30));
-        JButton createUserButton = new AddNewUserButton(this, userName, password);
+        createUserButton = new AddNewUserButton(this, userName, password);
         userName.getFormValidatorWorker().monitorButtons(Arrays.asList(createUserButton));
         password.getFormValidatorWorker().monitorButtons(Arrays.asList(createUserButton));
 
@@ -45,5 +48,17 @@ public class CreateUserWindow extends JFrame {
         loginForm.add(createUserButton);
 
         add(loginForm);
+    }
+
+    public GeneralInput getUserName() {
+        return userName;
+    }
+
+    public GeneralInput getPassword() {
+        return password;
+    }
+
+    public JButton getCreateUserButton() {
+        return createUserButton;
     }
 }

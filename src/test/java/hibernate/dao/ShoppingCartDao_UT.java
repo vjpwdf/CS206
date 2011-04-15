@@ -8,6 +8,7 @@ import hibernate.factory.DBClient;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ShoppingCartDao_UT extends DaoTest {
     }
 
     @Test
-    public void addShoppingCartFromListOfShoppingCartItems() {
+    public void addShoppingCartFromListOfShoppingCartItems() throws IOException {
         User user = addUser("John-the-man", "0123456");
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         ShoppingCart shoppingCart = new ShoppingCart();
@@ -51,7 +52,7 @@ public class ShoppingCartDao_UT extends DaoTest {
     }
 
     @Test
-    public void testGetAllShoppingCarts() {
+    public void testGetAllShoppingCarts() throws IOException {
         User user = addUser("John", "0123456");
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         ShoppingCartItem shoppingCartItem = new ShoppingCartItem();
@@ -81,7 +82,7 @@ public class ShoppingCartDao_UT extends DaoTest {
     }
 
     @Test
-    public void testUpdateShoppingCart() {
+    public void testUpdateShoppingCart() throws IOException {
         User user = addUser("John-the-man", "0123456");
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Item item2 = addItem("test2", "test2", "test2", "test2", 2.25f, null);
@@ -114,7 +115,7 @@ public class ShoppingCartDao_UT extends DaoTest {
     }
 
     @Test
-    public void testRemoveShoppingCart() {
+    public void testRemoveShoppingCart() throws IOException {
         User user = addUser("John-the-man", "0123456");
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Item item2 = addItem("test2", "test2", "test2", "test2", 2.25f, null);

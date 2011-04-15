@@ -8,9 +8,7 @@ import hibernate.serviceadaptor.ItemServiceAdaptor;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -20,7 +18,10 @@ public class EditItemWindow extends JFrame {
     final private int ROW_HEIGHT = 100;
     final private int HEIGHT = 600;
     final private int WIDTH = 500;
-    JTable table;
+    private JTable table;
+    private JButton edit;
+    private JButton remove;
+    private AbstractTableModel model;
 
     /**
      * Builds the edit item window
@@ -33,10 +34,10 @@ public class EditItemWindow extends JFrame {
         final Object[][] data = convertToObjectArray(items);
         final Object[] column = new Object[]{"Picture", "Name", "Manufacturer", "Price"};
 
-        AbstractTableModel model = new ItemTableModel(column, data);
+        model = new ItemTableModel(column, data);
         table = new JTable(model);
         table.setRowHeight(ROW_HEIGHT);
-        setImageObserver(table);
+        //setImageObserver(table);
         JScrollPane pane = new JScrollPane(table);
 
 
@@ -45,13 +46,13 @@ public class EditItemWindow extends JFrame {
 
         Box buttonBox = Box.createHorizontalBox();
 
-        JButton edit = new JButton("Edit");
+        edit = new JButton("Edit");
         edit.setMinimumSize(new Dimension(150, 50));
         edit.setMaximumSize(new Dimension(150, 50));
         edit.addActionListener(new UpdateItemButtonAction(table, items, this));
         edit.setEnabled(false);
 
-        JButton remove = new JButton("Remove");
+        remove = new JButton("Remove");
         remove.setMinimumSize(new Dimension(150, 50));
         remove.setMaximumSize(new Dimension(150, 50));
         remove.addActionListener(new RemoveItemButtonAction(table, items, this));
@@ -99,22 +100,6 @@ public class EditItemWindow extends JFrame {
     }
 
     /**
-     * Sets the image observer for the JTable for first column
-     * @param table table to set the image observer of
-     */
-    private void setImageObserver(JTable table) {
-        TableModel model = table.getModel();
-        int rowCount = model.getRowCount();
-        for (int row = 0; row < rowCount; row++) {
-            if (model.getValueAt(row, 0).getClass() == ImageIcon.class) {
-                ImageIcon icon = (ImageIcon) model.getValueAt(row, 0);
-                if (icon != null)
-                    icon.setImageObserver(new CellImageObserver(table, row, 0));
-            }
-        }
-    }
-
-    /**
      * Item table model for the item table
      */
     private static class ItemTableModel extends AbstractTableModel {
@@ -147,24 +132,19 @@ public class EditItemWindow extends JFrame {
         }
     }
 
-    class CellImageObserver implements ImageObserver {
-        JTable table;
-        int row;
-        int col;
+    public JTable getTable() {
+        return table;
+    }
 
-        CellImageObserver(JTable table, int row, int col) {
-            this.table = table;
-            this.row = row;
-            this.col = col;
-        }
+    public JButton getEdit() {
+        return edit;
+    }
 
-        public boolean imageUpdate(Image img, int flags,
-                                   int x, int y, int w, int h) {
-            if ((flags & (FRAMEBITS | ALLBITS)) != 0) {
-                Rectangle rect = table.getCellRect(row, col, false);
-                table.repaint(rect);
-            }
-            return (flags & (ALLBITS | ABORT)) == 0;
-        }
+    public JButton getRemove() {
+        return remove;
+    }
+
+    public AbstractTableModel getModel() {
+        return model;
     }
 }

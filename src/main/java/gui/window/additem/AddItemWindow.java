@@ -24,6 +24,15 @@ public class AddItemWindow extends JFrame {
     private static final Integer WIDTH = 600;
     private static final Integer HEIGHT = 330;
 
+    private GeneralInput nameInput;
+    private GeneralInput priceInput;
+    private GeneralInput upc;
+    private GeneralInput description;
+    private GeneralInput manufacturer;
+    private ImagePreviewPanel imagePreviewPanel;
+    private JButton addItem;
+    private GeneralInputFileBrowser fileBrowser;
+
     /**
      * Add item window
      * @param item item to overload to be able to save instead of add
@@ -34,37 +43,37 @@ public class AddItemWindow extends JFrame {
         setSize(WIDTH, HEIGHT);
         Box itemForm = Box.createVerticalBox();
 
-        GeneralInput nameInput = new GeneralInput("Item Name", true);
+        nameInput = new GeneralInput("Item Name", true);
         nameInput.addNewFormValidator(new MinLengthFormValidator(3));
         nameInput.addNewFormValidator(new MaxLengthFormValidator(30));
         itemForm.add(nameInput);
 
-        GeneralInput priceInput = new GeneralInput("Price", true);
+        priceInput = new GeneralInput("Price", true);
         priceInput.addNewFormValidator(new NumberFormValidator());
         itemForm.add(priceInput);
 
-        GeneralInput upc = new GeneralInput("UPC", true);
+        upc = new GeneralInput("UPC", true);
         upc.addNewFormValidator(new MinLengthFormValidator(14));
         upc.addNewFormValidator(new MaxLengthFormValidator(14));
         itemForm.add(upc);
 
-        GeneralInput description = new GeneralInput("Description", true);
+        description = new GeneralInput("Description", true);
         description.addNewFormValidator(new MaxLengthFormValidator(500));
         itemForm.add(description);
 
-        GeneralInput manufacturer = new GeneralInput("Manufacturer", true);
+        manufacturer = new GeneralInput("Manufacturer", true);
         manufacturer.addNewFormValidator(new MinLengthFormValidator(3));
         manufacturer.addNewFormValidator(new MaxLengthFormValidator(100));
         itemForm.add(manufacturer);
 
 
-        GeneralInputFileBrowser fileBrowser = new GeneralInputFileBrowser("Select Image");
+        fileBrowser = new GeneralInputFileBrowser("Select Image");
         itemForm.add(fileBrowser);
-        ImagePreviewPanel imagePreviewPanel = new ImagePreviewPanel(120, 120);
+        imagePreviewPanel = new ImagePreviewPanel(120, 120);
         itemForm.add(imagePreviewPanel);
         fileBrowser.getInput().addPropertyChangeListener(imagePreviewPanel);
 
-        JButton addItem = new AddItemButton("Add/Update Item", nameInput, priceInput, upc, description, manufacturer, fileBrowser, this, item);
+        addItem = new AddItemButton("Add/Update Item", nameInput, priceInput, upc, description, manufacturer, fileBrowser, this, item);
         itemForm.add(addItem);
 
         add(itemForm);
@@ -101,5 +110,33 @@ public class AddItemWindow extends JFrame {
      */
     public AddItemWindow() throws HeadlessException {
         this(null);
+    }
+
+    public GeneralInput getNameInput() {
+        return nameInput;
+    }
+
+    public GeneralInput getPriceInput() {
+        return priceInput;
+    }
+
+    public GeneralInput getUpc() {
+        return upc;
+    }
+
+    public GeneralInput getDescription() {
+        return description;
+    }
+
+    public GeneralInput getManufacturer() {
+        return manufacturer;
+    }
+
+    public JButton getAddItem() {
+        return addItem;
+    }
+
+    public GeneralInputFileBrowser getFileBrowser() {
+        return fileBrowser;
     }
 }

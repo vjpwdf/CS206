@@ -18,6 +18,10 @@ public class ComputeSavingsWindow extends JFrame {
     private static final Integer WIDTH = 525;
     private static final Integer HEIGHT = 600;
 
+    private JTabbedPane tabbedPane;
+    private JPanel noCouponsAppliedPanel;
+    private JPanel couponsAppliedPanel;
+
     /**
      * Computes saving window
      * @param selectedShoppingCart shopping cart to compute savings up
@@ -26,9 +30,11 @@ public class ComputeSavingsWindow extends JFrame {
     public ComputeSavingsWindow(ShoppingCart selectedShoppingCart) throws HeadlessException {
         setTitle("Savings For Shopping Cart");
         setSize(WIDTH, HEIGHT);
-        JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("No Coupons Applied", createNoCouponsAppliedPane(selectedShoppingCart));
-        tabbedPane.addTab("Coupons Applied", createCouponsAppliedPane(selectedShoppingCart));
+        tabbedPane = new JTabbedPane();
+        noCouponsAppliedPanel = createNoCouponsAppliedPane(selectedShoppingCart);
+        couponsAppliedPanel = createCouponsAppliedPane(selectedShoppingCart);
+        tabbedPane.addTab("No Coupons Applied", noCouponsAppliedPanel);
+        tabbedPane.addTab("Coupons Applied", couponsAppliedPanel);
         add(tabbedPane);
     }
 
@@ -84,5 +90,17 @@ public class ComputeSavingsWindow extends JFrame {
         noCouponsAppliedTextArea.setBackground(getBackground());
         createNoCouponsAppliedPane.add(noCouponsAppliedTextArea);
         return createNoCouponsAppliedPane;
+    }
+
+    public JTabbedPane getTabbedPane() {
+        return tabbedPane;
+    }
+
+    public JPanel getNoCouponsAppliedPanel() {
+        return noCouponsAppliedPanel;
+    }
+
+    public JPanel getCouponsAppliedPanel() {
+        return couponsAppliedPanel;
     }
 }

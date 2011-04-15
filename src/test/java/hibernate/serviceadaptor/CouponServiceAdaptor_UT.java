@@ -7,6 +7,7 @@ import org.mockito.Mock;
 
 import java.util.Date;
 
+import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -26,6 +27,8 @@ public class CouponServiceAdaptor_UT {
     public void setUp() {
         initMocks(this);
         CouponServiceAdaptor.setCouponDao(couponDao);
+        CouponServiceAdaptor couponServiceAdaptor = new CouponServiceAdaptor();
+        assertNotNull(couponServiceAdaptor);
     }
 
     @Test

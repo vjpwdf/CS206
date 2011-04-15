@@ -61,4 +61,8 @@ public class MinLengthFormValidator extends FormValidator {
     @Override
     public void keyReleased(KeyEvent keyEvent) {
     }
+
+    public void setMinLength(int minLength) {
+        this.minLength = minLength;
+    }
 }

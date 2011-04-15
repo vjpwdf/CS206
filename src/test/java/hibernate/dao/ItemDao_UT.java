@@ -6,6 +6,7 @@ import hibernate.factory.DBClient;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ItemDao_UT extends DaoTest{
     }
 
     @Test
-    public void testGetItem() {
+    public void testGetItem() throws IOException {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Item databaseItem = itemDao.getItemByUpc(item.getItemUpc());
         assertNotNull(databaseItem);
@@ -39,7 +40,7 @@ public class ItemDao_UT extends DaoTest{
     }
 
     @Test
-    public void testRemoveItem() {
+    public void testRemoveItem() throws IOException {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         itemDao.removeItem(item.getItemUpc());
         List<Item> items = new ArrayList<Item>(DBClient.INSTANCE.getListOfObjects("from Item"));
@@ -47,7 +48,7 @@ public class ItemDao_UT extends DaoTest{
     }
 
     @Test
-    public void testGetAllItems() {
+    public void testGetAllItems() throws IOException {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         List<Item> items = itemDao.getAllItems();
         assertNotNull(items);
@@ -55,7 +56,7 @@ public class ItemDao_UT extends DaoTest{
     }
 
     @Test
-    public void addItemWithCoupons() {
+    public void addItemWithCoupons() throws IOException {
         List<Coupon> couponList = new ArrayList<Coupon>();
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Coupon coupon = addCoupon(10, 2.5f, false, item);

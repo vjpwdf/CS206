@@ -17,7 +17,8 @@ public class ViewAllCouponsWindow extends JFrame {
     final private int ROW_HEIGHT = 30;
     final private int HEIGHT = 600;
     final private int WIDTH = 500;
-    JTable table;
+    private JTable table;
+    private AbstractTableModel model;
 
     /**
      * View all coupons window
@@ -30,7 +31,7 @@ public class ViewAllCouponsWindow extends JFrame {
         final Object[][] data = convertToObjectArray(coupons);
         final Object[] column = new Object[]{"Item", "Value", "Type", "Expiration Date"};
 
-        AbstractTableModel model = new CouponTableModel(column, data);
+        model = new CouponTableModel(column, data);
         table = new JTable(model);
         table.setRowHeight(ROW_HEIGHT);
         JScrollPane pane = new JScrollPane(table);
@@ -97,5 +98,13 @@ public class ViewAllCouponsWindow extends JFrame {
         public Class getColumnClass(int col) {
             return data[0][col].getClass();
         }
+    }
+
+    public JTable getTable() {
+        return table;
+    }
+
+    public AbstractTableModel getModel() {
+        return model;
     }
 }

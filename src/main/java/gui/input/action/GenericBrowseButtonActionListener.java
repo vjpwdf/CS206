@@ -15,6 +15,7 @@ import java.io.File;
 public class GenericBrowseButtonActionListener implements ActionListener {
     private JTextField input;
     private FileFilter fileFilter;
+    private JFileChooser fileChooser = new JFileChooser();
 
     /**
      * Generic browse button action
@@ -32,7 +33,7 @@ public class GenericBrowseButtonActionListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        JFileChooser fileChooser = new JFileChooser();
+        //fileChooser = new JFileChooser();
         if (fileFilter != null) {
             fileChooser.setFileFilter(fileFilter);
         }
@@ -41,5 +42,13 @@ public class GenericBrowseButtonActionListener implements ActionListener {
             input.setText(file.getAbsolutePath());
             input.firePropertyChange(JFileChooser.SELECTED_FILE_CHANGED_PROPERTY, 0, 1);
         }
+    }
+
+    public void setFileChooser(JFileChooser fileChooser) {
+        this.fileChooser = fileChooser;
+    }
+
+    public FileFilter getFileFilter() {
+        return fileFilter;
     }
 }

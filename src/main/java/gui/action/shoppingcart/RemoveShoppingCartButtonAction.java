@@ -1,5 +1,6 @@
 package gui.action.shoppingcart;
 
+import gui.MessageBuilder;
 import gui.window.viewallshoppingcarts.ViewAllShoppingCartsWindow;
 import hibernate.ShoppingCart;
 import hibernate.serviceadaptor.ShoppingCartServiceAdaptor;
@@ -19,6 +20,7 @@ public class RemoveShoppingCartButtonAction implements ActionListener {
     private JTable shoppingCarts;
     private List<ShoppingCart> shoppingCartList;
     private ViewAllShoppingCartsWindow viewAllShoppingCartsWindow;
+    private MessageBuilder messageBuilder = new MessageBuilder();
 
     /**
      * Remove shopping cart button action
@@ -42,10 +44,14 @@ public class RemoveShoppingCartButtonAction implements ActionListener {
         ShoppingCart selectedShoppingCart = shoppingCartList.get(selectedRow);
         ShoppingCartServiceAdaptor.removeShoppingCart(selectedShoppingCart);
 
-        JOptionPane.showMessageDialog(null, "Shopping cart has been successfully removed from the database.");
+        messageBuilder.displayMessage("Shopping cart has been successfully removed from the database.");
         viewAllShoppingCartsWindow.setVisible(false);
 
         viewAllShoppingCartsWindow = new ViewAllShoppingCartsWindow();
         viewAllShoppingCartsWindow.setVisible(true);
+    }
+
+    public void setMessageBuilder(MessageBuilder messageBuilder) {
+        this.messageBuilder = messageBuilder;
     }
 }

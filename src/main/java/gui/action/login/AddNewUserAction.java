@@ -1,5 +1,6 @@
 package gui.action.login;
 
+import gui.MessageBuilder;
 import gui.input.GeneralInput;
 import gui.window.login.CreateUserWindow;
 import hibernate.serviceadaptor.UserServiceAdaptor;
@@ -18,6 +19,7 @@ public class AddNewUserAction implements ActionListener {
     private CreateUserWindow createUserWindow;
     private GeneralInput userName;
     private GeneralInput password;
+    private MessageBuilder messageBuilder = new MessageBuilder();
 
     /**
      * Action for add new user button
@@ -39,11 +41,15 @@ public class AddNewUserAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if(UserServiceAdaptor.userNameAlreadyExists(userName.getInput().getText())) {
-            JOptionPane.showMessageDialog(null, "Username Already Exists", "There was a problem", JOptionPane.OK_OPTION);
+            messageBuilder.displayMessage("Username Already Exists", "There was a problem", JOptionPane.OK_OPTION);
             return;
         }
         UserServiceAdaptor.createUserAccount(userName.getInput().getText(), password.getInput().getText());
-        JOptionPane.showMessageDialog(null, "Username Created Successfully", "Success", JOptionPane.DEFAULT_OPTION);
+        messageBuilder.displayMessage("Username Created Successfully", "Success", JOptionPane.DEFAULT_OPTION);
         createUserWindow.setVisible(false);
+    }
+
+    public void setMessageBuilder(MessageBuilder messageBuilder) {
+        this.messageBuilder = messageBuilder;
     }
 }

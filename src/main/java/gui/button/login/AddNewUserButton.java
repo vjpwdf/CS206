@@ -16,7 +16,7 @@ import java.awt.*;
 public class AddNewUserButton extends JButton {
     private static final Integer WIDTH = 190;
     private static final Integer HEIGHT = 35;
-
+    private final String name = "AddNewUserButton";
 
     /**
      * Add new user button

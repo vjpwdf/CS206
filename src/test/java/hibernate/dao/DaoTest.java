@@ -2,6 +2,7 @@ package hibernate.dao;
 
 import hibernate.*;
 import hibernate.factory.DBClient;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.junit.BeforeClass;
@@ -13,6 +14,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +51,7 @@ public abstract class DaoTest {
         assertNotNull(DBClient.databaseSession);
     }
 
-    public Item addItem(String itemUpc, String itemName, String itemDescription, String itemManufacturer, float itemPrice, Set<Coupon> itemCoupons) {
+    public Item addItem(String itemUpc, String itemName, String itemDescription, String itemManufacturer, float itemPrice, Set<Coupon> itemCoupons) throws IOException {
         Item item = new Item();
         item.setItemUpc(itemUpc);
         item.setItemName(itemName);
@@ -85,5 +92,19 @@ public abstract class DaoTest {
         shoppingCart.setCreationDate(new Date());
         DBClient.databaseSession.getCurrentSession().save(shoppingCart);
         return shoppingCart;
+    }
+
+    public byte[] convertFileToByteArray(File file) throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(file);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum); //no doubt here is 0
+            }
+        } catch (IOException ex) {
+        }
+
+        return bos.toByteArray();
     }
 }

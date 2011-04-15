@@ -1,5 +1,6 @@
 package gui.action.general;
 
+import gui.MessageBuilder;
 import gui.input.GeneralInput;
 import gui.input.GeneralInputFileBrowser;
 import gui.window.additem.AddItemWindow;
@@ -26,6 +27,7 @@ public class AddItemActionListener implements ActionListener {
     private GeneralInputFileBrowser fileBrowser;
     private AddItemWindow addItemWindow;
     private Item editingItem;
+    private MessageBuilder messageBuilder = new MessageBuilder();
 
     /**
      * Action listener for add item button
@@ -64,12 +66,12 @@ public class AddItemActionListener implements ActionListener {
         try {
             imageBytes = convertFileToByteArray(new File(fileBrowser.getInput().getText()));
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error", "Could Not Locate Image File", JOptionPane.OK_OPTION);
+            messageBuilder.displayMessage("Error", "Could Not Locate Image File", JOptionPane.OK_OPTION);
             return;
         }
         ItemServiceAdaptor.saveItem(name, price, upcVal, descriptionVal, manufacturerVal, imageBytes, editingItem);
 
-        JOptionPane.showMessageDialog(null, "Item has been successfully added/updated to/in the database.");
+        messageBuilder.displayMessage("Item has been successfully added/updated to/in the database.");
         addItemWindow.setVisible(false);
     }
 
@@ -86,5 +88,9 @@ public class AddItemActionListener implements ActionListener {
         }
 
         return bos.toByteArray();
+    }
+
+    public void setMessageBuilder(MessageBuilder messageBuilder) {
+        this.messageBuilder = messageBuilder;
     }
 }

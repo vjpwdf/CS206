@@ -6,6 +6,7 @@ import hibernate.factory.DBClient;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class CouponDao_UT extends DaoTest{
     }
 
     @Test
-    public void testAddCoupon() {
+    public void testAddCoupon() throws IOException {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         couponDao.addCoupon("test", false, .25f, new Date());
         Coupon coupon = new Coupon();
@@ -41,7 +42,7 @@ public class CouponDao_UT extends DaoTest{
     }
 
     @Test
-    public void testGetCoupon() {
+    public void testGetCoupon() throws IOException {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Coupon coupon = addCoupon(10, 1.25f, false, item);
         Coupon couponFromDatabase = couponDao.getCoupon(coupon.getCouponId());
@@ -50,7 +51,7 @@ public class CouponDao_UT extends DaoTest{
     }
 
     @Test
-    public void testGetAllCoupons() {
+    public void testGetAllCoupons() throws IOException {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Coupon coupon = addCoupon(10, 1.25f, false, item);
         List<Coupon> couponList = couponDao.getAllCoupons();
@@ -59,7 +60,7 @@ public class CouponDao_UT extends DaoTest{
     }
 
     @Test
-    public void removeCoupon() {
+    public void removeCoupon() throws IOException {
         Item item = addItem("test", "test", "test", "test", 1.25f, null);
         Coupon coupon = addCoupon(10, 1.25f, false, item);
         couponDao.removeCoupon(coupon.getCouponId());

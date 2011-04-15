@@ -19,6 +19,8 @@ import java.util.Arrays;
 public class LoginWindow extends JFrame {
     private static final Integer WIDTH = 500;
     private static final Integer HEIGHT = 150;
+    private JButton loginButton;
+    private JButton createUserButton;
 
     /**
      * Shows the login window
@@ -37,8 +39,8 @@ public class LoginWindow extends JFrame {
         GeneralInput password = new GeneralInput("Password: ", true);
         password.addNewFormValidator(new MinLengthFormValidator(3));
         password.addNewFormValidator(new MaxLengthFormValidator(30));
-        JButton loginButton = new LoginButton(this, userName, password);
-        JButton createUserButton = new CreateUserButton();
+        loginButton = new LoginButton(this, userName, password);
+        createUserButton = new CreateUserButton();
         userName.getFormValidatorWorker().monitorButtons(Arrays.asList(loginButton));
         password.getFormValidatorWorker().monitorButtons(Arrays.asList(loginButton));
 

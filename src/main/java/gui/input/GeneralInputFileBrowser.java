@@ -15,6 +15,7 @@ import java.awt.*;
  */
 public class GeneralInputFileBrowser extends Box {
     private JTextField input;
+    private JButton browseButton;
 
     /**
      * General input file browser
@@ -29,7 +30,7 @@ public class GeneralInputFileBrowser extends Box {
         input = new JTextField();
         input.setMaximumSize(new Dimension(200, 20));
 
-        JButton browseButton = new JButton("Browse");
+        browseButton = new JButton("Browse");
         browseButton.addActionListener(new GenericBrowseButtonActionListener(input, new ImageFileFilter()));
 
         add(label);
@@ -43,5 +44,9 @@ public class GeneralInputFileBrowser extends Box {
      */
     public JTextField getInput() {
         return input;
+    }
+
+    public JButton getBrowseButton() {
+        return browseButton;
     }
 }

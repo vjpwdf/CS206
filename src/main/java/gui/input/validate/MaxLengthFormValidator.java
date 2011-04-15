@@ -60,4 +60,8 @@ public class MaxLengthFormValidator extends FormValidator {
     @Override
     public void keyReleased(KeyEvent keyEvent) {
     }
+
+    public void setMaxLength(int maxLength) {
+        this.maxLength = maxLength;
+    }
 }

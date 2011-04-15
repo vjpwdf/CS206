@@ -58,7 +58,7 @@ public class ItemServiceAdaptor_UT {
 
     @Test
     public void testSaveItemWithImage() throws Exception {
-        File file = new File("src/main/resources/images/check.png");
+        File file = new File("test.png");
 
         FileInputStream fis = new FileInputStream(file);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

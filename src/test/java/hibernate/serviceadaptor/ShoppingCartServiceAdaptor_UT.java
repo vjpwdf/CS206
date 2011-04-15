@@ -1,6 +1,7 @@
 package hibernate.serviceadaptor;
 
 import hibernate.Item;
+import hibernate.ShoppingCart;
 import hibernate.ShoppingCartItem;
 import hibernate.User;
 import hibernate.dao.ShoppingCartDaoImpl;
@@ -12,6 +13,7 @@ import org.mockito.Mockito;
 import java.util.HashMap;
 import java.util.Map;
 
+import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -31,6 +33,8 @@ public class ShoppingCartServiceAdaptor_UT {
     public void setUp() {
         initMocks(this);
         ShoppingCartServiceAdaptor.setShoppingCartDao(shoppingCartDao);
+        ShoppingCartServiceAdaptor shoppingCartServiceAdaptor = new ShoppingCartServiceAdaptor();
+        assertNotNull(shoppingCartServiceAdaptor);
     }
 
     @Test
@@ -41,5 +45,27 @@ public class ShoppingCartServiceAdaptor_UT {
         itemIntegerMap.put(item, 10);
         ShoppingCartServiceAdaptor.addShoppingCartFromListOfShoppingCartItems(itemIntegerMap, user);
         verify(shoppingCartDao).addShoppingCartFromListOfShoppingCartItems(Mockito.anyList(), Mockito.anyString());
+    }
+
+    @Test
+    public void testRemoveShoppingCart() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        ShoppingCartServiceAdaptor.removeShoppingCart(shoppingCart);
+        verify(shoppingCartDao).removeShoppingCart(shoppingCart);
+    }
+
+    @Test
+    public void testUpdateShoppingCart() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        Map<Item, Integer> itemMap = new HashMap<Item, Integer>();
+        itemMap.put(new Item(), 1);
+        ShoppingCartServiceAdaptor.updateShoppingCart(shoppingCart, itemMap);
+        verify(shoppingCartDao).updateShoppingCart(Mockito.eq(shoppingCart), Mockito.anyList());
+    }
+
+    @Test
+    public void getAllShoppingCarts() {
+        ShoppingCartServiceAdaptor.getAllShoppingCarts();
+        verify(shoppingCartDao).getAllShoppingCarts();
     }
 }

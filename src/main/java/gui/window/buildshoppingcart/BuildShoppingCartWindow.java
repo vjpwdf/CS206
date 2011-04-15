@@ -34,6 +34,10 @@ public class BuildShoppingCartWindow extends JFrame {
     private static final int ROW_HEIGHT = 100;
     private ShoppingCart selectedShoppingCart;
     private JTable shoppingCartTable;
+    private JTable itemTable;
+    private JButton addItemToCartButton;
+    private JButton removeItemFromCartButton;
+    private AbstractTableModel model;
 
     /**
      * Build shopping cart window constructor
@@ -57,10 +61,9 @@ public class BuildShoppingCartWindow extends JFrame {
         final Object[][] data = convertToObjectArray(items);
         final Object[] column = new Object[]{"Picture", "Name", "Manufacturer", "Price"};
 
-        AbstractTableModel model = new ItemTableModel(column, data);
-        JTable itemTable = new JTable(model);
+        model = new ItemTableModel(column, data);
+        itemTable = new JTable(model);
         itemTable.setRowHeight(ROW_HEIGHT);
-        setImageObserver(itemTable);
         JScrollPane pane = new JScrollPane(itemTable);
 
         shoppingCartVerticalBox.add(pane);
@@ -70,11 +73,11 @@ public class BuildShoppingCartWindow extends JFrame {
         GeneralInput quantityInput = new GeneralInput("Quantity", true);
         quantityInput.getInput().setText("1");
         Box buttonBox = Box.createHorizontalBox();
-        JButton addItemToCartButton = new AddItemToCartButton(itemTable, shoppingCartTable, items, quantityInput);
+        addItemToCartButton = new AddItemToCartButton(itemTable, shoppingCartTable, items, quantityInput);
         addItemToCartButton.setEnabled(false);
         buttonBox.add(addItemToCartButton);
 
-        JButton removeItemFromCartButton = new RemoveItemFromCartButton(shoppingCartTable);
+        removeItemFromCartButton = new RemoveItemFromCartButton(shoppingCartTable);
         removeItemFromCartButton.setEnabled(false);
         buttonBox.add(removeItemFromCartButton);
 
@@ -140,22 +143,6 @@ public class BuildShoppingCartWindow extends JFrame {
     }
 
     /**
-     * Sets the image observer to first column in the table
-     * @param table table to set the image observer to
-     */
-    private void setImageObserver(JTable table) {
-        TableModel model = table.getModel();
-        int rowCount = model.getRowCount();
-        for (int row = 0; row < rowCount; row++) {
-            if (model.getValueAt(row, 0).getClass() == ImageIcon.class) {
-                ImageIcon icon = (ImageIcon) model.getValueAt(row, 0);
-                if (icon != null)
-                    icon.setImageObserver(new CellImageObserver(table, row, 0));
-            }
-        }
-    }
-
-    /**
      * Item table model for item table
      */
     private static class ItemTableModel extends AbstractTableModel {
@@ -188,27 +175,23 @@ public class BuildShoppingCartWindow extends JFrame {
         }
     }
 
-    /**
-     * Cell image observer to fill graphics appropriately
-     */
-    class CellImageObserver implements ImageObserver {
-        JTable table;
-        int row;
-        int col;
+    public JTable getItemTable() {
+        return itemTable;
+    }
 
-        CellImageObserver(JTable table, int row, int col) {
-            this.table = table;
-            this.row = row;
-            this.col = col;
-        }
+    public JButton getAddItemToCartButton() {
+        return addItemToCartButton;
+    }
 
-        public boolean imageUpdate(Image img, int flags,
-                                   int x, int y, int w, int h) {
-            if ((flags & (FRAMEBITS | ALLBITS)) != 0) {
-                Rectangle rect = table.getCellRect(row, col, false);
-                table.repaint(rect);
-            }
-            return (flags & (ALLBITS | ABORT)) == 0;
-        }
+    public JTable getShoppingCartTable() {
+        return shoppingCartTable;
+    }
+
+    public JButton getRemoveItemFromCartButton() {
+        return removeItemFromCartButton;
+    }
+
+    public AbstractTableModel getModel() {
+        return model;
     }
 }

@@ -21,6 +21,10 @@ import java.util.List;
 public class ViewAllShoppingCartsWindow extends JFrame {
     private static final Integer WIDTH = 550;
     private static final Integer HEIGHT = 330;
+    private JTable shoppingCarts;
+    private JButton editShoppingCartButton;
+    private JButton removeShoppingCartButton;
+    private JButton computeSavingsButton;
 
     /**
      * Builds the view all shopping carts window
@@ -34,7 +38,7 @@ public class ViewAllShoppingCartsWindow extends JFrame {
         Object[][] shoppingCartDates = getDatesFromShoppingCartList(shoppingCartList);
 
         DefaultTableModel shoppingCartTableModel = new DefaultTableModel(shoppingCartDates, new String[]{"Creation Date"});
-        JTable shoppingCarts = new JTable(shoppingCartTableModel);
+        shoppingCarts = new JTable(shoppingCartTableModel);
         JScrollPane shoppingCartTablePane = new JScrollPane(shoppingCarts);
 
         Box allShoppingCartsBox = Box.createVerticalBox();
@@ -42,9 +46,9 @@ public class ViewAllShoppingCartsWindow extends JFrame {
         allShoppingCartsBox.add(shoppingCartTablePane);
 
         Box allShoppingCartsButtonBox = Box.createHorizontalBox();
-        JButton editShoppingCartButton = new EditShoppingCartButton(shoppingCartList, shoppingCarts, this);
-        JButton removeShoppingCartButton = new RemoveShoppingCartButton(shoppingCartList, shoppingCarts, this);
-        JButton computeSavingsButton = new ComputeSavingsButton(shoppingCartList, shoppingCarts);
+        editShoppingCartButton = new EditShoppingCartButton(shoppingCartList, shoppingCarts, this);
+        removeShoppingCartButton = new RemoveShoppingCartButton(shoppingCartList, shoppingCarts, this);
+        computeSavingsButton = new ComputeSavingsButton(shoppingCartList, shoppingCarts);
         editShoppingCartButton.setEnabled(false);
         removeShoppingCartButton.setEnabled(false);
         computeSavingsButton.setEnabled(false);
@@ -70,5 +74,21 @@ public class ViewAllShoppingCartsWindow extends JFrame {
             shoppingCartDates[i][0] = shoppingCartList.get(i).getCreationDate().toString();
         }
         return  shoppingCartDates;
+    }
+
+    public JTable getShoppingCarts() {
+        return shoppingCarts;
+    }
+
+    public JButton getEditShoppingCartButton() {
+        return editShoppingCartButton;
+    }
+
+    public JButton getRemoveShoppingCartButton() {
+        return removeShoppingCartButton;
+    }
+
+    public JButton getComputeSavingsButton() {
+        return computeSavingsButton;
     }
 }

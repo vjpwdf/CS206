@@ -90,4 +90,8 @@ public class ImagePreviewPanel extends JPanel implements PropertyChangeListener 
     public void setImage(Image image) {
         this.image = image;
     }
+
+    public Image getImage() {
+        return image;
+    }
 }
