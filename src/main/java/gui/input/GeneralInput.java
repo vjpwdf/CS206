@@ -45,6 +45,8 @@ public class GeneralInput extends Box {
         if (addValidation) {
             JLabel errorLabel = new JLabel();
             errorLabel.setMaximumSize(new Dimension(250, 20));
+            errorLabel.setMinimumSize(new Dimension(250, 20));
+            errorLabel.setPreferredSize(new Dimension(250, 20));
             Image errorIcon = new BufferedImage(20, 20, BufferedImage.BITMASK);
             ImagePane imagePane = new ImagePane(errorIcon, 20, 20);
             formValidatorWorker = new FormValidatorWorker(errorLabel, imagePane);
