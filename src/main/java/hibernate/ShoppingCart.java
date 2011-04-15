@@ -14,34 +14,66 @@ public class ShoppingCart {
     private int shoppingCartId;
     private Set<ShoppingCartItem> shoppingCartItems;
 
+    /**
+     * Gets the shopping cart id
+     * @return the shopping cart id
+     */
     public int getShoppingCartId() {
         return shoppingCartId;
     }
 
+    /**
+     * Sets the shopping cart id
+     * @param shoppingCartId the shopping cart id
+     */
     public void setShoppingCartId(int shoppingCartId) {
         this.shoppingCartId = shoppingCartId;
     }
 
+    /**
+     * Gets the owner of the shopping cart
+     * @return the owner of the shopping cart
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets the owner of the shopping cart
+     * @param user the owner of the shopping cart
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Gets the creation date of the shopping cart
+     * @return the creation date of the shopping cart
+     */
     public Date getCreationDate() {
         return creationDate;
     }
 
+    /**
+     * Sets the creation date of the shopping cart
+     * @param creationDate the creation date of the shopping cart
+     */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
+    /**
+     * Sets the shopping cart items for the shopping cart
+     * @param shoppingCartItems the shopping cart items for the shopping cart
+     */
     public void setShoppingCartItems(Set<ShoppingCartItem> shoppingCartItems) {
         this.shoppingCartItems = shoppingCartItems;
     }
 
+    /**
+     * Gets the shopping cart items for the shopping cart
+     * @return the shopping cart items for the shopping cart
+     */
     public Set<ShoppingCartItem> getShoppingCartItems() {
         return shoppingCartItems;
     }
