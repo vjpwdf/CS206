@@ -1,5 +1,7 @@
 package gui.action.general;
 
+import gui.window.editcoupon.EditCouponWindow;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;

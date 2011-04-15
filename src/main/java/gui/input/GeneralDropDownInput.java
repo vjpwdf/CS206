@@ -69,4 +69,16 @@ public class GeneralDropDownInput extends Box {
         return list.get(dropdown.getSelectedIndex());
     }
 
+    public void setSelectedObject(int ndx){
+        dropdown.setSelectedIndex(ndx);
+    }
+
+    public Object getObjectAt(int ndx){
+        return list.get(ndx);
+    }
+
+    public int getNumberOfElements(){
+        return list.size();
+    }
+
 }

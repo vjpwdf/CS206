@@ -2,6 +2,7 @@ package gui.window.editcoupon;
 
 
 import gui.action.general.EditCouponTableListener;
+import gui.action.general.RemoveCouponAction;
 import gui.action.general.UpdateCouponButtonAction;
 import gui.action.main.RemoveCouponButtonAction;
 import hibernate.Coupon;
@@ -51,7 +52,7 @@ public class EditCouponWindow extends JFrame {
         remove = new JButton("Remove");
         remove.setMinimumSize(new Dimension(150, 50));
         remove.setMaximumSize(new Dimension(150, 50));
-        remove.addActionListener(new RemoveCouponButtonAction());
+        remove.addActionListener(new RemoveCouponAction(coupons, table, this));
         remove.setEnabled(false);
 
         buttonBox.add(edit);

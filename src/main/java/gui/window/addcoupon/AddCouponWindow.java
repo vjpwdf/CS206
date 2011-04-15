@@ -9,6 +9,8 @@ import hibernate.Coupon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 /**
@@ -50,13 +52,28 @@ public class AddCouponWindow extends JFrame {
         type = new GeneralDropDownInput("Coupon Type", new String[]{"Percent Off", "Amount Off"});
         itemForm.add(type);
 
-        saveOrUpdateCouponButton = new SaveOrUpdateCouponButton("Add", value, expirationDate, items, type);
+        saveOrUpdateCouponButton = new SaveOrUpdateCouponButton("Add", value, expirationDate, items, type, coupon, this);
         itemForm.add(saveOrUpdateCouponButton);
 
         value.getFormValidatorWorker().monitorButtons(Arrays.asList(saveOrUpdateCouponButton));
         expirationDate.getFormValidatorWorker().monitorButtons(Arrays.asList(saveOrUpdateCouponButton));
 
         add(itemForm);
+
+        if(coupon != null){
+            value.getInput().setText(""+coupon.getCouponValue());
+            expirationDate.getInput().setText((new SimpleDateFormat("M/d/y")).format(coupon.getExpirationDate()));
+            if(coupon.isCouponType()){
+                type.setSelectedObject(0);
+            } else {
+                type.setSelectedObject(1);
+            }
+            for(int ndx = 0; ndx < items.getNumberOfElements(); ndx++){
+                if(items.getObjectAt(ndx).toString().equals(coupon.getItem().toString()))
+                    items.setSelectedObject(ndx);
+            }
+            saveOrUpdateCouponButton.setText("Update");
+        }
     }
 
     public AddCouponWindow() throws HeadlessException {

@@ -29,7 +29,7 @@ import java.util.List;
  * Time: 6:08:55 PM
  */
 public class BuildShoppingCartWindow extends JFrame {
-    private static final Integer WIDTH = 500;
+    private static final Integer WIDTH = 750;
     private static final Integer HEIGHT = 600;
     private static final int ROW_HEIGHT = 100;
     private ShoppingCart selectedShoppingCart;

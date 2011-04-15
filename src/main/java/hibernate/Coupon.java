@@ -15,38 +15,74 @@ public class Coupon {
     private float couponValue;
     private Date expirationDate;
 
+    /**
+     * Gets the coupons expiration date
+     * @return the coupons expiration date
+     */
     public Date getExpirationDate() {
         return expirationDate;
     }
 
+    /**
+     * Sets the coupons expiration date
+     * @param expirationDate the coupons expiration date
+     */
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
+    /**
+     * Gets the coupons value
+     * @return the coupons value
+     */
     public float getCouponValue() {
         return couponValue;
     }
 
+    /**
+     * Sets the coupons value
+     * @param couponValue the coupons value
+     */
     public void setCouponValue(float couponValue) {
         this.couponValue = couponValue;
     }
 
+    /**
+     * Gets the type of the coupon
+     * @return true if the coupon is %off false if the coupon is $ off
+     */
     public boolean isCouponType() {
         return couponType;
     }
 
+    /**
+     * Sets the type of hte coupon
+     * @param couponType true if the coupon is %off false if the coupon is $ off
+     */
     public void setCouponType(boolean couponType) {
         this.couponType = couponType;
     }
 
+    /**
+     * Gets the item the coupon is associated with
+     * @return item the coupon is associated with
+     */
     public Item getItem() {
         return item;
     }
 
+    /**
+     * Sets the item the coupon is associated with
+     * @param item item the coupon is associated with
+     */
     public void setItem(Item item) {
         this.item = item;
     }
 
+    /**
+     * Gets the id of the coupon
+     * @return the id of the coupon
+     */
     public int getCouponId() {
         return couponId;
     }
@@ -74,6 +110,10 @@ public class Coupon {
         return result;
     }
 
+    /**
+     * Sets the id of the coupon
+     * @param couponId id of the coupon
+     */
     public void setCouponId(int couponId) {
         this.couponId = couponId;
     }
