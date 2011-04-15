@@ -27,7 +27,7 @@ public class ItemDaoImpl implements ItemDao {
      */
     public void removeItem(String itemUpc) {
         Item item = (Item)DBClient.INSTANCE.getObject("from Item item where item.itemUpc = " + "'" + itemUpc + "'");
-        DBClient.databaseSession.getCurrentSession().delete(item);
+        DBClient.INSTANCE.deleteObject(item);
     }
 
     /**
