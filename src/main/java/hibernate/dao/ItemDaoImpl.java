@@ -1,6 +1,7 @@
 package hibernate.dao;
 
 import hibernate.Item;
+import hibernate.ShoppingCartItem;
 import hibernate.factory.DBClient;
 
 import java.util.List;
@@ -27,7 +28,17 @@ public class ItemDaoImpl implements ItemDao {
      */
     public void removeItem(String itemUpc) {
         Item item = (Item)DBClient.INSTANCE.getObject("from Item item where item.itemUpc = " + "'" + itemUpc + "'");
+        removeAllShoppingCartItemsAssociatedWithItem(item);
         DBClient.INSTANCE.deleteObject(item);
+    }
+
+    private void removeAllShoppingCartItemsAssociatedWithItem(Item item) {
+        List<ShoppingCartItem> shoppingCartItems = (List<ShoppingCartItem>)DBClient.INSTANCE.getListOfObjects("from ShoppingCartItem sci where sci.item.itemUpc = " + "'" + item.getItemUpc() + "'");
+        int size = shoppingCartItems.size();
+        for(int i = 0; i < size; i++) {
+            DBClient.INSTANCE.deleteObject(shoppingCartItems.get(i));
+        }
+        System.out.println();
     }
 
     /**
