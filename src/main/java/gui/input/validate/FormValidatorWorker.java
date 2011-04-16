@@ -63,8 +63,7 @@ public class FormValidatorWorker implements KeyListener {
     public void performValidation() {
         try {
             errorLabel.setText("");
-            imagePane.setImage(ImageIO.read(new File("check.png")));
-//            imagePane.setImage(ImageIO.read(new File("images/check.png")));
+            imagePane.setImage(ImageIO.read(new File("images/check.png")));
             enableButtons();
             for (FormValidator formValidator : formValidators) {
                 if (!formValidator.isValid()) {

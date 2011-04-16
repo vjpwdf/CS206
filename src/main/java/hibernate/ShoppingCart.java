@@ -91,11 +91,4 @@ public class ShoppingCart {
 
         return true;
     }
-
-    @Override
-    public int hashCode() {
-        int result = user != null ? user.hashCode() : 0;
-        result = 31 * result + (shoppingCartItems != null ? shoppingCartItems.hashCode() : 0);
-        return result;
-    }
 }

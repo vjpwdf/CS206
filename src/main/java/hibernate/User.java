@@ -70,11 +70,4 @@ public class User {
 
         return true;
     }
-
-    @Override
-    public int hashCode() {
-        int result = userName != null ? userName.hashCode() : 0;
-        result = 31 * result + (userPassword != null ? userPassword.hashCode() : 0);
-        return result;
-    }
 }

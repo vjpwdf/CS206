@@ -108,9 +108,14 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
+                    <!--<workingDirectory>/home/will/IdeaProjects/CS206/src/test/java</workingDirectory>-->
                     <includes>
                         <include>**/*_UT.java</include>
                     </includes>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${project.basedir}/src/main/resources
+                        </additionalClasspathElement>
+                    </additionalClasspathElements>
                 </configuration>
             </plugin>
         </plugins>

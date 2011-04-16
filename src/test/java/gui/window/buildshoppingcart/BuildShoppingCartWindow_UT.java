@@ -43,7 +43,7 @@ public class BuildShoppingCartWindow_UT extends WindowTest{
     Blob imageBlob;
 
     private BuildShoppingCartWindow buildShoppingCartWindow;
-    private Integer WIDTH = 500;
+    private Integer WIDTH = 750;
     private Integer HEIGHT = 600;
 
     @Before
