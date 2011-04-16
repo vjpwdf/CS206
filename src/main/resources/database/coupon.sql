@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `coupon`  
+-- Table structure for table `coupon`
 --
 
 DROP TABLE IF EXISTS `coupon`;
@@ -24,13 +24,12 @@ DROP TABLE IF EXISTS `coupon`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `coupon` (
   `coupon_id` int(11) NOT NULL AUTO_INCREMENT,
-  `item_upc` varchar(250) NOT NULL,
+  `item_upc` varchar(250) DEFAULT NULL,
   `coupon_type` tinyint(1) NOT NULL,
   `coupon_value` float NOT NULL,
   `expiration_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `coupon_image` blob NOT NULL,
   PRIMARY KEY (`coupon_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,11 +49,12 @@ DROP TABLE IF EXISTS `item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `item` (
-  `item_upc` varchar(250) NOT NULL,
+  `item_upc` varchar(250) NOT NULL DEFAULT '0',
   `item_name` varchar(250) NOT NULL,
   `item_description` varchar(500) NOT NULL,
   `item_manufacturer` varchar(500) NOT NULL,
   `item_image` blob,
+  `item_price` float NOT NULL,
   PRIMARY KEY (`item_upc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -80,7 +80,7 @@ CREATE TABLE `shopping_cart` (
   `user_id` int(11) NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`shopping_cart_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,11 +101,11 @@ DROP TABLE IF EXISTS `shopping_cart_item`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shopping_cart_item` (
   `shopping_cart_item_id` int(11) NOT NULL AUTO_INCREMENT,
-  `shopping_cart_id` int(11) NOT NULL,
+  `shopping_cart_id` int(11) DEFAULT NULL,
   `item_upc` varchar(250) NOT NULL,
   `item_quantity` int(11) NOT NULL,
   PRIMARY KEY (`shopping_cart_item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `user` (
   `user_name` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,6 +138,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (9,'Will','0123456');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -150,4 +151,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-02-22 15:50:46
+-- Dump completed on 2011-04-16 14:41:52

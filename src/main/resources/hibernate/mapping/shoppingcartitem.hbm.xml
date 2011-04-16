@@ -8,7 +8,7 @@
             <generator class="native"/>
         </id>
         <many-to-one name="shoppingCart" column="shopping_cart_id" class="ShoppingCart" cascade="none"/>
-        <many-to-one name="item" column="item_upc" class="Item" lazy="false" cascade="delete"/>
+        <many-to-one name="item" column="item_upc" class="Item" lazy="false"/>
         <property name="itemQuantity" column="item_quantity" type="integer"/>
     </class>
 </hibernate-mapping>
