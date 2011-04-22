@@ -80,12 +80,13 @@ public class AddItemWindow_UT extends WindowTest{
     public void testAddItemWithExistingItem() throws FileNotFoundException, SQLException {
         Item item = getAnItem();
         item.setItemImage(imageBlob);
-        when(imageBlob.getBytes(Mockito.anyLong(), Mockito.anyInt())).thenReturn(convertFileToByteArray(new File("test.png")));
-        when(fileChooser.getSelectedFile()).thenReturn(new File("/home/will/IdeaProjects/CS206/src/test/java/test.png"));
+        File file = new File("test.png");
+        when(imageBlob.getBytes(Mockito.anyLong(), Mockito.anyInt())).thenReturn(convertFileToByteArray(file));
+        when(fileChooser.getSelectedFile()).thenReturn(new File("test.png"));
         addItemWindow = new AddItemWindow(item);
         initializeMockedFileChooser();
         initializeActionListenerMock();
-        addItemWindow.getFileBrowser().getInput().setText("/home/will/IdeaProjects/CS206/src/test/java/test.png");
+        addItemWindow.getFileBrowser().getInput().setText(file.getAbsolutePath());
         assertEquals(item.getItemName(), addItemWindow.getNameInput().getInput().getText());
         assertEquals(item.getItemDescription(), addItemWindow.getDescription().getInput().getText());
         assertEquals(item.getItemManufacturer(), addItemWindow.getManufacturer().getInput().getText());
@@ -120,7 +121,8 @@ public class AddItemWindow_UT extends WindowTest{
         addItemWindow.getUpc().getInput().setText("test");
         addItemWindow.getDescription().getInput().setText("test");
         addItemWindow.getNameInput().getInput().setText("test");
-        addItemWindow.getFileBrowser().getInput().setText("/home/will/IdeaProjects/CS206/src/test/java/test.png");
+        File file = new File("test.png");
+        addItemWindow.getFileBrowser().getInput().setText(file.getAbsolutePath());
         addItemWindow.getAddItem().doClick();
         verify(itemDao).saveItem(Mockito.<Item>any());
         verify(messageBuilder).displayMessage("Item has been successfully added/updated to/in the database.");
