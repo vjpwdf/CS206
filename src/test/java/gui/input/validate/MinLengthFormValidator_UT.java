@@ -21,9 +21,9 @@ import static junit.framework.Assert.assertTrue;
 public class MinLengthFormValidator_UT {
     @Test
     public void testToString() throws Exception {
-        MinLengthFormValidator maxLengthFormValidator = new MinLengthFormValidator(10);
-        assertNotNull(maxLengthFormValidator.toString());
-        assert (maxLengthFormValidator.toString().equals("Maximum length is " + 10));
+        MinLengthFormValidator minLengthFormValidator = new MinLengthFormValidator(10);
+        assertNotNull(minLengthFormValidator.toString());
+        assertTrue(minLengthFormValidator.toString().equals("Minimum length must be " + 10));
     }
 
     @Test

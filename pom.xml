@@ -108,7 +108,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <!--<workingDirectory>/home/will/IdeaProjects/CS206/src/test/java</workingDirectory>-->
+                    <workingDirectory>${project.basedir}/src/test/java</workingDirectory>
+                    <forkMode>always</forkMode>
                     <includes>
                         <include>**/*_UT.java</include>
                     </includes>
