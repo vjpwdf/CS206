@@ -32,28 +32,13 @@ public class EditCouponWindow extends JFrame {
         final Object[][] data = convertToObjectArray(coupons);
         final Object[] column = new Object[]{"Item", "Value", "Type", "Expiration Date"};
 
-        model = new CouponTableModel(column, data);
-        table = new JTable(model);
-        table.setRowHeight(ROW_HEIGHT);
-        JScrollPane pane = new JScrollPane(table);
-
-
+        JScrollPane pane = buildCouponTableModel(data, column);
         Box vertBox = Box.createVerticalBox();
         vertBox.add(pane);
 
         Box buttonBox = Box.createHorizontalBox();
-
-        edit = new JButton("Edit");
-        edit.setMinimumSize(new Dimension(150, 50));
-        edit.setMaximumSize(new Dimension(150, 50));
-        edit.addActionListener(new UpdateCouponButtonAction(table, coupons, this));
-        edit.setEnabled(false);
-
-        remove = new JButton("Remove");
-        remove.setMinimumSize(new Dimension(150, 50));
-        remove.setMaximumSize(new Dimension(150, 50));
-        remove.addActionListener(new RemoveCouponAction(coupons, table, this));
-        remove.setEnabled(false);
+        buildEditCouponButton(coupons);
+        buildRemoveCouponButton(coupons);
 
         buttonBox.add(edit);
         buttonBox.add(remove);
@@ -64,6 +49,29 @@ public class EditCouponWindow extends JFrame {
 
         getContentPane().add(vertBox);
         setSize(WIDTH, HEIGHT);
+    }
+
+    private JScrollPane buildCouponTableModel(Object[][] data, Object[] column) {
+        model = new CouponTableModel(column, data);
+        table = new JTable(model);
+        table.setRowHeight(ROW_HEIGHT);
+        return new JScrollPane(table);
+    }
+
+    private void buildRemoveCouponButton(List<Coupon> coupons) {
+        remove = new JButton("Remove");
+        remove.setMinimumSize(new Dimension(150, 50));
+        remove.setMaximumSize(new Dimension(150, 50));
+        remove.addActionListener(new RemoveCouponAction(coupons, table, this));
+        remove.setEnabled(false);
+    }
+
+    private void buildEditCouponButton(List<Coupon> coupons) {
+        edit = new JButton("Edit");
+        edit.setMinimumSize(new Dimension(150, 50));
+        edit.setMaximumSize(new Dimension(150, 50));
+        edit.addActionListener(new UpdateCouponButtonAction(table, coupons, this));
+        edit.setEnabled(false);
     }
 
     private Object[][] convertToObjectArray(List<Coupon> coupons) {
@@ -82,36 +90,6 @@ public class EditCouponWindow extends JFrame {
             data[i][3] = coupon.getExpirationDate().toString();
         }
         return data;
-    }
-
-    private static class CouponTableModel extends AbstractTableModel {
-        private final Object[] column;
-        private final Object[][] data;
-
-        public CouponTableModel(Object[] column, Object[][] data) {
-            this.column = column;
-            this.data = data;
-        }
-
-        public int getColumnCount() {
-            return column.length;
-        }
-
-        public int getRowCount() {
-            return data.length;
-        }
-
-        public String getColumnName(int col) {
-            return (String) column[col];
-        }
-
-        public Object getValueAt(int row, int col) {
-            return data[row][col];
-        }
-
-        public Class getColumnClass(int col) {
-            return data[0][col].getClass();
-        }
     }
 
     public JTable getTable() {

@@ -61,9 +61,7 @@ public class BuildShoppingCartWindow extends JFrame {
         final Object[][] data = convertToObjectArray(items);
         final Object[] column = new Object[]{"Picture", "Name", "Manufacturer", "Price"};
 
-        model = new ItemTableModel(column, data);
-        itemTable = new JTable(model);
-        itemTable.setRowHeight(ROW_HEIGHT);
+        buildTableModel(data, column);
         JScrollPane pane = new JScrollPane(itemTable);
 
         shoppingCartVerticalBox.add(pane);
@@ -73,20 +71,15 @@ public class BuildShoppingCartWindow extends JFrame {
         GeneralInput quantityInput = new GeneralInput("Quantity", true);
         quantityInput.getInput().setText("1");
         Box buttonBox = Box.createHorizontalBox();
-        addItemToCartButton = new AddItemToCartButton(itemTable, shoppingCartTable, items, quantityInput);
-        addItemToCartButton.setEnabled(false);
-        buttonBox.add(addItemToCartButton);
 
-        removeItemFromCartButton = new RemoveItemFromCartButton(shoppingCartTable);
-        removeItemFromCartButton.setEnabled(false);
-        buttonBox.add(removeItemFromCartButton);
+        addAddItemToCartButton(items, quantityInput, buttonBox);
+        addRemoveItemFromCartButton(buttonBox);
 
         quantityInput.addNewFormValidator(new NumberFormValidator());
         quantityInput.getFormValidatorWorker().monitorButtons(Arrays.asList(addItemToCartButton));
         buttonBox.add(quantityInput);
 
         shoppingCartVerticalBox.add(buttonBox);
-
 
         JScrollPane shoppingCartTablePane = new JScrollPane(shoppingCartTable);
         shoppingCartVerticalBox.add(shoppingCartTablePane);
@@ -98,6 +91,24 @@ public class BuildShoppingCartWindow extends JFrame {
 
         JButton saveShoppingCartButton = new SaveShoppingCartButton(items, shoppingCartTable, this, selectedShoppingCart);
         shoppingCartVerticalBox.add(saveShoppingCartButton);
+    }
+
+    private void buildTableModel(Object[][] data, Object[] column) {
+        model = new ItemTableModel(column, data);
+        itemTable = new JTable(model);
+        itemTable.setRowHeight(ROW_HEIGHT);
+    }
+
+    private void addAddItemToCartButton(List<Item> items, GeneralInput quantityInput, Box buttonBox) {
+        addItemToCartButton = new AddItemToCartButton(itemTable, shoppingCartTable, items, quantityInput);
+        addItemToCartButton.setEnabled(false);
+        buttonBox.add(addItemToCartButton);
+    }
+
+    private void addRemoveItemFromCartButton(Box buttonBox) {
+        removeItemFromCartButton = new RemoveItemFromCartButton(shoppingCartTable);
+        removeItemFromCartButton.setEnabled(false);
+        buttonBox.add(removeItemFromCartButton);
     }
 
     /**
@@ -140,39 +151,6 @@ public class BuildShoppingCartWindow extends JFrame {
             data[i][3] = "$" + df.format(item.getItemPrice());
         }
         return data;
-    }
-
-    /**
-     * Item table model for item table
-     */
-    private static class ItemTableModel extends AbstractTableModel {
-        private final Object[] column;
-        private final Object[][] data;
-
-        public ItemTableModel(Object[] column, Object[][] data) {
-            this.column = column;
-            this.data = data;
-        }
-
-        public int getColumnCount() {
-            return column.length;
-        }
-
-        public int getRowCount() {
-            return data.length;
-        }
-
-        public String getColumnName(int col) {
-            return (String) column[col];
-        }
-
-        public Object getValueAt(int row, int col) {
-            return data[row][col];
-        }
-
-        public Class getColumnClass(int col) {
-            return data[0][col].getClass();
-        }
     }
 
     public JTable getItemTable() {

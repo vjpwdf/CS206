@@ -22,6 +22,8 @@ public class ComputeSavingsWindow extends JFrame {
     private JPanel noCouponsAppliedPanel;
     private JPanel couponsAppliedPanel;
 
+    private String couponsAppliedText;
+    private String noCouponsAppliedText;
     /**
      * Computes saving window
      * @param selectedShoppingCart shopping cart to compute savings up
@@ -45,29 +47,52 @@ public class ComputeSavingsWindow extends JFrame {
      */
     private JPanel createCouponsAppliedPane(ShoppingCart selectedShoppingCart) {
         JPanel createCouponsAppliedPane = new JPanel();
-        String couponsAppliedText = "Item Name\t\tQuantity\t\tTotal\n\n";
-        float totalCartPrice = 0.0f;
-        for (ShoppingCartItem shoppingCartItem : selectedShoppingCart.getShoppingCartItems()) {
-            Set<Coupon> itemCoupons = shoppingCartItem.getItem().getItemCoupons();
-            float totalItemPrice = shoppingCartItem.getItemQuantity() * shoppingCartItem.getItem().getItemPrice();
-            totalCartPrice += totalItemPrice;
-            couponsAppliedText += shoppingCartItem.getItem().getItemName() + "\t" + shoppingCartItem.getItemQuantity() + "\t\t" +
-                    totalItemPrice + "\n";
-            for (Coupon itemCoupon : itemCoupons) {
-                if(itemCoupon.isCouponType()) {
-                    totalCartPrice -= (totalItemPrice*itemCoupon.getCouponValue()*0.01);
-                    couponsAppliedText += "\t\t-" + itemCoupon.getCouponValue() + "%\t\t-" + totalItemPrice*itemCoupon.getCouponValue()*0.01 + "\n";
-                } else {
-                    totalCartPrice -= (totalItemPrice-(totalItemPrice-itemCoupon.getCouponValue()));
-                    couponsAppliedText += "\t\t-$" + itemCoupon.getCouponValue() + "\t\t-" + (totalItemPrice-(totalItemPrice-itemCoupon.getCouponValue())) + "\n";
-                }
-            }
-        }
+        couponsAppliedText = "Item Name\t\tQuantity\t\tTotal\n\n";
+        Float totalCartPrice = 0.0f;
+        totalCartPrice = computeSavingsForShoppingCartItems(selectedShoppingCart, totalCartPrice);
         couponsAppliedText += "\n\nTotal:\t\t\t\t" + totalCartPrice;
         JTextArea couponsAppliedTextArea = new JTextArea(couponsAppliedText);
         couponsAppliedTextArea.setBackground(getBackground());
         createCouponsAppliedPane.add(couponsAppliedTextArea);
         return createCouponsAppliedPane;
+    }
+
+    /**
+     * Computes the savings on a shopping cart
+     * @param selectedShoppingCart the shopping cart
+     * @param totalCartPrice total price of the shopping cart (with savings)
+     * @return Float the total price after savings
+     */
+    private Float computeSavingsForShoppingCartItems(ShoppingCart selectedShoppingCart, Float totalCartPrice) {
+        for (ShoppingCartItem shoppingCartItem : selectedShoppingCart.getShoppingCartItems()) {
+            Set<Coupon> itemCoupons = shoppingCartItem.getItem().getItemCoupons();
+            Float totalItemPrice = shoppingCartItem.getItemQuantity() * shoppingCartItem.getItem().getItemPrice();
+            totalCartPrice += totalItemPrice;
+            couponsAppliedText += shoppingCartItem.getItem().getItemName() + "\t" + shoppingCartItem.getItemQuantity() + "\t\t" +
+                    totalItemPrice + "\n";
+            totalCartPrice = computeSavingsForCoupons(totalCartPrice, itemCoupons, totalItemPrice);
+        }
+        return totalCartPrice;
+    }
+
+    /**
+     * Computes savings on a shopping cart item
+     * @param totalCartPrice the total cart price
+     * @param itemCoupons the coupons on an item
+     * @param totalItemPrice the total price of an item
+     * @return Float the total price
+     */
+    private Float computeSavingsForCoupons(Float totalCartPrice, Set<Coupon> itemCoupons, Float totalItemPrice) {
+        for (Coupon itemCoupon : itemCoupons) {
+            if(itemCoupon.isCouponType()) {
+                totalCartPrice -= (totalItemPrice*itemCoupon.getCouponValue()*0.01);
+                couponsAppliedText += "\t\t-" + itemCoupon.getCouponValue() + "%\t\t-" + totalItemPrice*itemCoupon.getCouponValue()*0.01 + "\n";
+            } else {
+                totalCartPrice -= (totalItemPrice-(totalItemPrice-itemCoupon.getCouponValue()));
+                couponsAppliedText += "\t\t-$" + itemCoupon.getCouponValue() + "\t\t-" + (totalItemPrice-(totalItemPrice-itemCoupon.getCouponValue())) + "\n";
+            }
+        }
+        return totalCartPrice;
     }
 
     /**
@@ -77,14 +102,9 @@ public class ComputeSavingsWindow extends JFrame {
      */
     private JPanel createNoCouponsAppliedPane(ShoppingCart selectedShoppingCart) {
         JPanel createNoCouponsAppliedPane = new JPanel();
-        String noCouponsAppliedText = "Item Name\t\tQuantity\t\tTotal\n\n";
+        noCouponsAppliedText = "Item Name\t\tQuantity\t\tTotal\n\n";
         float totalCartPrice = 0.0f;
-        for (ShoppingCartItem shoppingCartItem : selectedShoppingCart.getShoppingCartItems()) {
-            float totalItemPrice = shoppingCartItem.getItemQuantity() * shoppingCartItem.getItem().getItemPrice();
-            totalCartPrice += totalItemPrice;
-            noCouponsAppliedText += shoppingCartItem.getItem().getItemName() + "\t" + shoppingCartItem.getItemQuantity() + "\t\t" +
-                    totalItemPrice + "\n";
-        }
+        totalCartPrice = computePricesForShoppingCartItems(selectedShoppingCart, totalCartPrice);
         noCouponsAppliedText += "\n\nTotal:\t\t\t\t" + totalCartPrice;
         JTextArea noCouponsAppliedTextArea = new JTextArea(noCouponsAppliedText);
         noCouponsAppliedTextArea.setBackground(getBackground());
@@ -92,14 +112,42 @@ public class ComputeSavingsWindow extends JFrame {
         return createNoCouponsAppliedPane;
     }
 
+    /**
+     * Computes prices for shopping cart items (with no savings)
+     * @param selectedShoppingCart the shopping cart
+     * @param totalCartPrice the total cart price without savings applied
+     * @return float the total price
+     */
+    private float computePricesForShoppingCartItems(ShoppingCart selectedShoppingCart, float totalCartPrice) {
+        for (ShoppingCartItem shoppingCartItem : selectedShoppingCart.getShoppingCartItems()) {
+            float totalItemPrice = shoppingCartItem.getItemQuantity() * shoppingCartItem.getItem().getItemPrice();
+            totalCartPrice += totalItemPrice;
+            noCouponsAppliedText += shoppingCartItem.getItem().getItemName() + "\t" + shoppingCartItem.getItemQuantity() + "\t\t" +
+                    totalItemPrice + "\n";
+        }
+        return totalCartPrice;
+    }
+
+    /**
+     * Gets the tabbed pane
+     * @return JTabbedPane the pane
+     */
     public JTabbedPane getTabbedPane() {
         return tabbedPane;
     }
 
+    /**
+     * Gets the panel for no coupons applied
+     * @return JPanel the no coupons applied panel
+     */
     public JPanel getNoCouponsAppliedPanel() {
         return noCouponsAppliedPanel;
     }
 
+    /**
+     * Gets the coupons applied panel
+     * @return JPanel the panel for coupons applied
+     */
     public JPanel getCouponsAppliedPanel() {
         return couponsAppliedPanel;
     }
