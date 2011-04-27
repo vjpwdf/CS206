@@ -6,6 +6,7 @@ import hibernate.serviceadaptor.CouponServiceAdaptor;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,23 +26,35 @@ public class ViewAllCouponsWindow extends JFrame {
      */
     public ViewAllCouponsWindow() {
         super("View All Coupons");
+        setSize(WIDTH, HEIGHT);
 
-        java.util.List<Coupon> coupons = CouponServiceAdaptor.getAllCoupons();
+        List<Coupon> coupons = CouponServiceAdaptor.getAllCoupons();
+        JScrollPane pane = buildCouponTable(coupons);
 
-        final Object[][] data = convertToObjectArray(coupons);
-        final Object[] column = new Object[]{"Item", "Value", "Type", "Expiration Date"};
+        Box viewAllCouponsBox = Box.createVerticalBox();
+        viewAllCouponsBox.add(pane);
 
-        model = new CouponTableModel(column, data);
+        getContentPane().add(viewAllCouponsBox);
+    }
+
+    /**
+     * Builds the coupon table
+     * @param coupons coupons to build table from
+     * @return A scroll pane with coupons listed inside the table
+     */
+    private JScrollPane buildCouponTable(List<Coupon> coupons) {
+        model = new CouponTableModel(getColumnNames(), convertToObjectArray(coupons));
         table = new JTable(model);
         table.setRowHeight(ROW_HEIGHT);
-        JScrollPane pane = new JScrollPane(table);
+        return new JScrollPane(table);
+    }
 
-
-        Box vertBox = Box.createVerticalBox();
-        vertBox.add(pane);
-
-        getContentPane().add(vertBox);
-        setSize(WIDTH, HEIGHT);
+    /**
+     * Gets the column names of the table
+     * @return the column names of the table
+     */
+    private Object[] getColumnNames() {
+        return new Object[]{"Item", "Value", "Type", "Expiration Date"};
     }
 
     /**
@@ -49,61 +62,46 @@ public class ViewAllCouponsWindow extends JFrame {
      * @param coupons coupons to be converted
      * @return the list of coupons to converted object array
      */
-    private Object[][] convertToObjectArray(java.util.List<Coupon> coupons) {
+    private Object[][] convertToObjectArray(List<Coupon> coupons) {
         Object[][] data = new Object[coupons.size()][4];
         for (int i = 0; i < coupons.size(); i++) {
-            Coupon coupon = coupons.get(i);
-            data[i][0] = coupon.getItem().toString();
-
-            DecimalFormat df = new DecimalFormat();
-            df.setMinimumFractionDigits(2);
-            df.setMaximumFractionDigits(2);
-            data[i][1] = df.format(coupon.getCouponValue());
-
-            data[i][2] = coupon.isCouponType()?"Percent Off":"Amount Off";
-
-            data[i][3] = coupon.getExpirationDate().toString();
+            convertCouponToObject(coupons, data, i);
         }
         return data;
     }
 
     /**
-     * Coupon table model for coupon table
+     * Converts a coupon to an object array
+     * @param coupons coupon list
+     * @param data current data
+     * @param i position in array
      */
-    private static class CouponTableModel extends AbstractTableModel {
-        private final Object[] column;
-        private final Object[][] data;
+    private void convertCouponToObject(List<Coupon> coupons, Object[][] data, int i) {
+        Coupon coupon = coupons.get(i);
+        data[i][0] = coupon.getItem().toString();
 
-        public CouponTableModel(Object[] column, Object[][] data) {
-            this.column = column;
-            this.data = data;
-        }
+        DecimalFormat df = new DecimalFormat();
+        df.setMinimumFractionDigits(2);
+        df.setMaximumFractionDigits(2);
+        data[i][1] = df.format(coupon.getCouponValue());
 
-        public int getColumnCount() {
-            return column.length;
-        }
+        data[i][2] = coupon.isCouponType()?"Percent Off":"Amount Off";
 
-        public int getRowCount() {
-            return data.length;
-        }
-
-        public String getColumnName(int col) {
-            return (String) column[col];
-        }
-
-        public Object getValueAt(int row, int col) {
-            return data[row][col];
-        }
-
-        public Class getColumnClass(int col) {
-            return data[0][col].getClass();
-        }
+        data[i][3] = coupon.getExpirationDate().toString();
     }
 
+    /**
+     * Gets the coupon table
+     * @return the coupon table
+     */
     public JTable getTable() {
         return table;
     }
 
+    /**
+     * Gets the table model
+     * @return the table model
+     */
     public AbstractTableModel getModel() {
         return model;
     }
